@@ -12,15 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('project_informations', function (Blueprint $table) {
-            $table->id();
-            // 1. Thông tin cá nhân
+        $table->id();
         $table->string('full_name')->nullable();
         $table->string('email')->nullable();
         $table->string('job')->nullable();
         $table->string('age')->nullable();
         $table->string('phone')->nullable();
 
-        // 2. Thông tin dự án
+        $table->foreignId('project_id')->nullable()->constrained()->onDelete('set null');
         $table->string('type')->nullable();
         $table->string('acreage')->nullable();
         $table->string('scale')->nullable();

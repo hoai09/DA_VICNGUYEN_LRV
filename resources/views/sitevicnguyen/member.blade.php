@@ -10,18 +10,20 @@
                     class="member-card"
                     data-index="{{ $index }}"
                     data-name="{{ $member->name }}"
-                    data-role="{{ $member->role }}"
-                    data-image="{{ asset('assets/img/Thanhvien/' . $member->image) }}"
+                    @foreach($member->projects as $project)
+                    data-role="{{ $member->projects->pluck('pivot.role')->join(', ')  }}"
+                    data-image="{{ asset('storage/' . $member->image) }}"
                     data-graduation="{{ $member->graduation_year ?? '—' }}"
                     data-join="{{ $member->join_year ?? '—' }}"
-                    data-projects="{{ $member->projects ?? '—' }}"
+                    data-projects="{{ $member->projects->pluck('title')->join(', ')  }}"
+                    @endforeach
                     data-awards="{{ $member->awards ?? '—' }}"
                     data-bs-toggle="modal"
                     data-bs-target="#memberModal"
                 >
                     <figure class="member-card__figure">
                         <img
-                            src="{{ asset('assets/img/Thanhvien/' . $member->image) }}"
+                            src="{{ asset('storage/' . $member->image) }}"
                             alt="{{ $member->name }}"
                             class="member-card__image img-fluid"
                         />
@@ -80,6 +82,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateModal(member, index) {
         currentIndex = index;
+        const roles = member.projects.map(p => p.pivot.role).join(', ');
+        const projectTitles = member.projects.map(p => p.title).join(', ');
         const imageUrl = member.image
             ? `/assets/img/Thanhvien/${member.image}`
             : `/assets/img/Thanhvien/default.png`;
@@ -87,10 +91,10 @@ document.addEventListener("DOMContentLoaded", function () {
         modalImage.src = imageUrl;
         modalName.textContent = member.name;
         modalDetails.innerHTML = `
-            <p><strong>Chức vụ:</strong> ${member.role || '—'}</p>
+            <p><strong>Chức vụ:</strong> ${roles || '—'}</p>
             <p><strong>Tốt nghiệp:</strong> ${member.graduation_year || '—'}</p>
             <p><strong>Trở thành VICer:</strong> ${member.join_year || '—'}</p>
-            <p><strong>Dự án:</strong> ${member.projects || '—'}</p>
+            <p><strong>Dự án:</strong> ${projectTitles || '—'}</p>
             <p><strong>Giải thưởng:</strong> ${member.awards || '—'}</p>
         `;
     }

@@ -9,8 +9,10 @@ class MemberController extends Controller
 {
     public function index()
     {
-       
-        $members = Member::all();
+
+        $members = Member::with('projects')->get();
         return view('sitevicnguyen.member', compact('members'));
     }
+    
+
 }

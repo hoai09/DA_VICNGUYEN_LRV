@@ -4,21 +4,21 @@
 
 <main class="single-news-page container">
     <div class="row g-5">
-      <div class="col-12 col-lg-8 single-news__content prj__bt">
+    <div class="col-12 col-lg-8 single-news__content prj__bt">
         <header class="single-news__header mb-4">
-          <p class="single-news__title">ANPHA OFFICE / AD9 ARCHITECTS</p>
+        <p class="single-news__title">ANPHA OFFICE / AD9 ARCHITECTS</p>
         </header>
 
         <figure class="single-news__feature-figure mb-4">
-          <img
+        <img
             src="{{ asset('assets/img/TinTuc/chitiettin1.png') }}"
             alt="chitiettin1"
             class="single-news__feature-image img-fluid"
-          />
+        />
         </figure>
 
         <div class="single-news__text-block mb-4">
-          <p>
+        <p>
             Text description provided by the architects. Anpha office was
             formed after some big changes regarding its function from the
             investor. At first, we were tasked with creating a house for 5
@@ -31,28 +31,28 @@
             connect the rest of the spaces in the house, the activities, the
             balance between static and non-static, air movement, light and
             nature.
-          </p>
+        </p>
         </div>
 
         <div class="row g-1 mb-5">
-          <div class="col-5">
+        <div class="col-5">
             <img
-              src="./assets/img/TinTuc/chitiettin2-1.png"
-              alt="anh001"
-              class="img"
+            src="{{asset ('/assets/img/TinTuc/chitiettin2-1.png') }}"
+            alt="anh001"
+            class="img"
             />
-          </div>
-          <div class="col-7">
+        </div>
+        <div class="col-7">
             <img
-              src="{{asset ('assets/img/TinTuc/chitiettin2-2.png') }}"
-              alt="anh002"
-              class="img"
+            src="{{asset ('assets/img/TinTuc/chitiettin2-2.png') }}"
+            alt="anh002"
+            class="img"
             />
-          </div>
+        </div>
         </div>
 
         <div class="single-news__text-block mb-4">
-          <p>
+        <p>
             When the base of the construction was done, the investor shared
             with us his wish to convert the construction’s function to serve
             the purpose of running a mid-size family business, specializing in
@@ -67,95 +67,49 @@
             other, they can indulge in the natural atmosphere, the freshness
             of the trees. This is a feature that we are sure offices in
             skyscrapers cannot benefit from.
-          </p>
+        </p>
         </div>
 
         <figure class="single-news__feature-figure mb-4">
-          <img
+        <img
             src="{{asset ('assets/img/TinTuc/chitiettin3.png') }}"
             alt="anh003"
             class="single-news__feature-image img-fluid"
-          />
+        />
         </figure>
 
         <div class="single-news__text-block mb-4">
-          <p>
+        <p>
             We’ve recordeded photos of Anpha company after 2 operation years,
             in order to fully understand that what we created were going in
             the right direction, and to serve as inspiration for our future
             projects.
-          </p>
+        </p>
         </div>
-      </div>
-
-      <div class="col-lg-4 d-none d-lg-block single-news__sidebar">
-        <div class="sidebar-box">
-          <p class="sidebar-box__title mb-4">BÀI VIẾT KHÁC</p>
-
-          <a href="#!" class="sidebar-news-item d-flex mb-3">
-            <div class="sidebar-news-item__thumb me-3">
-              <img
-                src="./assets/img/TinTuc/xemthem1.png"
-                alt="xemthem1"
-                class="img-fluid"
-              />
-            </div>
-            <div class="sidebar-news-item__info">
-              <p class="sidebar-news-item__title">
-                Refuge in the Valley |Zanesco Arquitetura
-              </p>
-            </div>
-          </a>
-          <hr class="my-3" />
-
-          <a href="#!" class="sidebar-news-item d-flex mb-3">
-            <div class="sidebar-news-item__thumb me-3">
-              <img
-                src="{{ asset('assets/img/TinTuc/xemthem2.png') }}"
-                alt="xemthem2"
-                class="img-fluid"
-              />
-            </div>
-            <div class="sidebar-news-item__info">
-              <p class="sidebar-news-item__title">
-                Gia đình House | G+ architects
-              </p>
-            </div>
-          </a>
-          <hr class="my-3" />
-
-          <a href="#!" class="sidebar-news-item d-flex mb-3">
-            <div class="sidebar-news-item__thumb me-3">
-              <img
-                src="{{asset ('assets/img/TinTuc/xemthem3.png') }}"
-                alt="xemthem3"
-                class="img-fluid"
-              />
-            </div>
-            <div class="sidebar-news-item__info">
-              <p class="sidebar-news-item__title">
-                Nguyet House | Vic Nguyen architects
-              </p>
-            </div>
-          </a>
-          <hr class="my-3" />
-
-          <a href="#!" class="sidebar-news-item d-flex mb-3">
-            <div class="sidebar-news-item__thumb me-3">
-              <img
-                src="{{asset ('assets/img/TinTuc/xemthem4.png') }}"
-                alt="xemthem4"
-                class="img-fluid"
-              />
-            </div>
-            <div class="sidebar-news-item__info">
-              <p class="sidebar-news-item__title">
-                Refuge in the Valley |Zanesco Arquitetura
-              </p>
-            </div>
-          </a>
-        </div>
-      </div>
     </div>
-  </main>
-  @endsection
+        
+        <div class="col-lg-4 d-none d-lg-block single-news__sidebar">
+            <div class="sidebar-box">
+                <h5 class="sidebar-box__title mb-4">BÀI VIẾT KHÁC</h5>
+
+                @forelse($relatedNews as $item)
+                <a href="{{ route('vicnguyen.news.detail', $item->id) }}" class="sidebar-news-item d-flex mb-3">
+                    <div class="sidebar-news-item__thumb me-3">
+                        <img src="{{ asset($item->feature_image) }}" 
+                            alt="{{ $item->title }}"
+                            class="img-fluid">
+                    </div>
+                    <div class="sidebar-news-item__info">
+                        <p class="sidebar-news-item__title">{{ $item->title }}</p>
+                    </div>
+                </a>
+                <hr class="my-3">
+                @empty
+                <p>Không có bài viết liên quan.</p>
+                @endforelse
+            </div>
+        </div>
+
+    </div>
+</main>
+@endsection

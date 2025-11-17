@@ -1,3 +1,13 @@
+@php
+    use App\Models\Project;
+
+    // Lấy danh sách dự án mới nhất (ví dụ 15 dự án)
+    $projects = Project::select('title','slug')
+        ->orderBy('created_at', 'desc')
+        ->take(15)
+        ->get();
+@endphp
+
 <header
       class="main-header pb-xs-0 pb-sm-0 pb-md-0 pb-lg-5 navbar navbar-expand-lg bg-white"
     >
@@ -39,7 +49,7 @@
             >
               <li class="nav-item dropdown mx-lg-3">
                 <a
-                  href="{{ route('vicnguyen.project') }}"
+                  href="#"
                   class="nav-link dropdown-toggle"
                   id="projectdropdown"
                   role="button"
@@ -47,66 +57,15 @@
                   aria-expanded="false"
                   >Dự án</a
                 >
-                <ul class="dropdown-menu" aria-labelledby="projectdropdown">
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">TON PROJECT</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}"
-                      >DA NANG VILLA</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">LUU HOUSE</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}"
-                      >BEN TRE HOTEL</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">TDR HOUSE</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">MEY.VINH</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">LVS.HOUSE</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">KOMOREBI 2</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">KA HOUSE</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">SUSHI HARU</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">D8 HOUSE</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}"
-                      >LONG AN HOUSE</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}"
-                      >ALPHA OFFICE</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">KSS HOUSE</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}">YEN THO</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.project') }}"
-                      >OCEAN RESORT</a
-                    >
-                  </li>
-                </ul>
+            <ul class="dropdown-menu" aria-labelledby="projectdropdown">
+                  @foreach($allProjects as $project)
+              <li>
+                  <a class="dropdown-item" href="{{ route('vicnguyen.projects.show', $project->slug) }}">
+                {{ $project->title }}
+                  </a>
+              </li>
+                  @endforeach
+            </ul>
               </li>
               <li class="nav-item dropdown mx-lg-3">
                 <a
@@ -127,7 +86,7 @@
                 </ul>
               </li>
               <li class="nav-item mx-lg-3">
-                <a href="{{route('vicnguyen.news')}}" class="nav-link">Tin tức</a>
+                <a href="{{route('vicnguyen.news.index')}}" class="nav-link">Tin tức</a>
               </li>
               <li class="nav-item dropdown mx-lg-3">
                 <a
@@ -140,7 +99,7 @@
                 >
                 <ul class="dropdown-menu" aria-labelledby="contactDropdown">
                   <li>
-                    <a class="dropdown-item" href="{{ route('vicnguyen.address') }}">Địa chỉ</a>
+                    <a class="dropdown-item" href="{{ route('vicnguyen.address.index') }}">Địa chỉ</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="{{ route('vicnguyen.infomation') }}"

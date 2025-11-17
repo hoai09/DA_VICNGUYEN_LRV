@@ -279,6 +279,9 @@ body {
 .project-intro {
     padding-top: 3rem;
 }
+.project-intro .description__text {
+    line-height: 2.6rem;
+}
 .prj__bt {
     padding-bottom: 9rem !important;
 }
