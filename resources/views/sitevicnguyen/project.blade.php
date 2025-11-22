@@ -69,7 +69,7 @@
                 @forelse($project->images as $image)
                     <div class="gallery__item col-sm-6 col-md-3">
                         <img
-                            src="{{ asset($image->image_path) }}"
+                            src="{{ asset('storage/'.$image->image_path) }}"
                             alt="{{ $project->caption }}"
                             class="gallery__image img-fluid"
                         />

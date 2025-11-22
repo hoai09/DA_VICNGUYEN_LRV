@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const roles = member.projects.map(p => p.pivot.role).join(', ');
         const projectTitles = member.projects.map(p => p.title).join(', ');
         const imageUrl = member.image
-            ? `/assets/img/Thanhvien/${member.image}`
+            ? `storage./${member.image}`
             : `/assets/img/Thanhvien/default.png`;
 
         modalImage.src = imageUrl;

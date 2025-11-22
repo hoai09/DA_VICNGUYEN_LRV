@@ -14,5 +14,6 @@ class MemberController extends Controller
         return view('sitevicnguyen.member', compact('members'));
     }
     
+    
 
 }

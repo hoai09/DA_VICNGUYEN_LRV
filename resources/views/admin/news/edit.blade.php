@@ -1,68 +1,122 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.home')
 
 @section('header')
-<h3>Chỉnh sửa tin tức</h3>
+<h3 class="mb-4">Chỉnh sửa tin tức</h3>
 @endsection
 
 @section('content')
-<div class="container py-4">
-    <h3>Chỉnh sửa tin tức: {{ $news->title }}</h3>
+<div class="container mt-4">
 
-    <form method="POST" action="{{ route('admin.news.update', $news) }}" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4">
 
-        <div class="mb-3">
-            <label>Danh mục</label>
-            <select name="category_id" class="form-control" required>
-                @foreach($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ $news->category_id == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->name }}
-                    </option>
-                @endforeach
-            </select>
+                    <form method="POST" action="{{ route('admin.news.update', $news->slug) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                    
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Danh mục</label>
+                            <select name="category_id" class="form-select @error('category_id') is-invalid @enderror" required>
+                                <option value="">-- Chọn danh mục --</option>
+                                @foreach($categories as $cat)
+                                    <option value="{{ $cat->id }}" {{ old('category_id', $news->category_id) == $cat->id ? 'selected' : '' }}>
+                                        {{ $cat->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                    
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tiêu đề</label>
+                            <input type="text" name="title" value="{{ old('title', $news->title) }}" class="form-control @error('title') is-invalid @enderror" placeholder="Nhập tiêu đề tin tức" required>
+                            @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                    
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Ảnh tin tức</label>
+                            <input type="file" name="feature_image" class="form-control @error('feature_image') is-invalid @enderror">
+
+                            @if($news->feature_image)
+                                <p class="mt-2 fw-semibold">Ảnh hiện tại:</p>
+                                <img src="{{ asset('storage/' . $news->feature_image) }}" width="200" class="border rounded shadow-sm">
+                            @endif
+
+                            @error('feature_image') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tóm tắt</label>
+                            <textarea name="summary" rows="3" class="form-control @error('summary') is-invalid @enderror" placeholder="Tóm tắt ngắn gọn về tin tức">{{ old('summary', $news->summary) }}</textarea>
+                            @error('summary') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                    
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nội dung chi tiết</label>
+                            <textarea id="editor" name="content" class="form-control @error('content') is-invalid @enderror">{!! old('content', $news->content) !!}</textarea>
+                            @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                    
+                        <div class="mb-3 d-flex gap-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="featured_news" value="1" {{ old('featured_news', $news->featured_news) ? 'checked' : '' }}>
+                                <label class="form-check-label fw-semibold">Tin nổi bật</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="latest_news" value="1" {{ old('latest_news', $news->latest_news) ? 'checked' : '' }}>
+                                <label class="form-check-label fw-semibold">Tin mới</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="is_published" value="1" {{ old('is_published', $news->is_published) ? 'checked' : '' }}>
+                                <label class="form-check-label fw-semibold">Đăng ngay</label>
+                            </div>
+                        </div>
+
+                    
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Meta Title (SEO)</label>
+                            <input type="text" name="meta_title" value="{{ old('meta_title', $news->meta_title) }}" class="form-control" placeholder="Meta title SEO">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Meta Description (SEO)</label>
+                            <textarea name="meta_description" rows="2" class="form-control" placeholder="Meta description SEO">{{ old('meta_description', $news->meta_description) }}</textarea>
+                        </div>
+
+                    
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary btn-gradient">
+                                <i class="fa-solid fa-floppy-disk me-1"></i> Cập nhật
+                            </button>
+                            <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary">
+                                <i class="fa-solid fa-arrow-left me-1"></i> Quay lại
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
         </div>
-
-        <div class="mb-3">
-            <label>Ảnh đại diện</label><br>
-            @if($news->feature_image)
-                <img src="{{ asset('storage/'.$news->feature_image) }}" width="120" class="mb-2"><br>
-            @endif
-            <input type="file" name="feature_image" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label>Tóm tắt</label>
-            <textarea name="summary" class="form-control">{{ old('summary', $news->summary) }}</textarea>
-        </div>
-
-        <div class="mb-3">
-            <label>Nội dung</label>
-            <textarea id="editor" name="content" rows="6" class="form-control">
-                {{ old('content', $news->content) }}
-            </textarea>
-        </div>
-
-        <div class="form-check mb-3">
-            <input type="checkbox" name="is_published" class="form-check-input" {{ $news->is_published ? 'checked' : '' }}>
-            <label class="form-check-label">Đăng</label>
-        </div>
-
-        <button class="btn btn-success">Cập nhật</button>
-        <a href="{{ route('admin.news.index') }}" class="btn btn-secondary">Quay lại</a>
-    </form>
-
-    {{-- CKEDITOR --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor.create(document.querySelector('#editor'), {
-            ckfinder: {
-                uploadUrl: "{{ route('admin.ckeditor.upload') }}?_token={{ csrf_token() }}"
-            }
-        }).catch(error => {
-            console.error(error);
-        });
-    </script>
-
+    </div>
 </div>
+
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+ClassicEditor.create(document.querySelector('#editor'), {
+    ckfinder: {
+        uploadUrl: "{{ route('admin.ckeditor.upload') }}?_token={{ csrf_token() }}"
+    }
+}).catch(error => console.error(error));
+</script>
+
 @endsection

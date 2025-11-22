@@ -1,0 +1,46 @@
+.form-table .action-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-table .action-btn i {
+    font-size: 14px;
+}
+
+.form-table tbody tr:hover {
+    background: #f8fafc !important;
+    transition: 0.2s;
+}
+
+.badge-type {
+    background: #e3ecff;
+    color: #2a4d9f;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+/* ----------- */
+
+.form-detail-card h4 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.form-detail-card p {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.form-detail-card strong {
+    color: #183153;
+}
+
+.btn-back {
+    border-radius: 10px;
+    padding: 8px 18px;
+}

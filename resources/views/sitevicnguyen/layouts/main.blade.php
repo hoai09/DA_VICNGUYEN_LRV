@@ -103,7 +103,7 @@
 
     <title>@yield('title','VICNGUYEN') </title>
   </head>
-  <body>
+  <body >
     @if(!Request::routeIs('vicnguyen.home'))
     @include('sitevicnguyen.partials.header')
     @endif
@@ -115,5 +115,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
     
-</body>
+</body >
+
 </html>

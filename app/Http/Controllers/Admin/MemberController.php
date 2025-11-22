@@ -4,101 +4,105 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use App\Models\Project;
 use Illuminate\Http\Request;
-use App\Models\Project; 
+use Illuminate\Support\Str;
 
 class MemberController extends Controller
 {
     public function index()
     {
-        $members = Member::orderBy('created_at')->paginate(5);
+        $members = Member::orderBy('created_at', 'desc')->paginate(5);
         return view('admin.members.index', compact('members'));
     }
 
     public function create()
     {
         $projects = Project::orderBy('title')->get();
-        return view('admin.members.create',compact('projects'));
+        return view('admin.members.create', compact('projects'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
             'graduation_year' => 'nullable|integer',
             'join_year' => 'nullable|integer',
             'image' => 'nullable|image|max:2048',
             'role' => 'required|string|max:255',
             'project_id' => 'required|integer',
+            'awards' => 'nullable|string'
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('members', 'public');
-        }
+        $imagePath = $request->hasFile('image')
+            ? $request->file('image')->store('members', 'public')
+            : null;
 
-        $member =Member::create([
-            'name' => $request->name,
-            'graduation_year' => $request->graduation_year,
-            'join_year' => $request->join_year,
-            'awards' => $request->awards,
-            'image' => $request->image?->store('members', 'public'),
+        $member = Member::create([
+            'name' => $validated['name'],
+            'slug' => Member::generateUniqueSlug($validated['name']),
+            'graduation_year' => $validated['graduation_year'],
+            'join_year' => $validated['join_year'],
+            'awards' => $validated['awards'] ?? null,
+            'image' => $imagePath,
         ]);
-        if ($request->filled('project_id')) 
-        {
-        $member->projects()->attach($request->project_id, [
-            'role' => $request->role,
+
+        $member->projects()->attach($validated['project_id'], [
+            'role' => $validated['role'],
         ]);
-    }
+
         return redirect()->route('admin.members.index')->with('success', 'Thêm thành viên thành công!');
     }
 
     public function show(Member $member)
-    {
-        return view('admin.members.show',compact('member'));
-    }
+{
+    return view('admin.members.show', compact('member'));
+}
 
-    public function edit($id)
+
+    public function edit(Member $member)
     {
-        $member = Member::findOrFail($id);
         $projects = Project::all();
-        return view('admin.members.edit', compact('member','projects'));
+        return view('admin.members.edit', compact('member', 'projects'));
     }
 
     public function update(Request $request, Member $member)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
             'graduation_year' => 'nullable|integer',
             'join_year' => 'nullable|integer',
-            'image' => 'nullable|image|max:2048',
             'role' => 'required|string|max:255',
             'project_id' => 'required|integer',
+            'image' => 'nullable|image|max:2048',
+            'awards' => 'nullable|string'
         ]);
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('members', 'public');
-        } else {
-            $imagePath = $member->image;
-        }
+        $imagePath = $request->hasFile('image')
+            ? $request->file('image')->store('members', 'public')
+            : $member->image;
 
         $member->update([
-            'name' => $request->name,
-            'graduation_year' => $request->graduation_year,
-            'join_year' => $request->join_year,
-            'awards' => $request->awards,
+            'name' => $validated['name'],
+            'slug' => Member::generateUniqueSlug($validated['name'], $member->id),
+            'graduation_year' => $validated['graduation_year'],
+            'join_year' => $validated['join_year'],
+            'awards' => $validated['awards'] ?? null,
             'image' => $imagePath,
         ]);
+
         $member->projects()->sync([
-            $request->project_id => ['role' => $request->role]
+            $validated['project_id'] => ['role' => $validated['role']]
         ]);
+
         return redirect()->route('admin.members.index')->with('success', 'Cập nhật thành công!');
-        
     }
 
-    public function destroy (Member $member)
+    public function destroy(Member $member)
     {
+        $member->projects()->detach();
         $member->delete();
-        return redirect()->route('admin.members.index')->with('success','Xoá thành công');
+
+        return redirect()->route('admin.members.index')->with('success', 'Xoá thành công');
     }
 }

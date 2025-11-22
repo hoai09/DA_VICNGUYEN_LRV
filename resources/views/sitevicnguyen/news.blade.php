@@ -6,13 +6,22 @@
 
         @foreach($news as $newsdetail)
         <div class="col">
-            <a href="{{ route('vicnguyen.news.detail',$newsdetail->id) }}" class="news-card">
+            <a href="{{ route('vicnguyen.news.detail', ['slug' => $newsdetail->slug]) }}">
+
                 <figure class="news-card__figure mb-3">
+                    @if($newsdetail->feature_image)
                     <img
-                        src="{{ asset( $newsdetail->feature_image) }}"
+                        src="{{ asset('storage/'.$newsdetail->feature_image) }}"
                         alt="{{ $newsdetail->title }}"
                         class="news-card__image img-fluid"
                     />
+                    @else
+                    <img
+                        src="{{ asset('images/default-news.jpg') }}"
+                        alt="Default Image"
+                        class="news-card__image img-fluid"
+                    />
+                    @endif
                 </figure>
                 <div class="news-card__info">
                     <div class="news-card__title d-flex">
@@ -30,6 +39,9 @@
         </div>
         @endforeach
 
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $news->links('vendor.pagination.bootstrap-5') }}
     </div>
 </main>
 @endsection

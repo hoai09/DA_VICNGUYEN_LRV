@@ -12,7 +12,7 @@
       class="main-header pb-xs-0 pb-sm-0 pb-md-0 pb-lg-5 navbar navbar-expand-lg bg-white"
     >
       <div class="container main-header__wrapper ">
-       
+      
         <div class="d-flex align-items-center">
           <button
             class="navbar-toggler border-0  "
@@ -25,17 +25,17 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-           <!-- Logo -->
-           <a
-           href="{{ route('vicnguyen.home') }}"
-           class="main-header__logo-link mb-lg-4 navbar-brand"
-         >
-           <img
-             src="{{ asset('assets/img/logo.svg') }}"
-             alt="VICNGUYEN"
-             class="main-header__logo"
-           />
-         </a>
+          <!-- Logo -->
+          <a
+          href="{{ route('vicnguyen.home') }}"
+          class="main-header__logo-link mb-lg-4 navbar-brand"
+        >
+          <img
+            src="{{ asset('assets/img/logo.svg') }}"
+            alt="VICNGUYEN"
+            class="main-header__logo"
+          />
+      </a>
         </div>
         <!-- Nav -->
         <nav

@@ -1,22 +1,51 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.home')
+
 @section('header')
-<h3>Create ContactInfomation</h3>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-uppercase text-primary mb-0">Chi tiết thông tin liên hệ</h3>
+
+    <a href="{{ route('admin.contact_info.index') }}" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left me-1"></i> Quay lại danh sách
+    </a>
+</div>
 @endsection
+
 @section('content')
-<div class="container mt4">
-    <div clas="row">
-        <div class="col-md-6 offset-3">
-            <h1>Contact Detail</h1>
-            <div class="card bg-light text-black mt-4">
-                <div class="card-body border border-success rounded">
-                    <h5 class="card-title"><strong>Địa chỉ:</strong>{{ $contactInfos->address }}</h5>
-                    <p class="card-text"><strong>Email:</strong>{{ $contactInfos->email }}</p>
-                    <p class="card-text"><strong>Số điện thoại:</strong>{{ $contactInfos->phone }}</p>
-                    <p class="card-text"><strong>Map</strong>{{ $contactInfos->map_image  }}</p>
-                    
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white fw-bold">
+                    Thông tin liên hệ
+                </div>
+
+                <div class="card-body">
+                    <p class="mb-2"><strong>Địa chỉ:</strong> {{ $contactInfo->address }}</p>
+                    <p class="mb-2"><strong>Email:</strong> {{ $contactInfo->email ?? '-' }}</p>
+                    <p class="mb-2"><strong>Số điện thoại:</strong> {{ $contactInfo->phone ?? '-' }}</p>
+
+                    <div class="mb-3">
+                        <strong>Ảnh bản đồ:</strong>
+                        @if($contactInfo->map_image)
+                            <div class="mt-2">
+                                <img src="{{ asset('storage/' . $contactInfo->map_image) }}"
+                                    class="img-fluid rounded shadow-sm"
+                                    style="max-height: 250px; object-fit: cover; width: 100%;">
+                            </div>
+                        @else
+                            <span class="text-muted">Chưa có ảnh bản đồ</span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light d-flex justify-content-end">
+                    <a href="{{ route('admin.contact_info.index') }}" class="btn btn-secondary">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Quay lại
+                    </a>
                 </div>
             </div>
-            <a href="{{route('admin.contact_info.index')}}" class="btn btn-secondary my-4">Back to list</a>
+
         </div>
     </div>
 </div>

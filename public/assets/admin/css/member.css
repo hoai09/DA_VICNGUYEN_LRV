@@ -1,0 +1,204 @@
+/* ======== TABLE STYLE ======== */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 6px;
+}
+
+.table thead th {
+    font-weight: 600;
+    color: #495057;
+    background: #f8f9fa !important;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.table tbody tr {
+    background: #ffffff;
+    transition: 0.2s ease-in-out;
+}
+
+.table tbody tr:hover {
+    background: #f1f5ff !important;
+    transform: scale(1.01);
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 14px 16px !important;
+}
+
+/* ======== AVATAR ======== */
+.table img.rounded-circle {
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ======== BUTTONS ======== */
+.btn-outline-primary,
+.btn-outline-warning,
+.btn-outline-danger {
+    border-radius: 8px;
+    padding: 6px 10px;
+    transition: 0.2s;
+}
+
+.btn-outline-primary:hover {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-outline-warning:hover {
+    background: #f59e0b;
+    color: #fff;
+}
+
+.btn-outline-danger:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+/* ======== BADGES ======== */
+.badge {
+    padding: 6px 10px;
+    font-weight: 500;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+/* INFO BADGE */
+.bg-info.text-dark {
+    color: #055160 !important;
+    background-color: #cff4fc !important;
+}
+
+/* ROLE BADGE */
+.bg-secondary {
+    background: #e2e3e5 !important;
+    color: #555 !important;
+}
+
+/* ======== CARD STYLE ======== */
+.card {
+    border-radius: 12px !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+/* ======== PAGINATION ======== */
+.pagination .page-link {
+    border-radius: 6px !important;
+    margin: 0 3px;
+}
+
+.pagination .active .page-link {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+/* ======== MODAL ======== */
+.modal-content {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.modal-header.bg-danger {
+    background: #ef4444 !important;
+}
+
+.modal-body {
+    padding: 20px 24px;
+}
+
+.modal-footer .btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+/* ======== SEARCH FILTER (NẾU SAU NÀY DÙNG) ======== */
+.filter-select {
+    border-radius: 8px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    transition: 0.2s;
+}
+
+.filter-select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+
+
+/* Container */
+.container {
+    max-width: 700px;
+    margin-top: 2rem;
+}
+
+/* Card */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+}
+
+/* Card header */
+.card-header {
+    font-weight: 700;
+    font-size: 1.25rem;
+    background: linear-gradient(90deg, #0d6efd, #6610f2);
+    color: #fff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Form labels */
+.form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+/* Input fields */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.55rem 0.75rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #6610f2;
+    box-shadow: 0 0 0 0.2rem rgba(102,16,242,.25);
+}
+
+/* Buttons */
+.btn-success {
+    border-radius: 8px;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    background: linear-gradient(90deg, #28a745, #198754);
+    border: none;
+}
+
+.btn-success:hover {
+    background: linear-gradient(90deg, #198754, #28a745);
+    transform: translateY(-2px);
+}
+
+/* Image preview */
+.img-preview {
+    max-width: 120px;
+    border-radius: 8px;
+    margin-top: 8px;
+    border: 1px solid #ced4da;
+    object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 768px){
+    .container {
+        padding: 1rem;
+    }
+}
+

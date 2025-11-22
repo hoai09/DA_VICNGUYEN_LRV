@@ -1,107 +1,143 @@
-@extends('admin.layouts.app')
-@section('header')
-<h3>ContactInfomation-Admin</h3>
-@endsection
-@section('content')
-<div class="container mt4">
-    <h2 class="mb-4 text-black"> Danh sách thông tin liên hệ</h2>
-    <a href="{{ route('admin.contact_info.create') }}" class="btn btn-outline-info mb-3">Thêm</a>
-    @session('success')
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong>{{ $value }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-lable="Close"></button>
-            </div>
-            @endsession
-    <table class="table table-bordered table-light table-striped">
-        <thead>
-        <tr>
-            <th>STT</th>
-            <th>Địa chỉ</th>
-            <th>Email</th>
-            <th>Số điện thoại</th>
-            <th>Map</th>
-            <td>Thao tác</td>
-        </tr>
-        </thead>
-        <tbody>
-            @forelse ($contactInfos as $info)
-            
-            <tr>
-                <td>{{ $info->id }}</td>
-                <td>{{ $info->address }}</td>
-                <td>{{ $info->email }}</td>
-                <td>{{ $info->phone }}</td>
-                <td>{{ $info->map_image }}</td>
-                <td>
-                    <a href="{{ route('admin.contact_info.show',$info->id) }}" class="btn btn-outline-warning">Xem</a>
-                    <a href="{{ route('admin.contact_info.edit',$info->id) }}" class="btn btn-outline-danger">Sửa</a>
-                    
-                    <button type="button" class="btn btn-outline-danger delete-btn" 
-                    data-id="{{ $info->id }}"
-                    data-bs-toggle="modal" 
-                    data-bs-target="#deleteContactInfoModal"
-                >
-                    Xoá
-                </button>
-                </td>
-            </tr>
-            @empty
-                <tr>
-                    <td colspan="9" class="text-center">Không tìm thấy thông tin liên hệ</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-    <div class="d-flex justify-end mt-4">
-    {{ $contactInfos->links('vendor.pagination.bootstrap-5') }}
-    </div>
-</div>
+@extends('admin.layouts.home')
 
-<div class="modal fade" id="deleteContactInfoModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content bg-light text-black">
-            <div class="modal-header border-0">
-                <h5 class="modal-title"> Xoá thông tin liên hệ ?</h5>
-                    <button class="btn-close btn-close-black"
-                            type="button"
-                            data-bs-dismiss="modal"
-                            aria-label="Close">
-                    </button>
+
+@section('content')
+<div class="container-fluid px-0 py-3">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold mb-0">
+            <i class="bi bi-people-fill me-2"></i>Thông tin liên hệ
+        </h3>
+
+        <a href="{{ route('admin.contact_info.create') }}" 
+            class="btn btn-add shadow-sm px-4">
+            <i class="fa-solid fa-plus me-1 "></i>Thêm mới
+        </a>
+    </div>
+
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show shadow-sm d-flex align-items-center" role="alert">
+            <i class="fa-solid fa-circle-check me-2 fs-5"></i>
+            <span class="fw-semibold">{{ session('success') }}</span>
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden ms-3">
+
+        <div class="card-header bg-secondary bg-opacity-10 text-body-secondary fw-bold py-3 d-flex align-items-center">
+            <i class="fa-solid fa-address-card me-2"></i>
+            Danh sách thông tin liên hệ
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="py-3">ID</th>
+                            <th>Địa chỉ</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Ảnh bản đồ</th>
+                            <th class="text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @forelse ($contactInfos as $info)
+                        <tr class="table-row-hover">
+                            <td class="fw-bold">{{ $info->id }}</td>
+                            <td class="fw-semibold">{{ $info->address }}</td>
+                            <td>{{ $info->email ?? '-' }}</td>
+                            <td>{{ $info->phone ?? '-' }}</td>
+
+                            <td>
+                                @if($info->map_image)
+                                    <img src="{{ asset('storage/' . $info->map_image) }}"
+                                        class="rounded shadow-sm border"
+                                        style="width: 130px; height: 75px; object-fit: cover;">
+                                @else
+                                    <span class="text-muted fst-italic">Không có</span>
+                                @endif
+                            </td>
+
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+
+                                    <a href="{{ route('admin.contact_info.show', $info->slug) }}" 
+                                    class="btn btn-sm btn-outline-primary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('admin.contact_info.edit', $info->slug) }}" 
+                                    class="btn btn-sm btn-outline-warning">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+
+                                    <button class="btn btn-sm btn-outline-danger delete-btn"
+                                            data-slug="{{ $info->slug }}"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteContactInfoModal">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted fst-italic">
+                                Không có dữ liệu
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+
+                </table>
             </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xoá thông tin này không</p>
-                <p>Sau khi xoá không thể khôi phục </p>
-            </div>
-                <div class="modal-footer border-0">
-                    <button
-                    type="button"
-                    class="btn btn-outline-dack"
-                    data-bs-dismiss="modal">Cancel
-                </button>
-                <form id="deleteForm" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        Xoá thông tin
-                    </button>
-                </form>  
-            </div>
+        </div>
+
+        <div class="card-footer bg-white py-3 d-flex justify-content-end">
+            {{ $contactInfos->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded',function(){
-        const deleteButtons = document.querySelectorAll('.delete-btn');
-        const deleteForm = document.getElementById('deleteForm');
-        deleteButtons.forEach(button => {button.addEventListener('click',function(){
-            const contactId = this.dataset.id;
-            deleteForm.action = `/admin/contactInfos/${contactId}`;
 
-            });
-        });
+{{-- Modal xoá --}}
+<div class="modal fade" id="deleteContactInfoModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4">
 
-    });
-</script>
+            <div class="modal-header bg-danger text-white border-0 rounded-top-4">
+                <h5 class="modal-title fw-bold">
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i> Xác nhận xóa
+                </h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center py-4">
+                <p class="fs-5 fw-semibold">Bạn có chắc chắn muốn xóa mục này?</p>
+                <p class="text-muted">Hành động này không thể hoàn tác.</p>
+            </div>
+
+            <div class="modal-footer border-0 d-flex justify-content-between px-4 pb-3">
+                <button class="btn btn-secondary px-4" data-bs-dismiss="modal">
+                    Hủy
+                </button>
+
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger px-4 fw-bold">
+                        Xóa ngay
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @endsection

@@ -1,49 +1,103 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.home')
+
+@section('styles')
+<link rel="stylesheet" href="{{ asset('assets/admin/css/member.css') }}">
+@endsection
 
 @section('header')
-<h3>Danh sách ảnh dự án</h3>
 @endsection
 
 @section('content')
 <div class="container mt-4">
-    <h2 class="mb-3">Danh sách dự án</h2>
 
-    <a href="{{ route('admin.projects.create') }}" class="btn btn-primary btn-sm mb-3">Thêm</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-semibold m-0">Danh sách dự án</h2>
+        <a href="{{ route('admin.projects.create') }}" class="btn btn-add btn-sm">
+            <i class="fa-solid fa-plus me-1"></i> Thêm dự án
+        </a>
+    </div>
+
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success shadow-sm">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Tiêu đề</th>
-                <th>Trạng thái</th>
-                <th>Năm bắt đầu</th>
-                <th>Năm kết thúc</th>
-                <th width="160px">Hành động</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($projects as $project)
-            <tr>
-                <td>{{ $project->title }}</td>
-                <td>{{ $project->status }}</td>
-                <td>{{ $project->start_year }}</td>
-                <td>{{ $project->end_year }}</td>
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Tiêu đề</th>
+                        <th>Trạng thái</th>
+                        <th>Năm bắt đầu</th>
+                        <th>Người tạo</th>
+                        <th width="200px">Hành động</th>
+                    </tr>
+                </thead>
 
-                <td>
-                    
-                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning btn-sm">Sửa</a>
-                    <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" style="display:inline;">
-                        @csrf @method('DELETE')
-                        <button onclick="return confirm('Bạn có chắc muốn xoá không?')" class="btn btn-danger btn-sm">Xoá</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                <tbody>
+                    @foreach ($projects as $project)
+                    <tr>
+                        <td class="fw-semibold">{{ $project->title }}</td>
 
-    {{ $projects->links() }}
+                        <td>
+                            @switch($project->status)
+                                @case('Đang triển khai')
+                                    <span class="badge bg-success">Đang triển khai</span>
+                                    @break
+                                @case('Hoàn thành')
+                                    <span class="badge bg-primary">Hoàn thành</span>
+                                    @break
+                                @default
+                                    <span class="badge bg-secondary">Ẩn</span>
+                            @endswitch
+                        </td>
+
+                        <td>{{ $project->start_year }}</td>
+
+                        <td>
+                            <span class="text-dark fw-medium">
+                                {{ $project->user->name ?? 'Không xác định' }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="d-flex justify-content-center gap-2">
+
+                                <!-- Nút Xem -->
+                                <a href="{{ route('admin.projects.show', $project->slug) }}" 
+                                class="btn btn-info btn-sm action-btn">
+                                <i class="fa-solid fa-eye"></i>
+                                </a>
+
+                                <!-- Nút Sửa -->
+                                <a href="{{ route('admin.projects.edit', $project->slug) }}" 
+                                class="btn btn-warning btn-sm action-btn">
+                                <i class="fa-solid fa-pen"></i>
+                                </a>
+
+                                <!-- Nút Xoá -->
+                                <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button onclick="return confirm('Bạn có chắc muốn xoá không?')" 
+                                            class="btn btn-danger btn-sm action-btn">
+                                            <i class="fa-solid fa-trash "></i>
+                                    </button>
+                                </form>
+
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        {{ $projects->links('vendor.pagination.bootstrap-5') }}
+    </div>
+
 </div>
 @endsection

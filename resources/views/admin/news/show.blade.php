@@ -1,22 +1,74 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.home')
+
 @section('header')
-<h3>Create member</h3>
+<h3>Chi tiết tin tức</h3>
 @endsection
+
 @section('content')
-<div class="container mt4">
-    <div clas="row">
-        <div class="col-md-6 offset-3">
-            <h1>Member Detail</h1>
-            <div class="card bg-light text-black mt-4">
-                <div class="card-body border border-success rounded">
-                    <h5 class="card-title"><strong>Loại tin:</strong>{{ $news->category_id }}</h5>
-                    <p class="card-text"><strong>Tiêu đề:</strong>{{ $news->title }}</p>
-                    <p class="card-text"><strong>Ảnh :</strong>{{ $news->feature_image }}</p>
-                    <p class="card-text"><strong>Tóm tắt:</strong>{{ $news->summary  }}</p>
-                    <p class="card-text"><strong>Ngày đăng:</strong>{{ $news->published_at }}</p>
-                    <a href="{{route('admin.news.index')}}" class="btn btn-secondary">Back to list</a>
+<div class="container mt-4 member-detail">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+        
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-primary text-white rounded-top-4 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Chi tiết tin</h5>
+                    <a href="{{ route('admin.news.index') }}" class="btn btn-light btn-sm">Quay lại danh sách</a>
+                </div>
+
+                <div class="card-body">
+
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-semibold text-secondary">Danh mục</div>
+                        <div class="col-md-8">{{ $news->category?->name ?? '-' }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-semibold text-secondary">Tiêu đề</div>
+                        <div class="col-md-8">{{ $news->title }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-semibold text-secondary">Ảnh nổi bật</div>
+                        <div class="col-md-8">
+                            @if($news->feature_image)
+                                <img src="{{ asset('storage/' . $news->feature_image) }}" alt="Ảnh tin" class="img-fluid rounded" style="max-width:200px;">
+                            @else
+                                -
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-semibold text-secondary">Tóm tắt</div>
+                        <div class="col-md-8">{{ $news->summary ?? '-' }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-semibold text-secondary">Ngày đăng</div>
+                        <div class="col-md-8">
+                            {{ $news->published_at?->format('d/m/Y H:i') ?? '-' }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-semibold text-secondary">Nội dung chi tiết</div>
+                        <div class="col-md-8">
+                            {!! $news->content !!}
+                        </div>
+                    </div>
+
+                    
+                    <div class="d-flex justify-content-end mt-4 gap-2">
+                        <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary">Quay lại</a>
+                        <a href="{{ route('admin.news.edit', $news->slug) }}" class="btn btn-primary">Chỉnh sửa</a>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </div>
 </div>

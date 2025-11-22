@@ -1,12 +1,14 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.home')
+@section('styles')
+<link rel="stylesheet" href="{{ asset('assets/admin/css/member.css') }}">
+@endsection
 @section('header')
-<h3>Create member</h3>
 @endsection
 @section('content')
 <div class="container mt4">
     <div clas="row">
         <div class="col-md-6 offset-3">
-            <h1>Member Detail</h1>
+    
             <div class="card bg-light text-black mt-4">
                 <div class="card-body border border-success rounded">
                     <h5 class="card-title"><strong>Tên:</strong>{{ $member->name }}</h5>

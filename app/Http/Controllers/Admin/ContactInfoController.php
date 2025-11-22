@@ -14,7 +14,6 @@ class ContactInfoController extends Controller
         return view('admin.contact_info.index', compact('contactInfos'));
     }
 
-    
     public function create()
     {
         return view('admin.contact_info.create');
@@ -29,7 +28,8 @@ class ContactInfoController extends Controller
             'map_image' => 'nullable|image|max:2048',
         ]);
 
-            $imagePath = null;
+        $imagePath = null;
+
         if ($request->hasFile('map_image')) {
             $imagePath = $request->file('map_image')->store('contactInfos', 'public');
         }
@@ -44,18 +44,18 @@ class ContactInfoController extends Controller
         return redirect()->route('admin.contact_info.index')
             ->with('success', 'Thêm thông tin liên hệ thành công!');
     }
-    public function show(ContactInfo $contactInfos)
+
+    public function show(ContactInfo $contactInfo)
     {
-        return view('admin.contact_info.show',compact('contactInfos'));
+        return view('admin.contact_info.show', compact('contactInfo'));
     }
 
-    public function edit($id)
+    public function edit(ContactInfo $contactInfo)
     {
-        $contactInfos = ContactInfo::findOrFail($id);
-        return view('admin.contact_info.edit', compact('contactInfos'));
+        return view('admin.contact_info.edit', compact('contactInfo'));
     }
 
-    public function update(Request $request, ContactInfo $contactInfos)
+    public function update(Request $request, ContactInfo $contactInfo)
     {
         $request->validate([
             'address' => 'required|string|max:255',
@@ -64,26 +64,28 @@ class ContactInfoController extends Controller
             'map_image' => 'nullable|image|max:2048',
         ]);
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('contactInfos', 'public');
+        // xử lý ảnh
+        if ($request->hasFile('map_image')) {
+            $path = $request->file('map_image')->store('contactInfos', 'public');
         } else {
             $path = $contactInfo->map_image;
         }
 
-        $contactInfos->update([
+        $contactInfo->update([
             'address' => $request->address,
             'email' => $request->email,
             'phone' => $request->phone,
             'map_image' => $path,
         ]);
-        
+
         return redirect()->route('admin.contact_info.index')
             ->with('success', 'Cập nhật thông tin liên hệ thành công!');
     }
 
-    public function destroy(ContactInfo $contactInfos)
+    public function destroy(ContactInfo $contactInfo)
     {
-        $contactInfos->delete();
+        $contactInfo->delete();
+
         return redirect()->route('admin.contact_info.index')
             ->with('success', 'Đã xóa thông tin liên hệ!');
     }

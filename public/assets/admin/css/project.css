@@ -1,0 +1,47 @@
+.table-hover tbody tr:hover {
+    background-color: #f5f7fa;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.btn-sm {
+    padding: 4px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+.member-item:hover {
+    background: #f7f9ff;
+    border-color: #d0d7ff;
+    transition: 0.2s;
+}
+
+.member-list {
+    max-height: 350px;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding-right: 5px;
+}
+
+.member-item input[type="text"] {
+    height: 36px;
+}
+
+.card {
+    border-radius: 16px !important;
+}
+
+.form-control-lg {
+    border-radius: 10px;
+}
+
+label.form-label {
+    font-size: 14px;
+}

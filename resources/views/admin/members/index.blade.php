@@ -1,113 +1,184 @@
-@extends('admin.layouts.app')
-@section('header')
-<h3>MemberAdmin</h3>
+@extends('admin.layouts.home')
+@section('styles')
+<link rel="stylesheet" href="{{ asset('assets/admin/css/member.css') }}">
 @endsection
+
+@section('header')
+@endsection
+
 @section('content')
-<div class="container mt4">
-    <h2 class="mb-4 text-black"> Danh sách thành viên</h2>
-    <a href="{{ route('admin.members.create') }}" class="btn btn-outline-info mb-3">Thêm</a>
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold mb-0">
+            <i class="bi bi-people-fill me-2"></i>Danh sách thành viên
+        </h3>
+
+        <a href="{{ route('admin.members.create') }}" 
+            class="btn btn-add shadow-sm px-4">
+            <i class="fa-solid fa-plus me-1 "></i>Thêm thành viên
+        </a>
+    </div>
+
+
     @session('success')
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong>{{ $value }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-lable="Close"></button>
-            </div>
-            @endsession
-    <table class="table table-bordered table-light table-striped">
-        <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên</th>
-            <th>Ảnh</th>
-            <th>Tốt nghiệp</th>
-            <th>Trở thành Vicer</th>
-            <th>Dự án tham gia</th>
-            <th>Giải thưởng</th>
-            <td>Chức vụ</td>
-            <td>Thao tác</td>
-        </tr>
-        </thead>
-        <tbody>
-            @forelse ($members as $member)
-            
-            <tr>
-                <td>{{ $member->id }}</td>
-                <td>{{ $member->name }}</td>
-                <td>{{ $member->image }}</td>
-                <td>{{ $member->graduation_year }}</td>
-                <td>{{ $member->join_year }}</td>
-                <td>{{  $member->projects->pluck('title')->join(', ') }}</td>
-                <td>{{ $member->awards }}</td>
-                <td>{{ $member->projects->pluck('pivot.role')->join(', ')}}</td>
-                <td>
-                    <a href="{{ route('admin.members.show',$member->id) }}" class="btn btn-outline-warning">Xem</a>
-                    <a href="{{ route('admin.members.edit',$member->id) }}" class="btn btn-outline-danger">Sửa</a>
-                    
-                    <button type="button" class="btn btn-outline-danger delete-btn" 
-                    data-id="{{ $member->id }}"
-                    data-bs-toggle="modal" 
-                    data-bs-target="#deleteMemberModal"
-                >
-                    Xoá
-                </button>
-                </td>
-            </tr>
-            @empty
+    <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+        <strong>Thành công!</strong> {{ $value }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    @endsession
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
                 <tr>
-                    <td colspan="9" class="text-center">Không tìm thấy thành viên</td>
+                    <th>#</th>
+                    <th>Thông tin</th>
+                    <th>Năm tốt nghiệp</th>
+                    <th>Vicer từ</th>
+                    <th>Dự án tham gia</th>
+                    <th>Giải thưởng</th>
+                    <th>Chức vụ</th>
+                    <th class="text-center">Thao tác</th>
                 </tr>
-            @endforelse
-        </tbody>
-    </table>
-    <div class="d-flex justify-end mt-4">
-    {{ $members->links('vendor.pagination.bootstrap-5') }}
+                </thead>
+
+                <tbody>
+                @forelse ($members as $member)
+                <tr>
+                    <td class="text-muted">{{ $member->slug }}</td>
+
+                
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('storage/' . $member->image) }}"
+                                class="rounded-circle me-3" 
+                                width="48" height="48"
+                                style="object-fit: cover;">
+                            <div>
+                                <div class="fw-semibold">{{ $member->name }}</div>
+                                <small class="text-muted">{{ $member->slug }}</small>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>{{ $member->graduation_year }}</td>
+
+                    <td>
+                        <span class="badge bg-info text-dark">
+                            {{ $member->join_year }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="text-secondary small">
+                            {{ $member->projects->pluck('title')->join(', ') }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="text-muted small">{{ $member->awards }}</span>
+                    </td>
+
+                    <td>
+                        <span class="badge bg-secondary">
+                            {{ $member->projects->pluck('pivot.role')->join(', ') }}
+                        </span>
+                    </td>
+
+        
+                    <td class="text-center">
+                        {{-- @dd($member) --}}
+                        <div class="d-flex justify-content-center gap-2">
+                        <a href="{{ route('admin.members.show', ['member'=>$member->slug])}}" 
+                            class="btn btn-sm btn-outline-primary me-1 action-btn">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        
+                        <a href="{{ route('admin.members.edit', ['member'=>$member->slug]) }}" 
+                        class="btn btn-sm btn-outline-warning me-1 action-btn">
+                        <i class="fa-solid fa-pen"></i>
+                        </a>
+
+                        <button type="button" 
+                            class="btn btn-sm btn-outline-danger delete-btn action-btn"
+                            data-slug="{{ $member->slug }}"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteMemberModal">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        </div>
+                    </td>
+                </tr>
+
+                @empty
+                    <tr>
+                        <td colspan="8" class="text-center py-4 text-muted">
+                            <i class="bi bi-inboxes fs-2"></i>
+                            <div class="mt-2">Không có thành viên nào</div>
+                        </td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+        {{ $members->links('vendor.pagination.bootstrap-5') }}
     </div>
 </div>
 
 <div class="modal fade" id="deleteMemberModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content bg-light text-black">
-            <div class="modal-header border-0">
-                <h5 class="modal-title"> Xoá thành viên ?</h5>
-                    <button class="btn-close btn-close-black"
-                            type="button"
-                            data-bs-dismiss="modal"
-                            aria-label="Close">
-                    </button>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            
+            <div class="modal-header bg-danger text-white border-0">
+                <h5 class="modal-title">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    Xác nhận xoá
+                </h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
+
             <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xoá thành viên này không</p>
-                <p>Sau khi xoá không thể khôi phục </p>
+                <p class="fw-semibold">Bạn có chắc chắn muốn xoá thành viên này?</p>
+                <p class="text-muted small mb-0">* Hành động này không thể hoàn tác.</p>
             </div>
-                <div class="modal-footer border-0">
-                    <button
-                    type="button"
-                    class="btn btn-outline-dack"
-                    data-bs-dismiss="modal">Cancel
+
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                    Huỷ
                 </button>
+
                 <form id="deleteForm" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">
-                        Xoá thành viên
+                        Xoá ngay
                     </button>
-                </form>  
+                </form>
             </div>
+
         </div>
     </div>
 </div>
 @endsection
+
+
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded',function(){
-        const deleteButtons = document.querySelectorAll('.delete-btn');
-        const deleteForm = document.getElementById('deleteForm');
-        deleteButtons.forEach(button => {button.addEventListener('click',function(){
-            const memberId = this.dataset.id;
-            deleteForm.action = `/admin/members/${memberId}`;
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+    const deleteForm = document.getElementById('deleteForm');
 
-            });
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.dataset.slug;
+            deleteForm.action = `/admin/members/${id}`;
         });
-
     });
+});
 </script>
 @endsection

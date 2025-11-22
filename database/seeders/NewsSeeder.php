@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use App\Models\News;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
+
 
 
 class NewsSeeder extends Seeder
@@ -115,12 +117,19 @@ class NewsSeeder extends Seeder
         foreach ($news as $item) {
             News::create([
                 'title' => $item['title'],
+                'slug'  => News::generateUniqueSlug($item['title']),
                 'feature_image' => $item['feature_image'],
                 'summary' => $item['summary'],
                 'content' => $item['content'],
                 'published_at' => Carbon::now()->subDays(rand(0, 10)),
                 'category_id' => 1,
-                
+                'is_published' => 1,
+                'featured_news' => rand(0,1),
+                'latest_news' => rand(0,1),
+                'author_id' => 1,
+                'meta_title' => $item['title'],
+                'meta_description' => $item['summary'],
+                'view_count' => rand(0,100),
             ]);
         }
     }

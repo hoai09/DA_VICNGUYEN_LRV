@@ -14,7 +14,6 @@ class UploadController extends Controller
             $file = $request->file('upload');
             $filename = time() . '_' . $file->getClientOriginalName();
 
-            // Lưu file vào storage/app/public/uploads/news
             $file->storeAs('uploads/news', $filename, 'public');
 
             $url = asset("storage/uploads/news/$filename");

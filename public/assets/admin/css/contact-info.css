@@ -1,0 +1,89 @@
+.card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.table thead {
+    background: #f8f9fa;
+    font-weight: bold;
+}
+.table-hover tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+.btn-group .btn {
+    border-radius: 6px !important;
+    padding: 6px 10px;
+}
+
+.btn-outline-primary:hover {
+    background: #0d6efd;
+    color: #fff;
+}
+.btn-outline-warning:hover {
+    background: #ffc107;
+    color: #000;
+}
+.btn-outline-danger:hover {
+    background: #dc3545;
+    color: #fff;
+}
+
+.table img,
+.preview-image {
+    border-radius: 10px;
+    object-fit: cover;
+    transition: 0.25s ease-in-out;
+}
+.table img:hover,
+.preview-image:hover {
+    transform: scale(1.03);
+}
+
+.modal-content {
+    border-radius: 14px;
+}
+
+#previewWrapper {
+    padding: 12px;
+    background: #fafafa;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+}
+
+.page-title {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.back-btn {
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+@media (max-width: 768px) {
+    .table img {
+        width: 100px;
+        height: 60px;
+    }
+}
+
+.table-row-hover:hover {
+    background: #f7faff !important;
+    transition: 0.2s;
+}
+
+.card {
+    border-radius: 16px !important;
+}
+
+.btn-group .btn {
+    border-radius: 6px !important;
+}

@@ -13,10 +13,10 @@ class ProjectController extends Controller
 {
     
     public function index()
-    {
-        $projects = Project::latest()->paginate(10);
-        return view('admin.projects.index', compact('projects'));
-    }
+{
+    $projects = Project::with('user')->orderBy('created_at', 'desc')->paginate(10);
+    return view('admin.projects.index', compact('projects'));
+}
 
     public function create()
     {
@@ -29,7 +29,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-    $request->validate([
+        $validated = $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'nullable|string',
         'status' => 'required|string',
@@ -41,7 +41,7 @@ class ProjectController extends Controller
 
     Project::create([
         'title' => $request->title,
-        'slug' => Str::slug($request->title),
+        'slug'=> Project::generateUniqueSlug($validated['title']),
         'category' => $request->category,
         'address' => $request->address,
         'acreage' => $request->acreage,
@@ -49,10 +49,10 @@ class ProjectController extends Controller
         'status' => $request->status,
         'start_year' => $request->start_year,
         'end_year' => $request->end_year,
+        'created_by' => auth()->id(),
     ]);
 
     if($request->members){
-        // Tách roles theo dấu phẩy
         $roles = array_map('trim', explode(',', $request->roles ?? ''));
     
         foreach($request->members as $index => $memberId){
@@ -69,9 +69,13 @@ class ProjectController extends Controller
      * Display the specified resource.
      */
     public function show(Project $project)
-    {
-        //
-    }
+{
+    
+    $project->load('user', 'members');
+
+    return view('admin.projects.show', compact('project'));
+}
+
 
     /**
      * Show the form for editing the specified resource.
@@ -101,7 +105,7 @@ class ProjectController extends Controller
 
         $project->update([
             'title' => $request->title,
-            'slug' => Str::slug($request->title),
+            'slug'=> Project::generateUniqueSlug($validated['title']),
             'category' => $request->category,
             'address' => $request->address,
             'acreage' => $request->acreage,
@@ -111,11 +115,10 @@ class ProjectController extends Controller
             'end_year' => $request->end_year,
         ]);
 
-        $project->members()->detach(); // xoá hết trước (update)
-
+        $project->members()->detach();
 if($request->members){
     foreach($request->members as $memberId){
-        $role = $request->roles[$memberId] ?? null; // Lấy role trực tiếp
+        $role = $request->roles[$memberId] ?? null;
         $project->members()->attach($memberId, ['role' => $role]);
     }
 }
