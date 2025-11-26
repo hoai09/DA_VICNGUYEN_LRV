@@ -13,12 +13,12 @@ class Member extends Model
     protected $table = 'members';
 
     protected $fillable = [
-        'name',
+        'name',//tên
         'slug',
-        'image',
-        'graduation_year',
-        'join_year',
-        'awards',
+        'image',//ảnh
+        'graduation_year',//năm tốt nghiệp
+        'join_year',//năm trở thành vicer
+        'awards', // giải thưởng
     ];
 
 

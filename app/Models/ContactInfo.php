@@ -10,16 +10,16 @@ class ContactInfo extends Model
     protected $table = 'contact_info_tables';
 
     protected $fillable = [
-        'type',
-        'address',
-        'email',
-        'phone',
-        'map_image',
+        'type', //loại (studio/contact/social)
+        'address', // địa chỉ
+        'email',// email
+        'phone',//sđt
+        'map_image',//ảnh
         'slug',
-        'social_links',
-        'studio_image',
-        'studio_content',
-        'awards'
+        'social_links',//link social
+        'studio_image',// ảnh studio
+        'studio_content',// nội dung studio
+        'awards'// danh sách giải thưởng
     ];
 
     protected $casts = [

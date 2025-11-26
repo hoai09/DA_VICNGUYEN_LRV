@@ -14,7 +14,7 @@ class ProjectImage extends Model // bảng chứa ảnh của trang project
     'project_id',
     'image_path',// đường dẫn ảnh
     'slug',
-    'caption'];
+    ];
 
 
     public function project()

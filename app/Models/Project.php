@@ -11,7 +11,18 @@ class Project extends Model
 {
     use HasFactory;
     protected $table = 'projects';
-    protected $fillable=['title','slug','category','address','acreage','status','start_year','end_year','description','created_by'];
+    protected $fillable=[
+        'title',// tiêu đề
+        'slug',
+        'category',//thể loại
+        'address',// địa chỉ
+        'acreage',//diện tích
+        'status',//trạng thái
+        'start_year',//năm bắt đầu
+        'end_year',//năm kết thúc
+        'description',//mô tả
+        'created_by'//người tạo
+    ];
 
     public function images(){
         return $this->hasMany(ProjectImage::class);
