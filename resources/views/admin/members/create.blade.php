@@ -5,7 +5,7 @@
 
 @section('header')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold text-primary mb-0">Thêm Member Mới</h3>
+    <h3 class="fw-bold mb-0">Thêm Member Mới</h3>
     <a href="{{ route('admin.members.index') }}" class="btn btn-secondary">Quay lại danh sách</a>
 </div>
 @endsection
@@ -61,7 +61,7 @@
                     <input type="text" name="awards" class="form-control" value="{{ old('awards') }}">
                 </div>
 
-                <button type="submit" class="btn btn-success mt-3">Lưu Member</button>
+                <button type="submit" class="btn btn-outline-info mt-3">Lưu Member</button>
             </form>
 
         </div>

@@ -23,11 +23,6 @@ class Project extends Model
                     ->withTimestamps();
     }
 
-    public function news()
-    {
-        return $this->belongsToMany(News::class, 'project_news', 'project_id', 'news_id');
-    }
-
     public function project_information()
     {
         return $this->hasMany(Information::class);

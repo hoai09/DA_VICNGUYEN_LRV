@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\News;
-use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -13,14 +12,11 @@ class NewsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = News::with(['category', 'author']);
+        $query = News::with([ 'author']);
         if ($request->status === 'published') {
             $query->where('is_published', true);
         } elseif ($request->status === 'draft') {
             $query->where('is_published', false);
-        }
-        if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
         }
         $news = $query->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.news.index', compact('news'));
@@ -28,14 +24,12 @@ class NewsController extends Controller
 
     public function create()
     {
-        $categories = NewsCategory::orderBy('name')->get();
-        return view('admin.news.create', compact('categories'));
+        return view('admin.news.create');
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'category_id' => 'required|exists:news_categories,id',
             'title' => 'required|string|max:255|unique:news,title',
             'feature_image' => 'nullable|image|max:2048',
             'summary' => 'nullable|string',
@@ -48,7 +42,6 @@ class NewsController extends Controller
         $imagePath = $request->file('feature_image')?->store('uploads/news', 'public');
         $publishedAt = $request->has('is_published') ? Carbon::now('Asia/Ho_Chi_Minh') : null;
         News::create([
-            'category_id'=> $validated['category_id'],
             'title' => $validated['title'],
             'slug'             => News::generateUniqueSlug($validated['title']),
             'summary'          => $validated['summary'] ?? null,
@@ -74,14 +67,12 @@ class NewsController extends Controller
 
     public function edit(News $news)
     {
-        $categories = NewsCategory::all();
-        return view('admin.news.edit', compact('news', 'categories'));
+        return view('admin.news.edit', compact('news'));
     }
 
     public function update(Request $request, News $news)
     {
         $validated = $request->validate([
-            'category_id' => 'required|exists:news_categories,id',
             'title' => 'required|string|max:255|unique:news,title,' . $news->id,
             'feature_image' => 'nullable|image|max:2048',
             'summary' => 'nullable|string',
@@ -104,7 +95,6 @@ class NewsController extends Controller
             : null;
 
         $news->update([
-            'category_id'      => $validated['category_id'],
             'title'            => $validated['title'],
             'slug'             => News::generateUniqueSlug($validated['title'], $news->id),
             'summary'          => $validated['summary'] ?? null,

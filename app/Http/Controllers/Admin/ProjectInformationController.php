@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ProjectInformation;
 use Illuminate\Http\Request;
 
-class ProjectInformationController extends Controller
+class ProjectInformationController extends Controller   // FORM
 {
     public function index()
     {
@@ -18,7 +18,7 @@ class ProjectInformationController extends Controller
     {
         return view('admin.form.show', compact('information'));
     }
-
+    
     public function destroy(ProjectInformation $information)
     {
         $information->delete();

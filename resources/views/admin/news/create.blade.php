@@ -16,7 +16,7 @@
                         @csrf
 
                     
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label fw-semibold">Danh mục</label>
                             <select name="category_id" class="form-select @error('category_id') is-invalid @enderror" required>
                                 <option value="">-- Chọn danh mục --</option>
@@ -25,7 +25,7 @@
                                 @endforeach
                             </select>
                             @error('category_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                        </div>
+                        </div> --}}
 
                 
                         <div class="mb-3">
@@ -86,10 +86,10 @@
 
                     
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary btn-gradient">
+                            <button type="submit" class="btn btn-outline-info mt-3">
                                 <i class="fa-solid fa-floppy-disk me-1"></i> Lưu
                             </button>
-                            <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary mt-3">
                                 <i class="fa-solid fa-arrow-left me-1"></i> Quay lại
                             </a>
                         </div>

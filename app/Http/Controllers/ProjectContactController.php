@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Projectcontact;
+use App\Models\ProjectContact;
 use Illuminate\Http\Request;
 
-class ProjectContactController extends Controller
+class ProjectContactController extends Controller   // FORM  - SITE_VICNGUYENDESIGN
 {
     public function create()
     {
@@ -24,8 +24,7 @@ class ProjectContactController extends Controller
             'email.email' => 'Email không hợp lệ.',
         ]);
 
-        Projectcontact::create($request->only(['name', 'email', 'objects', 'content']));
-
+        ProjectContact::create($request->only(['name', 'email', 'objects', 'content']));
 
         return redirect()->back()->with('success', 'Thông tin đã được gửi thành công!');
     }

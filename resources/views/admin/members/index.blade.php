@@ -28,12 +28,13 @@
     </div>
     @endsession
 
-    <div class="card shadow-sm border-0">
+    <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-0">
-            <table class="table table-hover align-middle mb-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 project-table">
                 <thead class="table-light">
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Thông tin</th>
                     <th>Năm tốt nghiệp</th>
                     <th>Vicer từ</th>
@@ -47,7 +48,7 @@
                 <tbody>
                 @forelse ($members as $member)
                 <tr>
-                    <td class="text-muted">{{ $member->slug }}</td>
+                    <td class="text-muted">{{ $member->id }}</td>
 
                 
                     <td>
@@ -121,7 +122,8 @@
                     </tr>
                 @endforelse
                 </tbody>
-            </table>
+                </table>
+            </div>
         </div>
     </div>
 

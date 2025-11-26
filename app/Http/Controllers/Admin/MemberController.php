@@ -16,12 +16,17 @@ class MemberController extends Controller
         return view('admin.members.index', compact('members'));
     }
 
+    public function show(Member $member)
+    {
+        return view('admin.members.show', compact('member'));
+    }
+    
+    /*==========================THÊM==================================*/
     public function create()
     {
         $projects = Project::orderBy('title')->get();
         return view('admin.members.create', compact('projects'));
     }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -54,12 +59,8 @@ class MemberController extends Controller
         return redirect()->route('admin.members.index')->with('success', 'Thêm thành viên thành công!');
     }
 
-    public function show(Member $member)
-{
-    return view('admin.members.show', compact('member'));
-}
 
-
+/*=========================SỬA===================================*/
     public function edit(Member $member)
     {
         $projects = Project::all();
@@ -98,6 +99,7 @@ class MemberController extends Controller
         return redirect()->route('admin.members.index')->with('success', 'Cập nhật thành công!');
     }
 
+    /*============================XOÁ================================*/
     public function destroy(Member $member)
     {
         $member->projects()->detach();

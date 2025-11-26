@@ -51,7 +51,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Tiêu đề</th>
-                        <th>Danh mục</th>
+                        {{-- <th>Danh mục</th> --}}
                         <th>Tác giả</th>
                         <th>Ảnh</th>
                         <th>Trạng thái</th>
@@ -66,7 +66,7 @@
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td><strong>{{ $item->title }}</strong></td>
-                        <td>{{ $item->category->name ?? '-' }}</td>
+                        {{-- <td>{{ $item->category->name ?? '-' }}</td> --}}
                         <td>{{ $item->author->name ?? '-' }}</td>
                         <td>
                             @if($item->feature_image)

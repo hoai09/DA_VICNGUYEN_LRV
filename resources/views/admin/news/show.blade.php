@@ -20,10 +20,10 @@
                 <div class="card-body">
 
                     
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <div class="col-md-4 fw-semibold text-secondary">Danh mục</div>
                         <div class="col-md-8">{{ $news->category?->name ?? '-' }}</div>
-                    </div>
+                    </div> --}}
 
                     <div class="row mb-3">
                         <div class="col-md-4 fw-semibold text-secondary">Tiêu đề</div>
@@ -62,8 +62,8 @@
 
                     
                     <div class="d-flex justify-content-end mt-4 gap-2">
-                        <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary">Quay lại</a>
-                        <a href="{{ route('admin.news.edit', $news->slug) }}" class="btn btn-primary">Chỉnh sửa</a>
+                        <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary mt-3">Quay lại</a>
+                        <a href="{{ route('admin.news.edit', $news->slug) }}" class="btn btn-outline-info mt-3">Chỉnh sửa</a>
                     </div>
 
                 </div>

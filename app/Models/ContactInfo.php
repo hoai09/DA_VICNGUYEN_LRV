@@ -7,16 +7,25 @@ use Illuminate\Support\Str;
 
 class ContactInfo extends Model
 {
-    protected $table = 'contact_infos';
+    protected $table = 'contact_info_tables';
 
     protected $fillable = [
+        'type',
         'address',
         'email',
         'phone',
         'map_image',
-        'slug'
+        'slug',
+        'social_links',
+        'studio_image',
+        'studio_content',
+        'awards'
     ];
 
+    protected $casts = [
+        'social_links' => 'array',
+        'awards'=>'array',
+    ];
 
     public function scopePublished($query)
     {
@@ -37,7 +46,7 @@ class ContactInfo extends Model
                     $query->where('id', '!=', $contactId);
                 })
                 ->exists()
-        ) {
+        ){
             $slug = $originalSlug . '-' . $counter++;
         }
 

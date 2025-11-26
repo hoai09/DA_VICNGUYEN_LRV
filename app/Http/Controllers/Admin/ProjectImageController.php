@@ -32,12 +32,8 @@ class ProjectImageController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-
                 $path = $image->store('projects', 'public');
-
-                
                 $filename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-
                 ProjectImage::create([
                     'project_id' => $request->project_id,
                     'image_path' => $path,
@@ -46,7 +42,6 @@ class ProjectImageController extends Controller
                 ]);
             }
         }
-
         return redirect()
             ->route('admin.project_images.index')
             ->with('success', 'Ảnh đã được tải lên');
@@ -61,7 +56,6 @@ class ProjectImageController extends Controller
     {
         Storage::disk('public')->delete($projectImage->image_path);
         $projectImage->delete();
-
         return back()->with('success', 'Đã xoá ảnh.');
     }
 }

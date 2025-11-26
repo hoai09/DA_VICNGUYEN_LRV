@@ -15,9 +15,10 @@
         <div class="alert alert-success shadow-sm">{{ session('success') }}</div>
     @endif
 
-    <div class="card shadow-sm border-0">
+    <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-0 form-table">
-            <table class="table table-hover align-middle mb-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 form-table">
                 <thead class="table-light">
                     <tr>
                         <th>Họ và tên</th>
@@ -26,7 +27,7 @@
                         <th>Loại dự án</th>
                         <th>Diện tích</th>
                         <th>Ngày gửi</th>
-                        <th width="140px">Hành động</th>
+                        <th width="140px" class="text-center">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,13 +45,11 @@
                         <td>{{ $info->created_at->format('d/m/Y H:i') }}</td>
                         <td class="d-flex gap-1">
 
-                            {{-- View --}}
                             <a href="{{ route('admin.form.show', $info->id) }}" 
                             class="btn btn-info btn-sm action-btn">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
 
-                            {{-- Delete --}}
                             <form action="{{ route('admin.form.destroy', $info->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -65,7 +64,8 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
+                </table>
+            </div>
         </div>
     </div>
 

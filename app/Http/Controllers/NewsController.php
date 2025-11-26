@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -21,32 +20,17 @@ class NewsController extends Controller
     public function detail($slug)
     {
         $news = News::where('slug', $slug)
-            ->with('category')
             ->firstOrFail();
 
         $news->increment('view_count');
 
-        $category = $news->category;
-
-        $relatedNews = News::where('category_id', $news->category_id)
-            ->where('id', '!=', $news->id)
+        $relatedNews = News::where('id', '!=', $news->id)
             ->where('is_published', true)
             ->latest()
             ->limit(4)
             ->get();
 
-        return view('sitevicnguyen.chitiettintuc', compact('news', 'category', 'relatedNews'));
+        return view('sitevicnguyen.chitiettintuc', compact('news', 'relatedNews'));
     }
 
-    public function category($slug)
-    {
-        $category = NewsCategory::where('slug', $slug)->firstOrFail();
-
-        $news = News::where('category_id', $category->id)
-            ->where('is_published', true)
-            ->latest()
-            ->paginate(10);
-
-        return view('sitevicnguyen.category', compact('category', 'news'));
-    }
 }

@@ -1,21 +1,29 @@
-<footer
-      class="main-footer d-flex flex-column align-items-center justify-content-center pt-0 pb-4"
-    >
-      <p class="main-footer__copyright">
-        Copyright © VIC NGUYEN | ARCHITECTS 2018 
-      </p>
+<footer class="main-footer d-flex flex-column align-items-center justify-content-center pt-0 pb-4">
 
-      <div class="main-footer__socials d-flex mt-3">
-        <a href="https://www.facebook.com/Vicnguyendesign" class="main-footer__social-item">
-          <i class="fab fa-facebook-f main-footer__social-icon"></i>
-        </a>
+    <p class="main-footer__copyright">
+        Copyright © VIC NGUYEN | ARCHITECTS 2018
+    </p>
 
-        <a href="https://www.instagram.com/vicnguyendesign/" class="main-footer__social-item">
-          <i class="fab fa-instagram main-footer__social-icon"></i>
-        </a>
+    @php
+        $items = [
+            'facebook' => 'fab fa-facebook-f',
+            'instagram' => 'fab fa-instagram',
+            'email_social' => 'fas fa-envelope',
+        ];
+    @endphp
 
-        <a href="#!" class="main-footer__social-item">
-          <i class="fas fa-envelope main-footer__social-icon"></i>
-        </a>
-      </div>
-    </footer>
+    <div class="main-footer__socials d-flex mt-3">
+        @foreach($items as $key => $icon)
+            @if(!empty($social->social_links[$key]))
+                <a
+                    href="{{ $key === 'email_social' ? 'mailto:' . $social->social_links[$key] : $social->social_links[$key] }}"
+                    class="main-footer__social-item"
+                    target="{{ $key !== 'email_social' ? '_blank' : '' }}"
+                >
+                    <i class="{{ $icon }} main-footer__social-icon"></i>
+                </a>
+            @endif
+        @endforeach
+    </div>
+
+</footer>

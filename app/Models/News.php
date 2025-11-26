@@ -30,17 +30,7 @@ class News extends Model
         'meta_description',
         'view_count'
     ];
-    
-    
-    public function category()
-    {
-        return $this->belongsTo(NewsCategory::class, 'category_id');
-    }
 
-    public function projects()
-    {
-        return $this->belongsToMany(Project::class, 'projects_news', 'news_id', 'project_id');
-    }
 
     public function author()
     {

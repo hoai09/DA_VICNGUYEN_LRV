@@ -26,7 +26,10 @@
             </select>
         </div>
         <div class="col-md-3">
-            <button id="filterBtn" class="btn btn-primary w-100">Áp dụng</button>
+            <button id="filterBtn" class="btn btn-primary w-100">
+                <i class="fa-solid fa-filter"></i>
+                Áp dụng
+            </button>
         </div>
     </div>
 
@@ -102,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function(){
         window.location.href = `?year=${year}&project_status=${status}&news_type=${news}`;
     });
 
-    const monthLabels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const monthLabels = ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12'];
 
     new Chart(document.getElementById('projectsChart'), {
         type:'bar',

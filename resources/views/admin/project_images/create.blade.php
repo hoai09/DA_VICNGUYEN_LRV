@@ -47,8 +47,8 @@
                 </div>
 
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-success">Tải lên</button>
-                    <a href="{{ route('admin.project_images.index') }}" class="btn btn-secondary">Quay lại</a>
+                    <button type="submit" class="btn btn-outline-info mt-3">Tải lên</button>
+                    <a href="{{ route('admin.project_images.index') }}" class="btn btn-outline-secondary mt-3">Quay lại</a>
                 </div>
             </form>
         </div>

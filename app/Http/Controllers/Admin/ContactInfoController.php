@@ -6,87 +6,97 @@ use App\Http\Controllers\Controller;
 use App\Models\ContactInfo;
 use Illuminate\Http\Request;
 
-class ContactInfoController extends Controller
+class ContactInfoController extends Controller    //address + studio + footer
 {
-    public function index()
+/* =====================ADDRESS==============================*/
+
+    public function editContact()
     {
-        $contactInfos = ContactInfo::latest()->paginate(10);
-        return view('admin.contact_info.index', compact('contactInfos'));
+        $contact = ContactInfo::firstOrCreate(['type'=>'contact']);
+        return view('admin.contact_info.contact', compact('contact'));
     }
 
-    public function create()
+    public function updateContact(Request $request)
     {
-        return view('admin.contact_info.create');
-    }
-
-    public function store(Request $request)
-    {
+        $contact = ContactInfo::firstOrCreate(['type'=>'contact']);
         $request->validate([
             'address' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:50',
             'map_image' => 'nullable|image|max:2048',
-        ]);
+    ]);
 
-        $imagePath = null;
-
-        if ($request->hasFile('map_image')) {
-            $imagePath = $request->file('map_image')->store('contactInfos', 'public');
-        }
-
-        ContactInfo::create([
-            'address' => $request->address,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'map_image' => $imagePath,
-        ]);
-
-        return redirect()->route('admin.contact_info.index')
-            ->with('success', 'Thêm thông tin liên hệ thành công!');
-    }
-
-    public function show(ContactInfo $contactInfo)
-    {
-        return view('admin.contact_info.show', compact('contactInfo'));
-    }
-
-    public function edit(ContactInfo $contactInfo)
-    {
-        return view('admin.contact_info.edit', compact('contactInfo'));
-    }
-
-    public function update(Request $request, ContactInfo $contactInfo)
-    {
-        $request->validate([
-            'address' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:50',
-            'map_image' => 'nullable|image|max:2048',
-        ]);
-
-        // xử lý ảnh
-        if ($request->hasFile('map_image')) {
+        $path = $contact->map_image;
+        if ($request->hasFile('map_image')) 
+        {
             $path = $request->file('map_image')->store('contactInfos', 'public');
-        } else {
-            $path = $contactInfo->map_image;
         }
 
-        $contactInfo->update([
+        $contact->update
+        ([
             'address' => $request->address,
             'email' => $request->email,
             'phone' => $request->phone,
             'map_image' => $path,
         ]);
 
-        return redirect()->route('admin.contact_info.index')
-            ->with('success', 'Cập nhật thông tin liên hệ thành công!');
+        return redirect()->back()->with('success', 'Cập nhật thông tin liên hệ thành công!');
     }
 
-    public function destroy(ContactInfo $contactInfo)
-    {
-        $contactInfo->delete();
+/* =====================FOOTER==============================*/
 
-        return redirect()->route('admin.contact_info.index')
-            ->with('success', 'Đã xóa thông tin liên hệ!');
+    public function editSocial()
+    {
+        $social = ContactInfo::firstOrCreate(['type'=>'social']);
+        return view('admin.contact_info.social', compact('social'));
+    }
+
+    public function updateSocial(Request $request)
+    {
+        $social = ContactInfo::firstOrCreate(['type'=>'social']);
+
+        $request->validate([
+            'facebook' => 'nullable|url|max:255',
+            'instagram' => 'nullable|url|max:255',
+            'email_social' => 'nullable|email|max:255',
+        ]);
+
+        $social->update([
+            'social_links' => [
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'email_social' => $request->email_social
+            ]
+        ]);
+
+    return redirect()->back()->with('success', 'Cập nhật social links thành công!');
+    }
+/* =====================STUDIO==============================*/
+    public function editStudio()
+    {
+        $studio = ContactInfo::firstOrCreate(['type'=>'studio']);
+        return view('admin.contact_info.studio', compact('studio'));
+    }
+
+    public function updateStudio(Request $request)
+    {
+        $studio = ContactInfo::firstOrCreate(['type'=>'studio']);
+
+        $request->validate([
+            'studio_image'=>'nullable|image|max:2048',
+            'studio_content'=>'nullable|string|max:1000',
+            'awards'=>'nullable|string|max:5000',
+    ]);
+        $path_image = $studio->studio_image;
+        if ($request->hasFile('studio_image')) {
+            $path_image = $request->file('studio_image')->store('contactInfos', 'public');
+        }
+        $studio->update([
+            'studio_content' => $request->studio_content,
+            'awards' => array_filter(explode(PHP_EOL, $request->awards)),
+            'studio_image' => $path_image
+        ]);
+
+        return redirect()->back()->with('success', 'cập nhật thành công');
     }
 }

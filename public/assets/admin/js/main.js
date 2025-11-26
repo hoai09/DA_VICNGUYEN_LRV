@@ -15,3 +15,16 @@ toggle.onclick = function () {
     navigation.classList.toggle("active");
     main.classList.toggle("active");
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    const current = window.location.href;
+
+    if (current.includes("contact_info")) {
+        document.querySelector(".dropdown").classList.add("active");
+
+        const menu = document.getElementById("contactMenu");
+        if (menu && !menu.classList.contains("show")) {
+            menu.classList.add("show");
+        }
+    }
+});

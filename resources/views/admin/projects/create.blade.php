@@ -100,7 +100,7 @@
                         <i class="bi bi-arrow-left"></i> Quay lại
                     </a>
 
-                    <button class="btn btn-success px-4">
+                    <button class="btn btn-outline-info px-4">
                         <i class="fa-solid fa-floppy-disk me-2"></i> Lưu dự án
                     </button>
                 </div>

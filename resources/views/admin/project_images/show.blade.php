@@ -61,7 +61,6 @@
         </table>
     </div>
 
-    {{-- Pagination --}}
     <div class="mt-4 d-flex justify-content-end">
         {{ $images->links('pagination::bootstrap-5') }}
     </div>
@@ -69,12 +68,11 @@
 </div>
 @endsection
 
-@push('scripts')
+@section('scripts')
 <script>
-    // Optional: highlight row khi hover
     document.querySelectorAll('table.table-hover tbody tr').forEach(row => {
         row.addEventListener('mouseenter', () => row.classList.add('table-primary'));
         row.addEventListener('mouseleave', () => row.classList.remove('table-primary'));
     });
 </script>
-@endpush
+@endsection

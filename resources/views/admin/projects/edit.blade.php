@@ -97,9 +97,8 @@
                 <div class="d-flex justify-content-between mt-4">
                     <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-secondary px-4">
                         <i class="bi bi-arrow-left"></i> Quay lại
-                    </a>
-
-                    <button class="btn btn-success px-4">
+                    </a> 
+                    <button class="btn btn-outline-info px-4">
                         <i class="bi bi-save me-1"></i> Cập nhật
                     </button>
                 </div>

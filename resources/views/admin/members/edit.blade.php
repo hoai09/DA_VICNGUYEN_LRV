@@ -13,8 +13,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white">
-                    Cập nhật Member: {{ $member->name }}
+                <div class="card-header text-dack">
+                    Cập nhật nhân viên : {{ $member->name }}
                 </div>
                 <div class="card-body">
                     <form action="{{ route('admin.members.update', $member->id) }}" method="POST" enctype="multipart/form-data">
@@ -71,12 +71,13 @@
                             <input type="text" name="awards" value="{{ old('awards', $member->awards) }}" class="form-control">
                         </div>
 
-                        <button type="submit" class="btn btn-success w-100">Cập nhật</button>
+                        <button type="submit" class="btn btn-outline-info mt-3">Cập nhật</button>
+                        <a href="{{ route('admin.members.index') }}" class="btn btn-outline-secondary mt-3">Quay lại danh sách</a>
                     </form>
                 </div>
             </div>
 
-            <a href="{{ route('admin.members.index') }}" class="btn btn-secondary mt-3">Quay lại danh sách</a>
+            
         </div>
     </div>
 </div>

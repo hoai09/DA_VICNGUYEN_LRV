@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
-use App\Http\Controllers\Admin\NewsCategoryController as AdminNewsCategoryController;
 use App\Http\Controllers\Admin\ContactInfoController as AdminContactInfoController;
 use App\Http\Controllers\Admin\ProjectInformationController as AdminProjectInformationController;
 use App\Http\Controllers\Admin\ProjectImageController as AdminProjectImageController;
@@ -36,29 +35,38 @@ Route::middleware(['auth', 'isAdmin'])
         Route::resource('projects', AdminProjectController::class);
         Route::resource('project_images', AdminProjectImageController::class);
         Route::resource('members', AdminMemberController::class);
-        Route::resource('news_categories', AdminNewsCategoryController::class);
-        Route::resource('contact_info', AdminContactInfoController::class);
         Route::resource('form',AdminProjectInformationController::class)->only(['index','show','destroy']);
-        
+
+
+        Route::get('/contact', [AdminContactInfoController::class, 'editContact'])->name('contact_info.contact');
+        Route::put('/contact', [AdminContactInfoController::class, 'updateContact']);
+
+        Route::get('/social', [AdminContactInfoController::class, 'editSocial'])->name('contact_info.social');
+        Route::put('/social', [AdminContactInfoController::class, 'updateSocial']);
+
+        Route::get('/studio', [AdminContactInfoController::class, 'editStudio'])->name('contact_info.studio');
+        Route::put('/studio', [AdminContactInfoController::class, 'updateStudio']);
+
+
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-        Route::post('/admin/ckeditor/upload', [UploadController::class, 'ckeditorUpload'])->name('ckeditor.upload');
+        
 
-        
-    
-        
+        Route::post('/ckeditor/upload', [UploadController::class, 'ckeditorUpload'])->name('ckeditor.upload');
+
     });
 
 
 Route::prefix('/')->name('vicnguyen.')->group(function () {
     Route::get('/', fn() => view('sitevicnguyen.index'))->name('home');
     Route::view('/trangchu', 'sitevicnguyen.trangchu')->name('trangchu');
-    Route::view('/studio', 'sitevicnguyen.studio')->name('studio');
     
+    Route::get('/footer',[ContactInfoController::class,'indexsocials'])->name('socials.indexsocials');
+    Route::get('/studio',[ContactInfoController::class,'indexstudio'])->name('studio.indexstudio');
     Route::get('/address', [ContactInfoController::class, 'index'])->name('address.index');
     
     Route::get('/news', [NewsController::class, 'index'])->name('news.index');

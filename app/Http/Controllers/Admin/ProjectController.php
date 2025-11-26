@@ -13,10 +13,10 @@ class ProjectController extends Controller
 {
     
     public function index()
-{
-    $projects = Project::with('user')->orderBy('created_at', 'desc')->paginate(10);
-    return view('admin.projects.index', compact('projects'));
-}
+    {
+        $projects = Project::with('user')->orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.projects.index', compact('projects'));
+    }
 
     public function create()
     {
@@ -37,9 +37,9 @@ class ProjectController extends Controller
         'category' => 'nullable|string',
         'address' => 'nullable|string',
         'acreage' => 'nullable|string',
-    ]);
+        ]);
 
-    Project::create([
+        Project::create([
         'title' => $request->title,
         'slug'=> Project::generateUniqueSlug($validated['title']),
         'category' => $request->category,
@@ -50,17 +50,18 @@ class ProjectController extends Controller
         'start_year' => $request->start_year,
         'end_year' => $request->end_year,
         'created_by' => auth()->id(),
-    ]);
+        ]);
 
-    if($request->members){
-        $roles = array_map('trim', explode(',', $request->roles ?? ''));
+        if($request->members)
+        {
+            $roles = array_map('trim', explode(',', $request->roles ?? ''));
     
-        foreach($request->members as $index => $memberId){
-            $role = $roles[$index] ?? null;  // map theo thứ tự
-            $project->members()->attach($memberId, ['role' => $role]);
+            foreach($request->members as $index => $memberId){
+                $role = $roles[$index] ?? null;  // map theo thứ tự
+                $project->members()->attach($memberId, ['role' => $role]);
+            }
         }
-    }
-            return redirect()->route('admin.projects.index')->with('success', 'Tạo dự án thành công!');
+        return redirect()->route('admin.projects.index')->with('success', 'Tạo dự án thành công!');
     }
 
     
@@ -69,12 +70,10 @@ class ProjectController extends Controller
      * Display the specified resource.
      */
     public function show(Project $project)
-{
-    
-    $project->load('user', 'members');
-
-    return view('admin.projects.show', compact('project'));
-}
+    {
+        $project->load('user', 'members');
+        return view('admin.projects.show', compact('project'));
+    }
 
 
     /**
@@ -83,7 +82,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $members = Member::all();
-    return view('admin.projects.edit', compact('project', 'members'));
+        return view('admin.projects.edit', compact('project', 'members'));
     }
 
     /**
@@ -99,8 +98,6 @@ class ProjectController extends Controller
             'category' => 'nullable|string',
             'address' => 'nullable|string',
             'acreage' => 'nullable|string',
-    
-    
         ]);
 
         $project->update([
@@ -116,12 +113,12 @@ class ProjectController extends Controller
         ]);
 
         $project->members()->detach();
-if($request->members){
-    foreach($request->members as $memberId){
-        $role = $request->roles[$memberId] ?? null;
-        $project->members()->attach($memberId, ['role' => $role]);
-    }
-}
+            if($request->members){
+                foreach($request->members as $memberId){
+                    $role = $request->roles[$memberId] ?? null;
+                    $project->members()->attach($memberId, ['role' => $role]);
+                }
+            }
 
 
         return redirect()->route('admin.projects.index')->with('success', 'Cập nhật thành công!');

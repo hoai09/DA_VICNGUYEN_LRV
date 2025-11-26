@@ -1,7 +1,5 @@
 @php
     use App\Models\Project;
-
-    // Lấy danh sách dự án mới nhất (ví dụ 15 dự án)
     $projects = Project::select('title','slug')
         ->orderBy('created_at', 'desc')
         ->take(15)
@@ -25,7 +23,6 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <!-- Logo -->
           <a
           href="{{ route('vicnguyen.home') }}"
           class="main-header__logo-link mb-lg-4 navbar-brand"
@@ -37,7 +34,6 @@
           />
       </a>
         </div>
-        <!-- Nav -->
         <nav
           class="main-header__nav collapse navbar-collapse justify-content-center"
           id="mainNavbar"
@@ -78,7 +74,7 @@
                 >
                 <ul class="dropdown-menu" aria-labelledby="vicerDropdown">
                   <li>
-                    <a class="dropdown-item" href="{{route('vicnguyen.studio') }}">Studio</a>
+                    <a class="dropdown-item" href="{{route('vicnguyen.studio.indexstudio') }}">Studio</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="{{ route('vicnguyen.members.index') }}">Thành viên</a>
