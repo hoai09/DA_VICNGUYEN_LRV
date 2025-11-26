@@ -10,7 +10,11 @@ class ProjectImage extends Model // bảng chứa ảnh của trang project
 {
     use HasFactory;
     protected $table = 'project_images';
-    protected $fillable=['project_id','image_path','slug','caption'];
+    protected $fillable=[
+    'project_id',
+    'image_path',// đường dẫn ảnh
+    'slug',
+    'caption'];
 
 
     public function project()
