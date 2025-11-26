@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>   // trang chính chứa nav và các trang khác
 <html lang="en">
 <head>
     <meta charset="UTF-8">

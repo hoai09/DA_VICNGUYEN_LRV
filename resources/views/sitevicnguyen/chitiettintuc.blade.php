@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main')
+@extends('sitevicnguyen.layouts.main') //hiển thị chi tiết tin tức
     @section('title','chitiettintuc')
     @section('content')
 

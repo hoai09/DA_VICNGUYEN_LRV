@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')           //quản lí trang address
 
 @section('title', 'Cập nhật thông tin liên hệ')
 

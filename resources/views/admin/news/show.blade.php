@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')   // xem chi tiết tin tức
 
 @section('header')
 <h3>Chi tiết tin tức</h3>

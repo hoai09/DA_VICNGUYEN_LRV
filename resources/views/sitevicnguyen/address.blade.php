@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main')
+@extends('sitevicnguyen.layouts.main')  // trang address
     @section('title','VICNGUYEN/address')
     @section('content')
     <main class="contact-main">

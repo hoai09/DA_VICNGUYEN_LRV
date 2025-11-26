@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')       // cập nhật trang studio
 
 @section('content')
 <div class="container py-4">

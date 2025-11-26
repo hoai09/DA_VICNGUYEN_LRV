@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')   //thêm ảnh cho tưng dự án
 
 @section('header')
 <h3 class="text-primary">Thêm ảnh dự án</h3>

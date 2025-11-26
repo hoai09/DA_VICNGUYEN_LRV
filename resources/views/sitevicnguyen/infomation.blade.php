@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main')
+@extends('sitevicnguyen.layouts.main')   //hiển thị form
 @section('title', 'infomation')
 @section('content')
 <main class="form-page-content-wrapper container d-flex justify-content-center prj__bt">

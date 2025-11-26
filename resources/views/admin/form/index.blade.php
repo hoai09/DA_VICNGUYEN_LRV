@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')     // hiển thị danh sách thông tin yêu cầu khách hàng gửi lên từ form
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/admin/css/form.css') }}">

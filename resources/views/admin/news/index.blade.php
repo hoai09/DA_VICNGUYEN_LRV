@@ -1,6 +1,6 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')  // hiển thị danh sách tin tức
 
-@section('header')
+@section('header')  
 @endsection
 
 @section('content')

@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')  // sửa dự án
 
 @section('header')
 <h3 class="fw-bold">Chỉnh sửa dự án: {{ $project->title }}</h3>

@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main')
+@extends('sitevicnguyen.layouts.main') // trang studio
 @section('title', 'Studio')
 @section('content')
 

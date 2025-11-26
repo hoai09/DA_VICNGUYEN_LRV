@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')   //trang chỉnh sửa tin tức
 
 @section('header')
 <h3 class="mb-4">Chỉnh sửa tin tức</h3>

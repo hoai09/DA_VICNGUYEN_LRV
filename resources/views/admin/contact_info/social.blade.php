@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')       // cập nhật đường dẫn fb inta mailto ở phần footer
 
 @section('content')
 <div class="container mt-4">

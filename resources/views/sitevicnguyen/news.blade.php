@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main')
+@extends('sitevicnguyen.layouts.main') //hiển thị tin tức
 @section('title','Tin tức')
 @section('content')
 <main class="news-page container py-lg-5 py-md-5 py-sm-2">

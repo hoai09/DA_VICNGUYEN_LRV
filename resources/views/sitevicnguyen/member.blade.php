@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main')
+@extends('sitevicnguyen.layouts.main') // hiển thị nhân viên
 @section('title', 'member')
 
 @section('content')

@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')  // tạo dự án mới
 
 @section('header')
     <h3 class="fw-bold">Thêm dự án mới</h3>

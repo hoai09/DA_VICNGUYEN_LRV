@@ -1,5 +1,5 @@
 
-    @extends('sitevicnguyen.layouts.main')
+    @extends('sitevicnguyen.layouts.main')  //trang splash
     @section('title','home')
     @section('content')
     <section id="mainscreen" class="splash container-fluid">

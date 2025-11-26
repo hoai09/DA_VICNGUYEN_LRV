@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('admin.layouts.home')   // xem thông tin từ form khách hàng đã gửi
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/admin/css/form.css') }}">
