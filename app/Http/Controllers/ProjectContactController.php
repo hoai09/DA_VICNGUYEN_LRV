@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProjectContact;
 use Illuminate\Http\Request;
 
-class ProjectContactController extends Controller   // FORM  - SITE_VICNGUYENDESIGN
+class ProjectContactController extends Controller   // FORM cái ni là của site design em xử lí form bữa trước ạ k phải của cái ui ni
 {
     public function create()
     {

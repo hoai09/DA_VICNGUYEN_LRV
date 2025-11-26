@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
 
-class ProjectImage extends Model
+class ProjectImage extends Model // bảng chứa ảnh của trang project
 {
     use HasFactory;
     protected $table = 'project_images';

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectInformation extends Model
+class ProjectInformation extends Model  // BẢng chứa thông tin của form
 {
     protected $table = 'project_informations';
     protected $fillable = [
