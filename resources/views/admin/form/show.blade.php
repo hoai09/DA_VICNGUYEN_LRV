@@ -20,14 +20,14 @@
         <p><strong>Nghề nghiệp:</strong> {{ $information->job }}</p>
         <p><strong>Tuổi:</strong> {{ $information->age }}</p>
 
-        <p><strong>Loại dự án:</strong> {{ $information->type }}</p>
-        <p><strong>Diện tích:</strong> {{ $information->acreage }}</p>
-        <p><strong>Quy mô:</strong> {{ $information->scale }}</p>
+        <p><strong>Loại dự án:</strong> {{ $information->project_type }}</p>
+        <p><strong>Diện tích:</strong> {{ $information->area }}</p>
+        <p><strong>Quy mô:</strong> {{ $information->project_scale }}</p>
         <p><strong>Địa điểm:</strong> {{ $information->address }}</p>
 
-        <p><strong>Mô tả chức năng:</strong> {!! nl2br(e($information->function_description)) !!}</p>
-        <p><strong>Sở thích/Thói quen:</strong> {!! nl2br(e($information->hobby_habit)) !!}</p>
-        <p><strong>Lý do biết VIC:</strong> {!! nl2br(e($information->why_do_you_know)) !!}</p>
+        <p><strong>Mô tả chức năng:</strong> {!! nl2br(e($information->description)) !!}</p>
+        <p><strong>Sở thích/Thói quen:</strong> {!! nl2br(e($information->hobbies)) !!}</p>
+        <p><strong>Lý do biết VIC:</strong> {!! nl2br(e($information->referral)) !!}</p>
 
     </div>
     <a href="{{ route('admin.form.index') }}" class="btn btn-outline-secondary mt-3">

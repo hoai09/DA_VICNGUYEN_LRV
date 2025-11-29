@@ -38,10 +38,10 @@
                         <td>{{ $info->phone }}</td>
                         <td>
                             <span class="badge-type">
-                                {{ $info->type }}
+                                {{ $info->project_type }}
                             </span>
                         </td>
-                        <td>{{ $info->acreage }}</td>
+                        <td>{{ $info->area }}</td>
                         <td>{{ $info->created_at->format('d/m/Y H:i') }}</td>
                         <td class="d-flex gap-1">
 

@@ -22,7 +22,6 @@ class News extends Model
         'content',//nội dung
         'image',//ảnh
         'is_featured',//tin nổi bật
-        // 'latest_news',//tin mới
         'published_at',//ngày đăng
         'is_published',// đăng ngay(trạng thái)
         'create_by',//người đăng
