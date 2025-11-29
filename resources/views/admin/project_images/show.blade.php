@@ -12,7 +12,6 @@
 @section('content')
 <div class="container py-4">
 
-    {{-- Success message --}}
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show shadow-sm d-flex align-items-center" role="alert">
             <i class="fa-solid fa-circle-check me-2"></i>

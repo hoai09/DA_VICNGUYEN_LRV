@@ -37,6 +37,4 @@
 </div>
 @endsection
 
-@push('scripts')
-<script src="{{ asset('assets/admin/js/form.js') }}"></script>
-@endpush
+

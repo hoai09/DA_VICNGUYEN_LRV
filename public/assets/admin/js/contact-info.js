@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    /* -------------------------
-    XỬ LÝ NÚT XÓA
-    ------------------------- */
     const deleteButtons = document.querySelectorAll(".delete-btn");
     const deleteForm = document.getElementById("deleteForm");
 
@@ -12,9 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    /* -------------------------
-    PREVIEW ẢNH
-    ------------------------- */
     const mapInput = document.getElementById("mapInput");
     const previewWrapper = document.getElementById("previewWrapper");
     const previewImage = document.getElementById("previewImage");

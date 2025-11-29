@@ -15,7 +15,10 @@
         <span class="input-group-text bg-white border-end-0">
             <i class="fa-solid fa-magnifying-glass text-secondary"></i>
         </span>
-        <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Tìm kiếm dự án...">
+        <input type="text"
+                id="searchInput"
+                class="form-control border-start-0"
+                placeholder="Tìm kiếm dự án...">
     </div>
 </div>
 <div class="container-fluid project-image-page">
@@ -23,7 +26,9 @@
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
             <strong>Thành công!</strong> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"></button>
         </div>
     @endif
 

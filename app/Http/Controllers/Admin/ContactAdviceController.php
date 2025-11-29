@@ -14,14 +14,14 @@ class ContactAdviceController extends Controller   // FORM
         return view('admin.form.index', compact('information'));
     }
 
-    public function show(ContactAdvice $information)
+    public function show(ContactAdvice $form)
     {
-        return view('admin.form.show', compact('information'));
+        return view('admin.form.show', ['information' => $form]);
     }
     
-    public function destroy(ContactAdvice $information)
+    public function destroy(ContactAdvice $form)
     {
-        $information->delete();
+        $form->delete();
         return redirect()->route('admin.form.index')
                         ->with('success', 'Thông tin đã được xóa thành công.');
     }
