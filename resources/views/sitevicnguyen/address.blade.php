@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main')  // trang address
+@extends('sitevicnguyen.layouts.main')  
     @section('title','VICNGUYEN/address')
     @section('content')
     <main class="contact-main">
@@ -12,7 +12,7 @@
                   class="address__icon"
                 />
                 <p class="address__content">
-                  {{ $contactInfo->address }}
+                  {{ $companyInfo->address }}
                 </p>
               </section>
   
@@ -22,7 +22,7 @@
                   alt="Email"
                   class="address__icon"
                 />
-                <p class="address__content">{{ $contactInfo->email }}</p>
+                <p class="address__content">{{ $companyInfo->email }}</p>
               </section>
   
               <section class="address__phone address__intro d-flex">
@@ -31,13 +31,13 @@
                   alt="Số điện thoại"
                   class="address__icon"
                 />
-                <p class="address__content">{{ $contactInfo->phone }}</p>
+                <p class="address__content">{{ $companyInfo->phone }}</p>
               </section>
             </div>
   
             <div class="col-md-12 col-lg-6 address__image">
               <img
-                src="{{asset ('storage/'.$contactInfo->map_image) }}"
+                src="{{asset ('storage/'.$companyInfo->map_image) }}"
                 alt="Bản đồ địa chỉ"
                 class="img-fluid img-address"
               />

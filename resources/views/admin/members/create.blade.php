@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')     // trang tạo mới nhân viên
+@extends('admin.layouts.home')     
 @section('styles')
 <link rel="stylesheet" href="{{ asset('assets/admin/css/member.css') }}">
 @endsection

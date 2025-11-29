@@ -1,5 +1,4 @@
-@extends('admin.layouts.home')  // hiển thị danh sách ảnh dự án
-
+@extends('admin.layouts.home')  
 @section('header')
 <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
     <h2 class="title">Danh sách ảnh dự án</h2>
@@ -10,6 +9,15 @@
 @endsection
 
 @section('content')
+
+<div class="search-wrapper mb-4 d-flex justify-content-end">
+    <div class="input-group search-box shadow-sm">
+        <span class="input-group-text bg-white border-end-0">
+            <i class="fa-solid fa-magnifying-glass text-secondary"></i>
+        </span>
+        <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Tìm kiếm dự án...">
+    </div>
+</div>
 <div class="container-fluid project-image-page">
 
     @if(session('success'))
@@ -19,14 +27,6 @@
         </div>
     @endif
 
-    <div class="search-wrapper mb-4 d-flex justify-content-end">
-        <div class="input-group search-box shadow-sm">
-            <span class="input-group-text bg-white border-end-0">
-                <i class="fa-solid fa-magnifying-glass text-secondary"></i>
-            </span>
-            <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Tìm kiếm dự án...">
-        </div>
-    </div>
 
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-0">

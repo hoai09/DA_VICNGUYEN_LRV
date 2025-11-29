@@ -1,5 +1,5 @@
 <!-- main -->
-@extends('sitevicnguyen.layouts.main') // hiển thị dự án
+@extends('sitevicnguyen.layouts.main') 
     @section('title','project')
     @section('content')
     <main class="project-page">

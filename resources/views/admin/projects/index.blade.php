@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')   //hiển thị danh sách dự án
+@extends('admin.layouts.home')   
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('assets/admin/css/member.css') }}">

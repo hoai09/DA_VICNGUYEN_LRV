@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')   // xem ảnh
+@extends('admin.layouts.home')   
 
 @section('header')
 <div class="d-flex justify-content-between align-items-center mb-4">

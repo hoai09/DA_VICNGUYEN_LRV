@@ -38,7 +38,7 @@ class ProjectImageController extends Controller
                     'project_id' => $request->project_id,
                     'image_path' => $path,
                     'caption' => null,
-                    'slug' => ProjectImage::generateUniqueSlug($filename),
+                    
                 ]);
             }
         }

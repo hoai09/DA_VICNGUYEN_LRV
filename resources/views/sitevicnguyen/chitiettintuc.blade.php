@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main') //hiển thị chi tiết tin tức
+@extends('sitevicnguyen.layouts.main') 
     @section('title','chitiettintuc')
     @section('content')
 
@@ -26,7 +26,7 @@
                 @forelse($relatedNews as $item)
                 <a href="{{ route('vicnguyen.news.detail', $item->slug) }}" class="sidebar-news-item d-flex mb-3">
                     <div class="sidebar-news-item__thumb me-3">
-                        <img src="{{ asset('storage/'.$item->feature_image) }}" 
+                        <img src="{{ asset('storage/'.$item->image) }}" 
                             alt="{{ $item->title }}"
                             class="img-fluid">
                     </div>

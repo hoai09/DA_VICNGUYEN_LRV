@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ContactInfo;
+use App\Models\CompanyInfo;
 use Illuminate\Http\Request;
 
-class ContactInfoController extends Controller    //address + studio + footer
+class CompanyInfoController extends Controller    //address + studio + footer
 {
 /* =====================ADDRESS==============================*/
 
     public function editContact()
     {
-        $contact = ContactInfo::firstOrCreate(['type'=>'contact']);
-        return view('admin.contact_info.contact', compact('contact'));
+        $contact = CompanyInfo::firstOrCreate(['type'=>'contact']);
+        return view('admin.company_info.contact', compact('contact'));
     }
 
     public function updateContact(Request $request)
     {
-        $contact = ContactInfo::firstOrCreate(['type'=>'contact']);
+        $contact = CompanyInfo::firstOrCreate(['type'=>'contact']);
         $request->validate([
             'address' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
@@ -29,7 +29,7 @@ class ContactInfoController extends Controller    //address + studio + footer
         $path = $contact->map_image;
         if ($request->hasFile('map_image')) 
         {
-            $path = $request->file('map_image')->store('contactInfos', 'public');
+            $path = $request->file('map_image')->store('companyInfos', 'public');
         }
 
         $contact->update
@@ -47,13 +47,13 @@ class ContactInfoController extends Controller    //address + studio + footer
 
     public function editSocial()
     {
-        $social = ContactInfo::firstOrCreate(['type'=>'social']);
-        return view('admin.contact_info.social', compact('social'));
+        $social = CompanyInfo::firstOrCreate(['type'=>'social']);
+        return view('admin.company_info.social', compact('social'));
     }
 
     public function updateSocial(Request $request)
     {
-        $social = ContactInfo::firstOrCreate(['type'=>'social']);
+        $social = CompanyInfo::firstOrCreate(['type'=>'social']);
 
         $request->validate([
             'facebook' => 'nullable|url|max:255',
@@ -74,13 +74,13 @@ class ContactInfoController extends Controller    //address + studio + footer
 /* =====================STUDIO==============================*/
     public function editStudio()
     {
-        $studio = ContactInfo::firstOrCreate(['type'=>'studio']);
-        return view('admin.contact_info.studio', compact('studio'));
+        $studio = CompanyInfo::firstOrCreate(['type'=>'studio']);
+        return view('admin.company_info.studio', compact('studio'));
     }
 
     public function updateStudio(Request $request)
     {
-        $studio = ContactInfo::firstOrCreate(['type'=>'studio']);
+        $studio = CompanyInfo::firstOrCreate(['type'=>'studio']);
 
         $request->validate([
             'studio_image'=>'nullable|image|max:2048',
@@ -89,7 +89,7 @@ class ContactInfoController extends Controller    //address + studio + footer
     ]);
         $path_image = $studio->studio_image;
         if ($request->hasFile('studio_image')) {
-            $path_image = $request->file('studio_image')->store('contactInfos', 'public');
+            $path_image = $request->file('studio_image')->store('companyInfos', 'public');
         }
         $studio->update([
             'studio_content' => $request->studio_content,

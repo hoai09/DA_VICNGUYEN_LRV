@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')  // xem thông tin chi tiết dự án
+@extends('admin.layouts.home')  
 
 @section('header')
 <h3 class="fw-bold">Chi tiết dự án</h3>
@@ -35,7 +35,8 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <span class="text-muted fw-semibold">Thể loại:</span>
-                    <span class="ms-2">{{ $project->category ?? '-' }}</span>
+                    <span class="ms-2">{{ $project->category->name ?? 'Không có' }}
+                    </span>
                 </div>
             </div>
 

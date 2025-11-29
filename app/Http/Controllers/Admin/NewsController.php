@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\News;
+use App\Models\CategoriesNews;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
@@ -24,34 +26,37 @@ class NewsController extends Controller
 
     public function create()
     {
-        return view('admin.news.create');
+        $categories = CategoriesNews::all();
+        return view('admin.news.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:news,title',
-            'feature_image' => 'nullable|image|max:2048',
-            'summary' => 'nullable|string',
+            'category_id' => 'nullable|integer|exists:categories_news,id',
+            'image' => 'nullable|image|max:2048',
+            'description' => 'nullable|string',
             'content' => 'required|string',
             'is_published' => 'nullable|boolean',
-            'featured_news' => 'nullable|boolean',
-            'latest_news' => 'nullable|boolean',
+            'is_featured' => 'nullable|boolean',
+            // 'latest_news' => 'nullable|boolean',
         ]);
 
-        $imagePath = $request->file('feature_image')?->store('uploads/news', 'public');
+        $imagePath = $request->file('image')?->store('uploads/news', 'public');
         $publishedAt = $request->has('is_published') ? Carbon::now('Asia/Ho_Chi_Minh') : null;
         News::create([
             'title' => $validated['title'],
             'slug'             => News::generateUniqueSlug($validated['title']),
-            'summary'          => $validated['summary'] ?? null,
+            'category_id' => $validated['category_id'] ?? null,
+            'description'          => $validated['description'] ?? null,
             'content'          => $validated['content'],
-            'feature_image'    => $imagePath,
-            'featured_news'    => $request->boolean('featured_news'),
-            'latest_news'      => $request->boolean('latest_news'),
+            'image'    => $imagePath,
+            'is_featured'    => $request->boolean('is_featured'),
+            // 'latest_news'      => $request->boolean('latest_news'),
             'published_at'     => $publishedAt,
             'is_published'     => $request->has('is_published'),
-            'author_id'        => Auth::id(),
+            'create_by'        => Auth::id(),
             'meta_title'       => $request->meta_title,
             'meta_description' => $request->meta_description,
             'view_count'       => 0,
@@ -60,6 +65,50 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')->with('success', 'Thêm tin tức thành công!');
     }
 
+    public function storeAjax(Request $request)//
+{
+    $request->validate([
+        'name' => 'required|string|max:255|unique:categories_news,name'
+    ]);
+
+    $category = CategoriesNews::create([
+        'name' => $request->name,
+        'slug' => Str::slug($request->name)
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'category' => $category
+    ]);
+} 
+    public function deleteAjax($id)
+    {
+        $category = CategoriesNews::find($id);
+
+        if (!$category) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy thể loại!'
+            ], 404);
+        }
+
+        if ($category->news()->count() > 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không thể xoá vì vẫn còn tin tức sử dụng!'
+            ], 400);
+        }
+
+        $category->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Đã xoá thành công!'
+        ]);
+    }
+
+
+
     public function show(News $news)
     {
         return view('admin.news.show', compact('news'));
@@ -67,27 +116,29 @@ class NewsController extends Controller
 
     public function edit(News $news)
     {
-        return view('admin.news.edit', compact('news'));
+        $categories = CategoriesNews::all();
+        return view('admin.news.edit', compact('news','categories'));
     }
 
     public function update(Request $request, News $news)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:news,title,' . $news->id,
-            'feature_image' => 'nullable|image|max:2048',
-            'summary' => 'nullable|string',
+            'category_id' => 'nullable|integer|exists:categories_news,id',//
+            'image' => 'nullable|image|max:2048',
+            'description' => 'nullable|string',
             'content' => 'required|string',
             'is_published' => 'nullable|boolean',
-            'featured_news' => 'nullable|boolean',
-            'latest_news' => 'nullable|boolean',
+            'is_featured' => 'nullable|boolean',
+            // 'latest_news' => 'nullable|boolean',
         ]);
 
-        $imagePath = $news->feature_image;
-        if ($request->hasFile('feature_image')) {
-            if ($news->feature_image && \Storage::disk('public')->exists($news->feature_image)) {
-                \Storage::disk('public')->delete($news->feature_image);
+        $imagePath = $news->image;
+        if ($request->hasFile('image')) {
+            if ($news->image && \Storage::disk('public')->exists($news->image)) {
+                \Storage::disk('public')->delete($news->image);
             }
-            $imagePath = $request->file('feature_image')->store('uploads/news', 'public');
+            $imagePath = $request->file('image')->store('uploads/news', 'public');
         }
 
         $publishedAt = $request->has('is_published')
@@ -97,11 +148,12 @@ class NewsController extends Controller
         $news->update([
             'title'            => $validated['title'],
             'slug'             => News::generateUniqueSlug($validated['title'], $news->id),
-            'summary'          => $validated['summary'] ?? null,
+            'category_id' => $validated['category_id'] ?? null,
+            'description'          => $validated['description'] ?? null,
             'content'          => $validated['content'],
-            'feature_image'    => $imagePath,
-            'featured_news'    => $request->boolean('featured_news'),
-            'latest_news'      => $request->boolean('latest_news'),
+            'image'    => $imagePath,
+            'is_featured'    => $request->boolean('is_featured'),
+            // 'latest_news'      => $request->boolean('latest_news'),
             'published_at'     => $publishedAt,
             'is_published'     => $request->has('is_published'),
             'meta_title'       => $request->meta_title,
@@ -113,8 +165,8 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-        if ($news->feature_image && \Storage::disk('public')->exists($news->feature_image)) {
-            \Storage::disk('public')->delete($news->feature_image);
+        if ($news->image && \Storage::disk('public')->exists($news->image)) {
+            \Storage::disk('public')->delete($news->image);
         }
         $news->delete();
         return redirect()->route('admin.news.index')->with('success', 'Xóa tin tức thành công!');

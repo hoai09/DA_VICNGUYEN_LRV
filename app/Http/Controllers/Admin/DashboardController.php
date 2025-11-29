@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\News;
-use App\Models\ProjectInformation;
+use App\Models\ContactAdvice;
 
 class DashboardController extends Controller
 {
@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $recentNews = $newsQuery->latest()->take(5)->get();
 
         // ===== FỎM =====
-        $formQuery = ProjectInformation::query();
+        $formQuery = ContactAdvice::query();
         $formCount = $formQuery->count();
         $recentForms = $formQuery->latest()->take(5)->get();
 
@@ -59,7 +59,7 @@ class DashboardController extends Controller
         $monthlyNews = [];
         foreach($months as $m) $monthlyNews[$m] = $monthlyNewsRaw[$m] ?? 0;
 
-        $monthlyFormsRaw = ProjectInformation::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        $monthlyFormsRaw = ContactAdvice::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
             ->whereYear('created_at', $year)
             ->groupBy('month')
             ->pluck('total','month')

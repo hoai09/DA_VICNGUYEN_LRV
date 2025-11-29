@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')  // hiển thị danh sách tin tức
+@extends('admin.layouts.home')  
 
 @section('header')  
 @endsection
@@ -55,22 +55,22 @@
                         <th>Tác giả</th>
                         <th>Ảnh</th>
                         <th>Trạng thái</th>
-                        <th>Nổi bật</th>
+                        <th>Chú ý</th>
                         <th>Lượt xem</th>
                         <th>Ngày đăng</th>
                         <th class="text-center">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($news as $item)
+                    @forelse ($news as $key=>$item)
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td><strong>{{ $item->title }}</strong></td>
                         {{-- <td>{{ $item->category->name ?? '-' }}</td> --}}
                         <td>{{ $item->author->name ?? '-' }}</td>
                         <td>
-                            @if($item->feature_image)
-                                <img src="{{ asset('storage/' . $item->feature_image) }}" class="news-thumb" alt="{{ $item->title }}">
+                            @if($item->image)
+                                <img src="{{ asset('storage/' . $item->image) }}" class="news-thumb" alt="{{ $item->title }}">
                             @else
                                 <span class="text-muted">Không có</span>
                             @endif
@@ -83,10 +83,10 @@
                             @endif
                         </td>
                         <td>
-                            @if($item->featured_news)
+                            @if($item->is_featured)
                                 <span class="badge badge-feature">Nổi bật</span>
                             @endif
-                            @if($item->latest_news)
+                            @if($key === 0)
                                 <span class="badge badge-latest">Mới</span>
                             @endif
                         </td>

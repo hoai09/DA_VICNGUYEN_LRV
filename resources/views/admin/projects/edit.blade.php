@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')  // sửa dự án
+@extends('admin.layouts.home')
 
 @section('header')
 <h3 class="fw-bold">Chỉnh sửa dự án: {{ $project->title }}</h3>
@@ -14,19 +14,33 @@
                 @csrf
                 @method('PUT')
 
-                
+                {{-- Title --}}
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Tiêu đề dự án <span class="text-danger">*</span></label>
-                    <input type="text" name="title" id="title" class="form-control form-control-lg" value="{{ $project->title }}" required>
-                    
+                    <input type="text" name="title" id="title" class="form-control form-control-lg"
+                        value="{{ $project->title }}" required>
+
                     <small class="text-muted d-block mt-1">Slug tự tạo dựa trên tiêu đề</small>
                     <input type="text" name="slug" id="slug" class="form-control mt-1" value="{{ $project->slug }}">
                 </div>
 
+                {{-- Category --}}
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold">Thể loại</label>
-                        <input type="text" name="category" class="form-control" value="{{ $project->category }}">
+
+                        <div class="input-group">
+                            <select name="category_id" id="categorySelect" class="form-select">
+                                <option value="">-- Chọn thể loại --</option>
+
+                                @foreach($categories as $cat)
+                                    <option value="{{ $cat->id }}" 
+                                        {{ $project->category_id == $cat->id ? 'selected' : '' }}>
+                                        {{ $cat->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -45,7 +59,6 @@
                     <textarea name="description" class="form-control" rows="4">{{ $project->description }}</textarea>
                 </div>
 
-        
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold">Trạng thái</label>
@@ -67,7 +80,6 @@
                     </div>
                 </div>
 
-            
                 <div class="mt-4 mb-3">
                     <label class="form-label fw-semibold fs-5">Thành viên dự án</label>
 
@@ -93,11 +105,11 @@
                     </div>
                 </div>
 
-            
                 <div class="d-flex justify-content-between mt-4">
                     <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-secondary px-4">
                         <i class="bi bi-arrow-left"></i> Quay lại
-                    </a> 
+                    </a>
+
                     <button class="btn btn-outline-info px-4">
                         <i class="bi bi-save me-1"></i> Cập nhật
                     </button>
@@ -108,11 +120,15 @@
         </div>
     </div>
 </div>
+
+
+
+
 @endsection
 
 @section('scripts')
 <script>
-    
+
     document.getElementById('title').addEventListener('input', function () {
         let text = this.value.toLowerCase()
             .replace(/ /g, '-')
@@ -126,5 +142,8 @@
             roleInput.style.display = this.checked ? 'block' : 'none';
         });
     });
+
+    
+
 </script>
 @endsection

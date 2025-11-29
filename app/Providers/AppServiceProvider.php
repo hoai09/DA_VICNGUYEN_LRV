@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Project;
-use App\Models\ContactInfo;
+use App\Models\CompanyInfo;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $view->with('allProjects', Project::select('title', 'slug')->get());
 
-            $social = ContactInfo::firstOrCreate(['type' => 'social']);
+            $social = CompanyInfo::firstOrCreate(['type' => 'social']);
             $view->with('social', $social);
         });
     }

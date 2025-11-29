@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main') // trang chủ
+@extends('sitevicnguyen.layouts.main') 
     @section('title','trangchu')
     @section('content')
     

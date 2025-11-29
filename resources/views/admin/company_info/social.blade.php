@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')       // cập nhật đường dẫn fb inta mailto ở phần footer
+@extends('admin.layouts.home')       
 
 @section('content')
 <div class="container mt-4">
@@ -8,7 +8,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('admin.contact_info.social') }}" method="POST">
+    <form action="{{ route('admin.company_info.social') }}" method="POST">
         @csrf
         @method('PUT')
 

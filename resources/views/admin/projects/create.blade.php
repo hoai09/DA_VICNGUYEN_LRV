@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')  // tạo dự án mới
+@extends('admin.layouts.home')
 
 @section('header')
     <h3 class="fw-bold">Thêm dự án mới</h3>
@@ -26,7 +26,20 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold">Thể loại</label>
-                        <input type="text" name="category" class="form-control">
+                            <div class="input-group">
+                                <select name="category_id" id="categorySelect" class="form-select">
+                                    <option value="">-- Chọn loại dự án --</option>
+                                    @foreach($categories as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                <button type="button" class="btn btn-outline-primary" 
+                                    data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                            
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -111,6 +124,45 @@
     </div>
 
 </div>
+
+{{-- =========================== --}}
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm loại dựa án </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Tên loại dự án</label>
+                    <input type="text" id="newCategoryName" class="form-control">
+                </div>
+
+                <button class="btn btn-primary w-100" id="saveCategoryBtn">
+                    <i class="fa-solid fa-floppy-disk me-1"></i> Lưu
+                </button>
+            </div>
+            <hr>
+                <h6 class="fw-bold">Danh mục hiện có</h6>
+                <ul id="categoryList" class="list-group">
+                    @foreach($categories as $cat)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ $cat->name }}
+                            <button class="btn btn-sm btn-danger deleteCatBtn" data-id="{{ $cat->id }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </li>
+                    @endforeach
+                </ul>
+
+        </div>
+    </div>
+</div>
+
+
 @endsection
 
 @section('scripts')
@@ -121,6 +173,52 @@
             .replace(/ /g, '-')
             .replace(/[^\w-]+/g, '');
         document.getElementById('slug').value = text;
+    });
+
+    // ===========================
+
+    document.getElementById('saveCategoryBtn').addEventListener('click', function() {
+        let name = document.getElementById('newCategoryName').value;
+
+        if (!name.trim()) return alert("Vui lòng nhập tên thể loại");
+
+        fetch("{{ route('admin.categories_project.store.ajax') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ name })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                let select = document.getElementById('categorySelect');
+                let option = new Option(data.category.name, data.category.id, true, true);
+                select.add(option);
+
+                document.getElementById('newCategoryName').value = "";
+                bootstrap.Modal.getInstance(document.getElementById('addCategoryModal')).hide();
+            }
+        });
+    });
+
+    document.addEventListener('click',function(e){
+        if (e.target.closest('.deleteCatBtn')) {
+            let id = e.target.closest('.deleteCatBtn').dataset.id;
+    
+            if (!confirm("Bạn có chắc muốn xoá danh mục này?")) return;
+            fetch("{{ url('admin/categories_project/delete') }}/" + id, {
+        method: "DELETE",
+        headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" }
+        })
+
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) location.reload();
+                else alert(data.message);
+            });
+        }
     });
 </script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')           //quản lí trang address
+@extends('admin.layouts.home')           
 
 @section('title', 'Cập nhật thông tin liên hệ')
 
@@ -33,7 +33,7 @@
     <div class="card shadow-sm">
         <div class="card-body">
 
-            <form action="{{ route('admin.contact_info.contact') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.company_info.contact') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

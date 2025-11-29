@@ -1,4 +1,4 @@
-@extends('sitevicnguyen.layouts.main') //hiển thị tin tức
+@extends('sitevicnguyen.layouts.main')
 @section('title','Tin tức')
 @section('content')
 <main class="news-page container py-lg-5 py-md-5 py-sm-2">
@@ -9,9 +9,9 @@
             <a href="{{ route('vicnguyen.news.detail', ['slug' => $newsdetail->slug]) }}">
 
                 <figure class="news-card__figure mb-3">
-                    @if($newsdetail->feature_image)
+                    @if($newsdetail->image)
                     <img
-                        src="{{ asset('storage/'.$newsdetail->feature_image) }}"
+                        src="{{ asset('storage/'.$newsdetail->image) }}"
                         alt="{{ $newsdetail->title }}"
                         class="news-card__image img-fluid"
                     />

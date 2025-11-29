@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')   // xem chi tiết tin tức
+@extends('admin.layouts.home')   
 
 @section('header')
 <h3>Chi tiết tin tức</h3>
@@ -33,8 +33,8 @@
                     <div class="row mb-3">
                         <div class="col-md-4 fw-semibold text-secondary">Ảnh nổi bật</div>
                         <div class="col-md-8">
-                            @if($news->feature_image)
-                                <img src="{{ asset('storage/' . $news->feature_image) }}" alt="Ảnh tin" class="img-fluid rounded" style="max-width:200px;">
+                            @if($news->image)
+                                <img src="{{ asset('storage/' . $news->image) }}" alt="Ảnh tin" class="img-fluid rounded" style="max-width:200px;">
                             @else
                                 -
                             @endif
@@ -43,7 +43,7 @@
 
                     <div class="row mb-3">
                         <div class="col-md-4 fw-semibold text-secondary">Tóm tắt</div>
-                        <div class="col-md-8">{{ $news->summary ?? '-' }}</div>
+                        <div class="col-md-8">{{ $news->description ?? '-' }}</div>
                     </div>
 
                     <div class="row mb-3">

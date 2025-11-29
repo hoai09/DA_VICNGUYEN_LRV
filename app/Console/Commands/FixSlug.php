@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\ContactInfo;
+use App\Models\CompanyInfo;
 use Illuminate\Support\Str;
 
 class FixSlug extends Command
@@ -13,12 +13,12 @@ class FixSlug extends Command
 
     public function handle()
     {
-        $records = ContactInfo::whereNull('slug')
+        $records = CompanyInfo::whereNull('slug')
                     ->orWhere('slug', '')
                     ->get();
 
         foreach ($records as $record) {
-            $slug = ContactInfo::generateUniqueSlug($record->address);
+            $slug = CompanyInfo::generateUniqueSlug($record->address);
             $record->update(['slug' => $slug]);
 
             $this->info("Updated: ID {$record->id} => {$slug}");

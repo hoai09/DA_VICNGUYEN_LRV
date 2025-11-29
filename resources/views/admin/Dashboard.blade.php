@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')   // thống kê
+@extends('admin.layouts.home')  
 
 @section('content')
 <div class="container-fluid py-4">

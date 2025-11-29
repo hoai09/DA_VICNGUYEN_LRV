@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')     // hiển thị danh sách thông tin yêu cầu khách hàng gửi lên từ form
+@extends('admin.layouts.home')     
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/admin/css/form.css') }}">
@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($informations as $info)
+                    @foreach($information as $info)
                     <tr>
                         <td class="fw-semibold">{{ $info->full_name }}</td>
                         <td>{{ $info->email }}</td>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="mt-3">
-        {{ $informations->links('vendor.pagination.bootstrap-5') }}
+        {{ $information->links('vendor.pagination.bootstrap-5') }}
     </div>
 
 </div>

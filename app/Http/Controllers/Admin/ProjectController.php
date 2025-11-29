@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
-use App\Models\Gallery;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\CategoriesProject;
 
 class ProjectController extends Controller
 {
@@ -21,7 +21,8 @@ class ProjectController extends Controller
     public function create()
     {
         $members = Member::all();
-        return view('admin.projects.create', compact('members'));
+        $categories = CategoriesProject::all();
+        return view('admin.projects.create', compact('members','categories'));
     }
 
     /**
@@ -33,16 +34,15 @@ class ProjectController extends Controller
         'title' => 'required|string|max:255',
         'description' => 'nullable|string',
         'status' => 'required|string',
-        'title' => 'required|string|max:255',
-        'category' => 'nullable|string',
+        'category_id' => 'nullable|integer|exists:categories_project,id',//
         'address' => 'nullable|string',
         'acreage' => 'nullable|string',
         ]);
 
-        Project::create([
-        'title' => $request->title,
+        $project = Project::create([
+        'title' => $validated['title'],
         'slug'=> Project::generateUniqueSlug($validated['title']),
-        'category' => $request->category,
+        'category_id' => $request->category_id,//
         'address' => $request->address,
         'acreage' => $request->acreage,
         'description' => $request->description,
@@ -57,14 +57,58 @@ class ProjectController extends Controller
             $roles = array_map('trim', explode(',', $request->roles ?? ''));
     
             foreach($request->members as $index => $memberId){
-                $role = $roles[$index] ?? null;  // map theo thứ tự
+                $role = $roles[$index] ?? null;
                 $project->members()->attach($memberId, ['role' => $role]);
             }
         }
         return redirect()->route('admin.projects.index')->with('success', 'Tạo dự án thành công!');
     }
 
-    
+    public function storeAjax(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255|unique:categories_project,name'
+    ]);
+
+    $category = CategoriesProject::create([
+        'name' => $request->name,
+        'slug' => Str::slug($request->name)
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Thêm danh mục thành công!',
+        'category' => $category
+    ]);
+}
+
+public function deleteAjax($id)
+    {
+        $category = CategoriesProject::find($id);
+
+        if (!$category) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy loại dự án!'
+            ], 404);
+        }
+
+        if ($category->projects()->count() > 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không thể xoá vì vẫn còn dự án sử dụng!'
+            ], 400);
+        }
+
+        $category->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Đã xoá thành công!'
+        ]);
+    }
+
+
 
     /**
      * Display the specified resource.
@@ -82,7 +126,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $members = Member::all();
-        return view('admin.projects.edit', compact('project', 'members'));
+        $categories = CategoriesProject::all();//
+        return view('admin.projects.edit', compact('project', 'members', 'categories'));
     }
 
     /**
@@ -90,20 +135,24 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'required|string',
-            'title' => 'required|string|max:255',
-            'category' => 'nullable|string',
+            'category_id' => 'nullable|integer|exists:categories_project,id',//
             'address' => 'nullable|string',
             'acreage' => 'nullable|string',
         ]);
 
+        $slug = $project->slug; //
+        if ($validated['title'] !== $project->title) {
+            $slug = Project::generateUniqueSlug($validated['title'], $project->id);
+        }
+
         $project->update([
-            'title' => $request->title,
-            'slug'=> Project::generateUniqueSlug($validated['title']),
-            'category' => $request->category,
+            'title' => $validated['title'],
+            'slug'=> $slug,
+            'category_id' => $validated['category_id'] ?? null,//
             'address' => $request->address,
             'acreage' => $request->acreage,
             'description' => $request->description,
@@ -112,8 +161,8 @@ class ProjectController extends Controller
             'end_year' => $request->end_year,
         ]);
 
-        $project->members()->detach();
-            if($request->members){
+        $project->members()->sync([]);
+        if($request->has('members')) {
                 foreach($request->members as $memberId){
                     $role = $request->roles[$memberId] ?? null;
                     $project->members()->attach($memberId, ['role' => $role]);

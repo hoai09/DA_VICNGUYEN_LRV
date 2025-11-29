@@ -35,11 +35,6 @@
     />
     <link
       rel="apple-touch-icon"
-      sizes="144x144"
-      href="{{asset('assets/favicon/apple-icon-144x144.png')}}"
-    />
-    <link
-      rel="apple-touch-icon"
       sizes="152x152"
       href="{{asset('assets/favicon/apple-icon-152x152.png')}}"
     />

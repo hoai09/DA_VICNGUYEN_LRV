@@ -1,4 +1,4 @@
-<!DOCTYPE html>   // trang chính chứa nav và các trang khác
+<!DOCTYPE html>   
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -78,19 +78,19 @@
                 </span>
                 <span class="title">Form</span></a></li>
 
-                <li><a href="{{ route('admin.contact_info.contact') }}">
+                <li><a href="{{ route('admin.company_info.contact') }}">
                     <span class="icon">
                         <i class="fa-solid fa-earth-asia"></i>
                     </span>
                     <span class="title">Liên Hệ</span></a></li>
                     
-                    <li><a href="{{ route('admin.contact_info.studio') }}">
+                    <li><a href="{{ route('admin.company_info.studio') }}">
                         <span class="icon">
                             <i class="fa-solid fa-gear"></i>
                         </span>
                         <span class="title">Studio</span></a></li>
 
-                        <li><a href="{{ route('admin.contact_info.social') }}">
+                        <li><a href="{{ route('admin.company_info.social') }}">
                             <span class="icon">
                                 <i class="fa-solid fa-link"></i></i>
                             </span>

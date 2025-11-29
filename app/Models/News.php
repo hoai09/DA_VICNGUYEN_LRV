@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CategoriesNews;
 use Illuminate\Support\Str;
 
 
@@ -10,30 +11,33 @@ class News extends Model
 {
     protected $casts = [
         'published_at' => 'datetime',
-        'featured_news' => 'boolean',
+        'is_featured' => 'boolean',
         'latest_news' => 'boolean',
         'is_published' => 'boolean',
     ];
     protected $fillable = [
         'title',// tiêu đề
         'slug',
-        'summary',//tóm tắt
+        'description',//tóm tắt
         'content',//nội dung
-        'feature_image',//ảnh
-        'featured_news',//tin nổi bật
-        'latest_news',//tin mới
+        'image',//ảnh
+        'is_featured',//tin nổi bật
+        // 'latest_news',//tin mới
         'published_at',//ngày đăng
         'is_published',// đăng ngay(trạng thái)
-        'author_id',//người đăng
+        'create_by',//người đăng
         'meta_title', 
         'meta_description',
         'view_count'//người xem
     ];
 
+    public function categoriesNews(){
+        return $this->belongsTo(categoriesNews::class,'category_id');
+    }
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'create_by');
     }
 
     public function scopePublished($query)

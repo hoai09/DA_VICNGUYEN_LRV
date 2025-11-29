@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')       // cập nhật trang studio
+@extends('admin.layouts.home')      
 
 @section('content')
 <div class="container py-4">
@@ -9,7 +9,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('admin.contact_info.studio') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.company_info.studio') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

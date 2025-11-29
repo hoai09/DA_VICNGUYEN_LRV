@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\MemberProject;
+use App\Models\CategoriesProject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -14,7 +15,7 @@ class Project extends Model
     protected $fillable=[
         'title',// tiêu đề
         'slug',
-        'category',//thể loại
+        'category_id',//thể loại
         'address',// địa chỉ
         'acreage',//diện tích
         'status',//trạng thái
@@ -28,15 +29,19 @@ class Project extends Model
         return $this->hasMany(ProjectImage::class);
     }
     
+    public function category(){
+        return $this->belongsTo(CategoriesProject::class, 'category_id');
+    }
+
     public function members(){
         return $this->belongsToMany(Member::class,'member_project','project_id','member_id')
                     ->withPivot('role')
                     ->withTimestamps();
     }
 
-    public function project_information()
+    public function contactAdvice()
     {
-        return $this->hasMany(Information::class);
+        return $this->hasMany(ContactAdvice::class);
     }
 
     public function user()

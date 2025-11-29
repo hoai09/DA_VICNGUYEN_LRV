@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class ContactInfo extends Model
+class CompanyInfo extends Model
 {
-    protected $table = 'contact_info_tables';
+    protected $table = 'company_info_tables';
 
     protected $fillable = [
         'type', //loại (studio/contact/social)

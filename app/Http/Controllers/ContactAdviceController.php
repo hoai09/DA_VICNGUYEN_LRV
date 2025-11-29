@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ProjectInformation;
+use App\Models\ContactAdvice;
 
-class ProjectInformationController extends Controller    //FORM FE
+class ContactAdviceController extends Controller    //FORM FE
 {
     public function create()
     {
@@ -23,7 +23,7 @@ class ProjectInformationController extends Controller    //FORM FE
             'email.email' => 'Email không hợp lệ.',
         ]);
 
-        ProjectInformation::create($request->all());
+        ContactAdvice::create($request->all());
 
         return redirect()->back()->with('success', 'Thông tin đã được gửi thành công!');
     }
