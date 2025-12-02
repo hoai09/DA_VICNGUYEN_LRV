@@ -10,16 +10,16 @@ class CompanyInfo extends Model
     protected $table = 'company_info_tables';
 
     protected $fillable = [
-        'type', //loại (studio/contact/social)
-        'address', // địa chỉ
-        'email',// email
-        'phone',//sđt
-        'map_image',//ảnh
+        'type',             //loại (studio/contact/social)
+        'address',          // địa chỉ
+        'email',            // email
+        'phone',            //sđt
+        'map_image',        //ảnh
         'slug',
-        'social_links',//link social
-        'studio_image',// ảnh studio
-        'studio_content',// nội dung studio
-        'awards'// danh sách giải thưởng
+        'social_links',     //link social
+        'studio_image',     // ảnh studio
+        'studio_content',   // nội dung studio
+        'awards'            // danh sách giải thưởng
     ];
 
     protected $casts = [

@@ -48,6 +48,8 @@ Route::middleware(['auth', 'isAdmin'])
         Route::get('/studio', [AdminCompanyInfoController::class, 'editStudio'])->name('company_info.studio');
         Route::put('/studio', [AdminCompanyInfoController::class, 'updateStudio']);
 
+        Route::patch('/form/{form}/status', [AdminContactAdviceController::class, 'updateStatus'])
+        ->name('form.status');
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

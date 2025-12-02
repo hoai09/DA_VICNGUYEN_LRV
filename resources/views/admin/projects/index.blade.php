@@ -79,8 +79,8 @@
                                     <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button onclick="return confirm('Bạn có chắc muốn xoá không?')" 
-                                            class="btn btn-danger btn-sm action-btn">
+                                        <button type="submit"
+                                            class="btn btn-danger btn-sm action-btn btn-delete">
                                             <i class="fa-solid fa-trash "></i>
                                         </button>
                                     </form>

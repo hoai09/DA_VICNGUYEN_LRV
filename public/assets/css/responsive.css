@@ -3,9 +3,6 @@
         max-width: 100%;
         margin-left: 0%;
     }
-    .address__image img {
-        transform: translate(3px, -3px);
-    }
 
     .mobile-header {
         display: none;
@@ -128,8 +125,5 @@
 @media screen and (min-width: 320px) {
     .frm-group-row label {
         font-size: 1.4rem;
-    }
-    .address__image img {
-        transform: translate(14px, 50px);
     }
 }

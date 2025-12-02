@@ -31,7 +31,7 @@
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0 project-table">
+                <table class="table table-hover align-middle mb-0 member-table">
                 <thead class="table-light">
                 <tr>
                     <th>ID</th>
@@ -84,7 +84,7 @@
 
                     <td>
                         <span class="badge bg-secondary">
-                            {{ $member->projects->pluck('pivot.role')->join(', ') }}
+                            {{ $member->main_role }}
                         </span>
                     </td>
 
@@ -102,13 +102,13 @@
                         <i class="fa-solid fa-pen"></i>
                         </a>
 
-                        <button type="button" 
-                            class="btn btn-sm btn-outline-danger delete-btn action-btn"
-                            data-slug="{{ $member->slug }}"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteMemberModal">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                        <form action="{{ route('admin.members.destroy', $member->slug) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm action-btn btn-delete">
+                                <i class="fa-solid fa-trash "></i>
+                            </button>
+                        </form>
                         </div>
                     </td>
                 </tr>
@@ -132,55 +132,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteMemberModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow">
-            
-            <div class="modal-header bg-danger text-white border-0">
-                <h5 class="modal-title">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    Xác nhận xoá
-                </h5>
-                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-                <p class="fw-semibold">Bạn có chắc chắn muốn xoá thành viên này?</p>
-                <p class="text-muted small mb-0">* Hành động này không thể hoàn tác.</p>
-            </div>
-
-            <div class="modal-footer border-0">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                    Huỷ
-                </button>
-
-                <form id="deleteForm" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        Xoá ngay
-                    </button>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 @endsection
 
 
-@section('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    const deleteForm = document.getElementById('deleteForm');
 
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.dataset.slug;
-            deleteForm.action = `/admin/members/${id}`;
-        });
-    });
-});
-</script>
-@endsection

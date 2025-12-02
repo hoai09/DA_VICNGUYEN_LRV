@@ -74,7 +74,6 @@
       content="{{asset('assets/favicon/ms-icon-144x144.png')}}"
     />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="{{asset('assets/css/reset.css')}}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -88,13 +87,16 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{{asset('assets/css/reset.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}" />
+    
+    @stack('styles')
 
     <title>@yield('title','VICNGUYEN') </title>
   </head>

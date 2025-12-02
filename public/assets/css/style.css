@@ -617,19 +617,6 @@ body {
     text-transform: uppercase;
 }
 
-.single-news__text-block p {
-    font-size: 1.6rem;
-    line-height: 1.8;
-    color: #333;
-    margin-bottom: 2rem;
-}
-
-.single-news__feature-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
 .single-news__footer a {
     color: var(--hover-color);
     text-decoration: none;
@@ -735,6 +722,7 @@ body {
     line-height: 1.6;
     margin-bottom: 0;
 }
+
 /* =====================INFORMATION=============================== */
 .form_stock_information {
     width: 100%;
@@ -745,10 +733,10 @@ body {
 .title_def {
     font-size: 2.2rem;
     font-weight: 600;
-    font-family: "Lato";
+    /* font-family: "Lato"; */
 }
 .btn_frm_stock_info {
-    font-family: "lato";
+    /* font-family: "lato"; */
     font-weight: 700;
     border-radius: 10%;
     outline: none;
@@ -764,16 +752,25 @@ body {
     font-size: 1.8rem;
     font-weight: 700;
     height: 2.4rem;
-    font-family: "Lato";
+    /* font-family: "Lato"; */
 }
 
 .frm-group-row label {
     font-size: 1.6rem;
     font-weight: 400;
-    font-family: "Lato";
+    /* font-family: "Lato"; */
+}
+
+.form-control select {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-color: #eeeeee !important;
+    border: 1px solid #d4d6dd !important;
 }
 
 .frm-group-row input,
+.frm-group-row select,
 .frm-group-row textarea {
     border: #d4d6dd solid 1px;
     background: #eeeeee;

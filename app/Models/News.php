@@ -16,18 +16,18 @@ class News extends Model
         'is_published' => 'boolean',
     ];
     protected $fillable = [
-        'title',// tiêu đề
+        'title',                // tiêu đề
         'slug',
-        'description',//tóm tắt
-        'content',//nội dung
-        'image',//ảnh
-        'is_featured',//tin nổi bật
-        'published_at',//ngày đăng
-        'is_published',// đăng ngay(trạng thái)
-        'create_by',//người đăng
-        'meta_title', 
+        'description',          //tóm tắt
+        'content',              //nội dung
+        'image',                //ảnh
+        'is_featured',          //tin nổi bật
+        'published_at',         //ngày đăng
+        'is_published',         // đăng ngay(trạng thái)
+        'create_by',            //người đăng
+        'meta_title',
         'meta_description',
-        'view_count'//người xem
+        'view_count'            //người xem
     ];
 
     public function categoriesNews(){

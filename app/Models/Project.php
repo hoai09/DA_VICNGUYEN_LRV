@@ -13,16 +13,16 @@ class Project extends Model
     use HasFactory;
     protected $table = 'projects';
     protected $fillable=[
-        'title',// tiêu đề
+        'title',            // tiêu đề
         'slug',
-        'category_id',//thể loại
-        'address',// địa chỉ
-        'acreage',//diện tích
-        'status',//trạng thái
-        'start_year',//năm bắt đầu
-        'end_year',//năm kết thúc
-        'description',//mô tả
-        'created_by'//người tạo
+        'category_id',      //thể loại
+        'address',          // địa chỉ
+        'acreage',          //diện tích
+        'status',           //trạng thái
+        'start_year',       //năm bắt đầu
+        'end_year',         //năm kết thúc
+        'description',      //mô tả
+        'created_by'        //người tạo
     ];
 
     public function images(){
@@ -39,10 +39,6 @@ class Project extends Model
                     ->withTimestamps();
     }
 
-    public function contactAdvice()
-    {
-        return $this->hasMany(ContactAdvice::class);
-    }
 
     public function user()
     {

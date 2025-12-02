@@ -67,12 +67,20 @@
         <div class="box box--half-width col-6">
           <div class="title mb-4">2. Thông tin dự án</div>
           <div class="frm-group-row mb-3">
-            <label for="type" class="form-label">Loại hình</label>
-            <input type="text" class="form-control" name="type" id="type" />
+            <label for="project_type" class="form-label">Loại hình</label>
+            {{-- <input type="text" class="form-control" name="type" id="type" /> --}}
+            <div class="select-wrapper">
+            <select name="category_id" id="project_type" class=" form-control">
+              <option value=""> </option>
+              @foreach($categories as $category)
+        <option value="{{ $category->id }}">{{ $category->name }}</option>
+    @endforeach
+          </select> 
+        </div>
           </div>
           <div class="frm-group-row mb-3">
-            <label for="acreage" class="form-label">Diện tích</label>
-            <input type="text" class="form-control" name="acreage" id="acreage" />
+            <label for="area" class="form-label">Diện tích</label>
+            <input type="text" class="form-control" name="area" id="area" />
           </div>
           <div class="frm-group-row mb-3">
             <label for="scale" class="form-label">Quy mô</label>

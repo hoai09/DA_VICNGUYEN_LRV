@@ -20,7 +20,7 @@
         <p><strong>Nghề nghiệp:</strong> {{ $information->job }}</p>
         <p><strong>Tuổi:</strong> {{ $information->age }}</p>
 
-        <p><strong>Loại dự án:</strong> {{ $information->project_type }}</p>
+        <p><strong>Loại dự án:</strong> {{ $information->category->name ?? ' ' }}</p>
         <p><strong>Diện tích:</strong> {{ $information->area }}</p>
         <p><strong>Quy mô:</strong> {{ $information->project_scale }}</p>
         <p><strong>Địa điểm:</strong> {{ $information->address }}</p>

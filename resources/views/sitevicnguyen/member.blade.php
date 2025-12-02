@@ -30,7 +30,7 @@
                     </figure>
                     <div class="member-card__info text-center">
                         <p class="member-card__name">{{ $member->name }}</p>
-                        <p class="member-card__role">{{ $member->role }}</p>
+                        <p class="member-card__role">{{ $member->main_role }}</p>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateModal(member, index) {
         currentIndex = index;
-        const roles = member.projects.map(p => p.pivot.role).join(', ');
+        // const roles = member.projects.map(p => p.pivot.role).join(', ');
         const projectTitles = member.projects.map(p => p.title).join(', ');
         const imageUrl = member.image
             ? `storage./${member.image}`
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         modalImage.src = imageUrl;
         modalName.textContent = member.name;
         modalDetails.innerHTML = `
-            <p><strong>Chức vụ:</strong> ${roles || '—'}</p>
+            
             <p><strong>Tốt nghiệp:</strong> ${member.graduation_year || '—'}</p>
             <p><strong>Trở thành VICer:</strong> ${member.join_year || '—'}</p>
             <p><strong>Dự án:</strong> ${projectTitles || '—'}</p>

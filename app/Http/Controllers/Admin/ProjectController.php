@@ -54,7 +54,7 @@ class ProjectController extends Controller
 
         if($request->members)
         {
-            $roles = array_map('trim', explode(',', $request->roles ?? ''));
+            $roles = array_map('trim', explode(',', $request->role ?? ''));
     
             foreach($request->members as $index => $memberId){
                 $role = $roles[$index] ?? null;

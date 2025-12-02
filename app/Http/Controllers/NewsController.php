@@ -12,7 +12,7 @@ class NewsController extends Controller
     {
         $news = News::published()
             ->orderBy('published_at', 'desc')
-            ->paginate(10);
+            ->paginate(5);
 
         return view('sitevicnguyen.news', compact('news'));
     }
@@ -24,10 +24,10 @@ class NewsController extends Controller
 
         $news->increment('view_count');
 
-        $relatedNews = News::where('id', '!=', $news->id)
+        $relatedNews = News::where('slug', '!=', $news->slug)
             ->where('is_published', true)
             ->latest()
-            ->limit(4)
+            ->limit(5)
             ->get();
 
         return view('sitevicnguyen.chitiettintuc', compact('news', 'relatedNews'));

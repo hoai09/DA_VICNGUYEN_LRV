@@ -179,7 +179,7 @@ ClassicEditor.create(document.querySelector('#editor'), {
             if (data.success) {
 
                 let select = document.getElementById('categorySelect');
-                let option = new Option(data.category.name, data.category.id);
+                let option = new Option(data.category.name, data.category.id, true, true);
                 select.add(option);
     
                 let list = document.getElementById('categoryList');

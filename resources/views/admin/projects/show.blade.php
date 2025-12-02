@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <span class="text-muted fw-semibold">Thể loại:</span>
-                    <span class="ms-2">{{ $project->category->name ?? 'Không có' }}
+                    <span class="ms-2">{{ $project->category->name ?? ' ' }}
                     </span>
                 </div>
             </div>

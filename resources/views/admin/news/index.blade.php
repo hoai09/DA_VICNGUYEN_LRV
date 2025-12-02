@@ -102,12 +102,15 @@
                                     class="btn btn-outline-primary action-btn" title="Sửa">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
-                                <button type="button" class="btn btn-outline-danger btn-sm delete-btn action-btn" 
-                        data-slug="{{ $item->slug }}"
-                        data-bs-toggle="modal" 
-                        data-bs-target="#deleteNewsModal">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+
+                                <form action="{{ route('admin.news.destroy', $item->slug) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" 
+                                        class="btn btn-danger btn-sm action-btn btn-delete">
+                                        <i class="fa-solid fa-trash "></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -130,43 +133,7 @@
 </div>
 
 
-<div class="modal fade" id="deleteNewsModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content bg-light text-black">
-            <div class="modal-header border-0">
-                <h5 class="modal-title">Xoá tin tức?</h5>
-                <button class="btn-close btn-close-black" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xoá tin tức này không?</p>
-                <p>Sau khi xoá không thể khôi phục.</p>
-            </div>
-            <div class="modal-footer border-0">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
-                <form id="deleteForm" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Xoá tin tức</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
 
-@section('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    const deleteForm = document.getElementById('deleteForm');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const newsId = this.dataset.slug;
-        
-            deleteForm.action = `/admin/news/${newsId}`;
-        });
-    });
-});
-</script>
-@endsection
+

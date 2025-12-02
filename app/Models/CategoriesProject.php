@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Project;
+use App\Models\ContactAdvice;
 use Illuminate\Support\Str;
 
 class CategoriesProject extends Model
@@ -17,6 +18,11 @@ class CategoriesProject extends Model
 
     public function projects(){
         return $this->hasMany(Project::class, 'category_id');
+    }
+
+    public function contactAdvice()
+    {
+        return $this->hasMany(ContactAdvice::class);
     }
 
     public static function generateUniqueSlug($title, $projectId = null)

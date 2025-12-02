@@ -16,15 +16,34 @@ toggle.onclick = function () {
     main.classList.toggle("active");
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    const current = window.location.href;
+document.querySelectorAll(".btn-delete").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+        e.preventDefault();
 
-    if (current.includes("contact_info")) {
-        document.querySelector(".dropdown").classList.add("active");
+        let form = this.closest("form");
 
-        const menu = document.getElementById("contactMenu");
-        if (menu && !menu.classList.contains("show")) {
-            menu.classList.add("show");
-        }
-    }
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger",
+            },
+            buttonsStyling: false,
+        });
+
+        swalWithBootstrapButtons
+            .fire({
+                title: "Bạn có chắc muốn xoá?",
+                text: "Hành động này không thể hoàn tác!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Đồng ý",
+                cancelButtonText: "Hủy",
+                reverseButtons: true,
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+    });
 });

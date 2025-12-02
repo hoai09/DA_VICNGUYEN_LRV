@@ -34,8 +34,9 @@ class MemberController extends Controller
             'graduation_year' => 'nullable|integer',
             'join_year' => 'nullable|integer',
             'image' => 'nullable|image|max:2048',
-            'role' => 'required|string|max:255',
-            'project_id' => 'required|integer',
+            'main_role' => 'required|string|max:255',
+            // 'project_id' => 'required|array',
+            // 'project_id.*' => 'required|integer',
             'awards' => 'nullable|string'
         ]);
 
@@ -50,11 +51,10 @@ class MemberController extends Controller
             'join_year' => $validated['join_year'],
             'awards' => $validated['awards'] ?? null,
             'image' => $imagePath,
+            'main_role' => $validated['main_role'],
         ]);
 
-        $member->projects()->attach($validated['project_id'], [
-            'role' => $validated['role'],
-        ]);
+        $member->projects()->sync($validated['project_id'] ?? []);
 
         return redirect()->route('admin.members.index')->with('success', 'Thêm thành viên thành công!');
     }
@@ -73,8 +73,9 @@ class MemberController extends Controller
             'name' => 'required|string|min:2|max:255',
             'graduation_year' => 'nullable|integer',
             'join_year' => 'nullable|integer',
-            'role' => 'required|string|max:255',
-            'project_id' => 'required|integer',
+            'main_role' => 'nullable|string|max:255',
+            // 'project_id' => 'required|array',
+            // 'project_id.*' => 'required|integer',
             'image' => 'nullable|image|max:2048',
             'awards' => 'nullable|string'
         ]);
@@ -90,11 +91,10 @@ class MemberController extends Controller
             'join_year' => $validated['join_year'],
             'awards' => $validated['awards'] ?? null,
             'image' => $imagePath,
+            'main_role' => $validated['main_role'],
         ]);
 
-        $member->projects()->sync([
-            $validated['project_id'] => ['role' => $validated['role']]
-        ]);
+        $member->projects()->sync($validated['project_id'] ?? []);
 
         return redirect()->route('admin.members.index')->with('success', 'Cập nhật thành công!');
     }

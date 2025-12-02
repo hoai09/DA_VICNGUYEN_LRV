@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteButtons.forEach((btn) => {
         btn.addEventListener("click", function () {
             const slug = this.dataset.slug;
-            deleteForm.action = `/admin/contact_info/${slug}`;
+            deleteForm.action = `/admin/company_info/${slug}`;
         });
     });
 

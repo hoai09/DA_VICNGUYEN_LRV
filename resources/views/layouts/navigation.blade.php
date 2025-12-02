@@ -5,20 +5,12 @@
             <div class="flex">
                 <!-- Logo -->
                 <div >
-                <a href="{{ route('vicnguyen.home') }}">
+                <a href="{{ route('admin.dashboard') }}">
                 <img
                     src="{{ asset('assets/img/logo.svg') }}"
                     alt="VICNGUYEN"
                     />
                 </a>
-                </div>
-
-                <!-- Navigation Links -->
-                
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
                 </div>
             </div>
 

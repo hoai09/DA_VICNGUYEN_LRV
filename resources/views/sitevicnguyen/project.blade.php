@@ -13,7 +13,7 @@
                 <div class="info-block">
                     <div class="info-block__item d-flex justify-content-between">
                         <span class="info-block__label">Thể loại</span>
-                        <span class="info-block__value">{{ $project->category ?? '_' }}</span>
+                        <span class="info-block__value">{{ $project->category->name ?? '_' }}</span>
                     </div>
 
                     <div class="info-block__item d-flex justify-content-between">

@@ -27,6 +27,7 @@
                         <th>Loại dự án</th>
                         <th>Diện tích</th>
                         <th>Ngày gửi</th>
+                        <th>Trạng thái</th>
                         <th width="140px" class="text-center">Thao tác</th>
                     </tr>
                 </thead>
@@ -38,14 +39,28 @@
                         <td>{{ $info->phone }}</td>
                         <td>
                             <span class="badge-type">
-                                {{ $info->project_type }}
+                                {{ $info->category->name ?? ' ' }}
+
                             </span>
                         </td>
                         <td>{{ $info->area }}</td>
                         <td>{{ $info->created_at->format('d/m/Y H:i') }}</td>
-                        <td class="d-flex gap-1">
 
-                            <a href="{{ route('admin.form.show', $info->id) }}" 
+                        <td>
+                            <form action="{{ route('admin.form.status', ['form' => $info->id]) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                            
+                                <button type="submit" class="badge {{ $info->status ? 'bg-success' : 'bg-danger text-dark' }} border-0">
+                                    {{ $info->status ? 'Đã hoàn thành' : 'Chưa xử lý' }}
+                                </button>
+                            </form>
+                            
+                        </td>
+
+                        <td class="d-flex gap-1 justify-content-center">
+
+                            <a href="{{ route('admin.form.show', $info->id) }}"
                             class="btn btn-info btn-sm action-btn">
                                 <i class="fa-solid fa-eye"></i>
                             </a>

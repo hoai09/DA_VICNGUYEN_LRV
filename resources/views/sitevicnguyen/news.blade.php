@@ -30,7 +30,7 @@
                     </div>
                     <div class="member-modal__divider"></div>
                     <p class="news-card__excerpt">
-                        {{ $newsdetail->summary }}
+                        {{ $newsdetail->description }}
                     </p>
                     <a href="Backyardhouse.vic.vn">Backyardhouse.vic.vn</a>
 

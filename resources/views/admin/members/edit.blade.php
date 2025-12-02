@@ -17,7 +17,7 @@
                     Cập nhật nhân viên : {{ $member->name }}
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.members.update', $member->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.members.update', $member->slug) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -39,7 +39,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Chức vụ</label>
-                            <input type="text" name="role" value="{{ old('role', $member->projects->pluck('pivot.role')->join(', ')) }}" class="form-control">
+                            <input type="text" name="main_role" value="{{ old('main_role', $member->main_role) }}" class="form-control">
                         </div>
 
                         <div class="row">
@@ -53,7 +53,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label">Dự án tham gia</label>
                             <select name="project_id[]" class="form-select" multiple>
                                 @foreach($projects as $project)
@@ -64,7 +64,7 @@
                                 @endforeach
                             </select>
                             <small class="text-muted">Giữ Ctrl hoặc Cmd để chọn nhiều dự án</small>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label class="form-label">Giải thưởng</label>

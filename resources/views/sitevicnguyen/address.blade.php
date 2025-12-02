@@ -1,6 +1,7 @@
 @extends('sitevicnguyen.layouts.main')  
-    @section('title','VICNGUYEN/address')
-    @section('content')
+@section('title','VICNGUYEN/address')
+@section('content')
+
     <main class="contact-main">
         <div class="container-sm address-page">
           <div class="row g-5 address-mobile-sm">

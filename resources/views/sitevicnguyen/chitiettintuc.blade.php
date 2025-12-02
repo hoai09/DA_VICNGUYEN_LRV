@@ -1,23 +1,27 @@
-@extends('sitevicnguyen.layouts.main') 
-    @section('title','chitiettintuc')
-    @section('content')
+@extends('sitevicnguyen.layouts.main')
+@section('title','chitiettintuc')
+@push('styles')
+<link rel="stylesheet" href="{{asset('assets/css/detail.css')}}" />
+@endpush
 
+@section('content')
+    
 <main class="single-news-page container">
     <div class="row g-5">
-        <div class="col-12 col-lg-8 single-news__content prj__bt">
+        <div class="col-12 col-lg-8 single-news__content prj__bt content">
             <header class="single-news__header mb-4">
                 <p class="single-news__category">
-                    {{ $category->title ?? ($newsDetail->category->title ?? $news->category->title ?? '') }}
+                    {{ $category->title ?? ($news->category->title ?? '') }}
                 </p>
                 <h1 class="single-news__title">
-                    {{ $newsDetail->title ?? $news->title ?? '-' }}
+                    {{ $news->title ?? '-' }}
                 </h1>
             </header>
 
-            <div class="single-news__text-block mb-4">
-                {!! $newsDetail->content ?? $news->content ?? '' !!}
+            <div class="single-news__text-block  mb-4">
+                {!! $news->content ?? '' !!}
             </div>
-    </div>
+        </div>
         
         <div class="col-lg-4 d-none d-lg-block single-news__sidebar">
             <div class="sidebar-box">

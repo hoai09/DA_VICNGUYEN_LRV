@@ -19,46 +19,49 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label class="form-label">Tên</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+                    <label class="form-label" for="name" >Tên</label>
+                    <input id="name" type="text" name="name" autocomplete="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                     @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Ảnh</label>
+                    <label class="form-label" for= "imageInput">Ảnh</label>
                     <input type="file" name="image" class="form-control" id="imageInput">
                     <img class="img-preview mt-2" style="display:none;">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Chức vụ</label>
-                    <input type="text" name="role" class="form-control" value="{{ old('role') }}">
+                    <label class="form-label" for="mainrole">Chức vụ</label>
+                    <input id="mainrole" type="text" name="main_role" autocomplete="role" class="form-control" value="{{ old('main_role') }}">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Tốt nghiệp</label>
-                    <input type="text" name="graduation_year" class="form-control" value="{{ old('graduation_year') }}">
+                    <label class="form-label" for="yeartn">Tốt nghiệp</label>
+                    <input id="yeartn" type="number" name="graduation_year" class="form-control" value="{{ old('graduation_year') }}">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Trở thành Vicer</label>
-                    <input type="text" name="join_year" class="form-control" value="{{ old('join_year') }}">
+                    <label class="form-label" for="yeartg">Trở thành Vicer</label>
+                    <input id="yeartg" type="number" name="join_year"  class="form-control" value="{{ old('join_year') }}">
                 </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label class="form-label">Dự án tham gia</label>
-                    <select name="project_id" class="form-select">
+                    <select name="project_id[]" class="form-select" multiple>
                         @foreach($projects as $project)
-                            <option value="{{ $project->id }}">{{ $project->title }}</option>
+                            <option value="{{ $project->id }}" 
+                            @if(collect(old('project_id'))->contains($project->id)) selected @endif>
+                            {{ $project->title }}
+                            </option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="mb-3">
-                    <label class="form-label">Giải thưởng</label>
-                    <input type="text" name="awards" class="form-control" value="{{ old('awards') }}">
+                    <label class="form-label" for="giai">Giải thưởng</label>
+                    <input id="giai" type="text" name="awards" autocomplete="awards" class="form-control" value="{{ old('awards') }}">
                 </div>
 
                 <button type="submit" class="btn btn-outline-info mt-3">Lưu Member</button>

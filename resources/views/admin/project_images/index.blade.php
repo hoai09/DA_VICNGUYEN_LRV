@@ -89,8 +89,8 @@
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button onclick="return confirm('Bạn có chắc muốn xoá ảnh này không?')"
-                                                class="btn btn-outline-danger action-btn"
+                                        <button type="submit"
+                                                class="btn btn-outline-danger action-btn btn-delete"
                                                 title="Xoá">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>

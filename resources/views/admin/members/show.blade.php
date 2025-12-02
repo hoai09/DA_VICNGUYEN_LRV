@@ -14,7 +14,6 @@
             <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-header text-dack rounded-top-4 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Thông tin nhân viên : {{ $member->name }}</h5>
-                    <a href="{{ route('admin.news.index') }}" class="btn btn-light btn-sm">Quay lại danh sách</a>
                 </div>
 
                 <div class="card-body">
@@ -31,7 +30,7 @@
 
                     <div class="row mb-3">
                         <div class="col-md-4 fw-semibold text-secondary">Chức vụ</div>
-                        <div class="col-md-8">{{ $member->projects->pluck('pivot.role')->join(', ') }}</div>
+                        <div class="col-md-8">{{ $member->main_role }}</div>
                     </div>
 
                     <div class="row mb-3">

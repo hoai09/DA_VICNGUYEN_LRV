@@ -12,7 +12,7 @@ class ProjectImage extends Model // bảng chứa ảnh của trang project
     protected $table = 'project_images';
     protected $fillable=[
     'project_id',
-    'image_path',// đường dẫn ảnh
+    'image_path',       // đường dẫn ảnh
     
     ];
 
