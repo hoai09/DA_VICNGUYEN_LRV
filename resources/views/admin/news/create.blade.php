@@ -50,7 +50,9 @@
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Ảnh tin tức</label>
                             <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
-                            @error('image') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            @error('image') 
+                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            <div id="imagePreviewContainer"></div>
                         </div>
 
                     
@@ -74,10 +76,7 @@
                                 <input class="form-check-input" type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}>
                                 <label class="form-check-label fw-semibold">Nổi bật</label>
                             </div>
-                            {{-- <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" name="latest_news" value="1" {{ old('latest_news') ? 'checked' : '' }}>
-                                <label class="form-check-label fw-semibold">Tin mới</label>
-                            </div> --}}
+                            
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="is_published" value="1" {{ old('is_published', true) ? 'checked' : '' }}>
                                 <label class="form-check-label fw-semibold">Đăng ngay</label>
@@ -149,70 +148,9 @@
         </div>
     </div>
     </div>
-    
+@endsection
 
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-<script>
-ClassicEditor.create(document.querySelector('#editor'), {
-    ckfinder: {
-        uploadUrl: "{{ route('admin.ckeditor.upload') }}?_token={{ csrf_token() }}"
-    }
-}).catch(error => console.error(error));
-</script>
+@section('scripts')
+<script src="{{ asset('assets/admin/js/news.js') }}"></script>
 
-<script>
-    document.getElementById('saveCategoryBtn').addEventListener('click', function() {
-    
-        let name = document.getElementById('newCategoryName').value.trim();
-        if (!name) return alert("Vui lòng nhập tên danh mục");
-    
-        fetch("{{ route('admin.categories_news.store.ajax') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-            },
-            body: JSON.stringify({ name })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-
-                let select = document.getElementById('categorySelect');
-                let option = new Option(data.category.name, data.category.id, true, true);
-                select.add(option);
-    
-                let list = document.getElementById('categoryList');
-                list.innerHTML += `
-                <li class="list-group-item d-flex justify-content-between">
-                    ${data.category.name}
-                    <button class="btn btn-sm btn-danger deleteCatBtn" data-id="${data.category.id}">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </li>`;
-    
-                document.getElementById('newCategoryName').value = "";
-            }
-        });
-    });
-    
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.deleteCatBtn')) {
-            let id = e.target.closest('.deleteCatBtn').dataset.id;
-    
-            if (!confirm("Bạn có chắc muốn xoá danh mục này?")) return;
-            
-            fetch("{{ url('admin/categories_news/delete') }}/" + id, {
-        method: "DELETE",
-        headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" }
-        })
-
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) location.reload();
-                else alert(data.message);
-            });
-        }
-    });
-    </script>
 @endsection

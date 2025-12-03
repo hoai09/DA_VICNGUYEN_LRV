@@ -5,16 +5,9 @@
 
 @section('content')
 <div class="news-page container-fluid">
+        <h2 class="title mt-4">Danh sách tin tức</h2>
 
-    
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="title">Danh sách tin tức</h2>
-        <a href="{{ route('admin.news.create') }}" class="btn btn-add">
-            <i class="fa-solid fa-plus"></i> Thêm tin tức
-        </a>
-    </div>
-
-    
+    <div class="d-flex justify-content-between align-items-center mt-4 ">
     <div class="filter-bar d-flex gap-2 mb-4">
         <a href="{{ route('admin.news.index') }}"
         class="filter-chip {{ request('status') == null ? 'active' : '' }}">
@@ -33,8 +26,13 @@
             <i class="fa-solid fa-circle-xmark text-secondary"></i>
             <span>Chưa đăng</span>
         </a>
+        
     </div>
 
+    <a href="{{ route('admin.news.create') }}" class="btn btn-add mb-4">
+        <i class="fa-solid fa-plus"></i> Thêm tin tức
+    </a>
+</div>
     
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
@@ -66,7 +64,6 @@
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td><strong>{{ $item->title }}</strong></td>
-                        {{-- <td>{{ $item->category->name ?? '-' }}</td> --}}
                         <td>{{ $item->author->name ?? '-' }}</td>
                         <td>
                             @if($item->image)

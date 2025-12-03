@@ -27,7 +27,8 @@ class ProjectImageController extends Controller
     {
         $request->validate([
             'project_id' => 'required|exists:projects,id',
-            'images.*' => 'required|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
         if ($request->hasFile('images')) {
@@ -54,7 +55,9 @@ class ProjectImageController extends Controller
 
     public function destroy(ProjectImage $projectImage)
     {
+        if (Storage::disk('public')->exists($projectImage->image_path)) {
         Storage::disk('public')->delete($projectImage->image_path);
+        }
         $projectImage->delete();
         return back()->with('success', 'Đã xoá ảnh.');
     }

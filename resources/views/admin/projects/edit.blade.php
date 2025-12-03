@@ -120,30 +120,8 @@
         </div>
     </div>
 </div>
-
-
-
-
 @endsection
 
 @section('scripts')
-<script>
-
-    document.getElementById('title').addEventListener('input', function () {
-        let text = this.value.toLowerCase()
-            .replace(/ /g, '-')
-            .replace(/[^\w-]+/g, '');
-        document.getElementById('slug').value = text;
-    });
-
-    document.querySelectorAll('.member-checkbox').forEach(cb => {
-        cb.addEventListener('change', function() {
-            const roleInput = this.closest('.member-item').querySelector('.role-input');
-            roleInput.style.display = this.checked ? 'block' : 'none';
-        });
-    });
-
-    
-
-</script>
+<script src="{{ asset('assets/admin/js/projects.js') }}"></script>
 @endsection

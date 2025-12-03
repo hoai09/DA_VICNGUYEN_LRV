@@ -47,18 +47,6 @@
                     <input id="yeartg" type="number" name="join_year"  class="form-control" value="{{ old('join_year') }}">
                 </div>
 
-                {{-- <div class="mb-3">
-                    <label class="form-label">Dự án tham gia</label>
-                    <select name="project_id[]" class="form-select" multiple>
-                        @foreach($projects as $project)
-                            <option value="{{ $project->id }}" 
-                            @if(collect(old('project_id'))->contains($project->id)) selected @endif>
-                            {{ $project->title }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div> --}}
-
                 <div class="mb-3">
                     <label class="form-label" for="giai">Giải thưởng</label>
                     <input id="giai" type="text" name="awards" autocomplete="awards" class="form-control" value="{{ old('awards') }}">
@@ -73,18 +61,5 @@
 @endsection
 
 @section('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-    const input = document.getElementById('imageInput');
-    const preview = document.querySelector('.img-preview');
-
-    input.addEventListener('change', function(){
-        const file = this.files[0];
-        if(file){
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
-        }
-    });
-});
-</script>
+<script src="{{ asset('assets/admin/js/member.js') }}"></script>
 @endsection

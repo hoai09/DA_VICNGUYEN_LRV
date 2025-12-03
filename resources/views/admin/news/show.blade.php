@@ -18,12 +18,6 @@
 
                 <div class="card-body">
 
-                    
-                    {{-- <div class="row mb-3">
-                        <div class="col-md-4 fw-semibold text-secondary">Danh mục</div>
-                        <div class="col-md-8">{{ $news->category?->name ?? '-' }}</div>
-                    </div> --}}
-
                     <div class="row mb-3">
                         <div class="col-md-4 fw-semibold text-secondary">Tiêu đề</div>
                         <div class="col-md-8">{{ $news->title }}</div>

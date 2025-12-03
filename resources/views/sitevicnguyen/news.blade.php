@@ -9,19 +9,11 @@
             <a href="{{ route('vicnguyen.news.detail', ['slug' => $newsdetail->slug]) }}">
 
                 <figure class="news-card__figure mb-3">
-                    @if($newsdetail->image)
                     <img
                         src="{{ asset('storage/'.$newsdetail->image) }}"
                         alt="{{ $newsdetail->title }}"
                         class="news-card__image img-fluid"
                     />
-                    @else
-                    <img
-                        src="{{ asset('images/default-news.jpg') }}"
-                        alt="Default Image"
-                        class="news-card__image img-fluid"
-                    />
-                    @endif
                 </figure>
                 <div class="news-card__info">
                     <div class="news-card__title d-flex">

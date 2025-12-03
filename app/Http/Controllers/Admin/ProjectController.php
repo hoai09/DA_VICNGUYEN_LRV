@@ -37,6 +37,10 @@ class ProjectController extends Controller
         'category_id' => 'nullable|integer|exists:categories_project,id',//
         'address' => 'nullable|string',
         'acreage' => 'nullable|string',
+        'members' => 'nullable|array',
+        'members.*' => 'exists:members,id',
+        'roles' => 'nullable|array',
+        'roles.*' => 'nullable|string|max:255',
         ]);
 
         $project = Project::create([
@@ -52,15 +56,16 @@ class ProjectController extends Controller
         'created_by' => auth()->id(),
         ]);
 
-        if($request->members)
-        {
-            $roles = array_map('trim', explode(',', $request->role ?? ''));
-    
-            foreach($request->members as $index => $memberId){
-                $role = $roles[$index] ?? null;
-                $project->members()->attach($memberId, ['role' => $role]);
+
+        $syncData = [];
+        if ($request->has('members')) {
+            foreach($request->members as $memberId){
+                $syncData[$memberId] = ['role' => $request->roles[$memberId] ?? ''];
             }
         }
+        $project->members()->sync($syncData);
+        
+
         return redirect()->route('admin.projects.index')->with('success', 'Tạo dự án thành công!');
     }
 
@@ -142,6 +147,10 @@ public function deleteAjax($id)
             'category_id' => 'nullable|integer|exists:categories_project,id',//
             'address' => 'nullable|string',
             'acreage' => 'nullable|string',
+            'members' => 'nullable|array',
+            'members.*' => 'exists:members,id',
+            'roles' => 'nullable|array',
+            'roles.*' => 'nullable|string|max:255',
         ]);
 
         $slug = $project->slug; //
@@ -161,14 +170,13 @@ public function deleteAjax($id)
             'end_year' => $request->end_year,
         ]);
 
-        $project->members()->sync([]);
-        if($request->has('members')) {
-                foreach($request->members as $memberId){
-                    $role = $request->roles[$memberId] ?? null;
-                    $project->members()->attach($memberId, ['role' => $role]);
-                }
-            }
-
+        $syncData = [];
+if ($request->has('members')) {
+    foreach($request->members as $memberId){
+        $syncData[$memberId] = ['role' => $request->roles[$memberId] ?? ''];
+    }
+}
+$project->members()->sync($syncData);
 
         return redirect()->route('admin.projects.index')->with('success', 'Cập nhật thành công!');
     }

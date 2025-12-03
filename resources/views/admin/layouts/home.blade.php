@@ -104,14 +104,6 @@
             
             <div class="toggle"><i class="fa-solid fa-bars"></i></div>
 
-            {{-- <!-- Search -->
-            <div class="search">
-                <label>
-                    <input type="text" placeholder="Search here...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </label>
-            </div> --}}
-
             <div class="d-flex align-items-center gap-3">
 
                 <a href="{{ route('admin.profile.edit') }}" class="user">

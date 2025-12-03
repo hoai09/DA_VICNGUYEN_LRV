@@ -14,12 +14,19 @@ class ProjectController extends Controller
         return view('admin.projects.index', compact('projects'));
     }
 
-    public function detail()
-    {
+    // public function detail()
+    // {
 
-        $projects = Project::with('members')->find($id);
-        return view('sitevicnguyen.project', compact('projects'));
-    }
+    //     $projects = Project::with('members')->find($id);
+    //     return view('sitevicnguyen.project', compact('projects'));
+    // }
+//===================================================
+    public function detail($slug)
+{
+    $project = Project::where('slug', $slug)->with('members')->firstOrFail();
+    return view('sitevicnguyen.project', compact('project'));
+}
+//====================================================
     public function show($slug)
     {
     $project = Project::where('slug', $slug)

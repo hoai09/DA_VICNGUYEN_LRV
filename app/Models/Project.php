@@ -54,6 +54,7 @@ class Project extends Model
 
     public static function generateUniqueSlug($title, $projectId = null)
     {
+        if (!$title) return null;
         $slug = Str::slug($title);
         $originalSlug = $slug;
         $counter = 1;

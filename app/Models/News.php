@@ -66,6 +66,12 @@ class News extends Model
     {
     return 'slug';
     }
+
+    public function getImageUrlAttribute()
+{
+    return $this->image ? asset('storage/'.$this->image) : asset('images/default-news.jpg');
+}
+
 }
 
 

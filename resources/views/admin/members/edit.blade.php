@@ -53,19 +53,6 @@
                             </div>
                         </div>
 
-                        {{-- <div class="mb-3">
-                            <label class="form-label">Dự án tham gia</label>
-                            <select name="project_id[]" class="form-select" multiple>
-                                @foreach($projects as $project)
-                                    <option value="{{ $project->id }}" 
-                                    @if($member->projects->contains($project->id)) selected @endif>
-                                    {{ $project->title }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <small class="text-muted">Giữ Ctrl hoặc Cmd để chọn nhiều dự án</small>
-                        </div> --}}
-
                         <div class="mb-3">
                             <label class="form-label">Giải thưởng</label>
                             <input type="text" name="awards" value="{{ old('awards', $member->awards) }}" class="form-control">
@@ -84,15 +71,5 @@
 @endsection
 
 @section('scripts')
-<script>
-    // Preview ảnh trước khi upload
-    document.getElementById('imageInput').addEventListener('change', function(event){
-        const [file] = event.target.files;
-        const preview = document.getElementById('previewImg');
-        if(file){
-            preview.src = URL.createObjectURL(file);
-            preview.classList.remove('d-none');
-        }
-    });
-</script>
+<script src="{{ asset('assets/admin/js/member.js') }}"></script>
 @endsection

@@ -85,7 +85,7 @@
                                         <i class="fa-solid fa-image"></i>
                                     </a>
 
-                                    <form action="{{ route('admin.project_images.destroy', $img->slug) }}" 
+                                    <form action="{{ route('admin.project_images.destroy', $img) }}" 
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -115,16 +115,5 @@
 
 
 @section('scripts')
-<script>
-    const searchInput = document.getElementById("searchInput");
-
-    searchInput.addEventListener("keyup", function () {
-        const value = this.value.toLowerCase();
-        document.querySelectorAll("#tableBody tr").forEach(function (row) {
-            row.style.display = row.textContent.toLowerCase().includes(value)
-                ? ""
-                : "none";
-        });
-    });
-</script>
+<script src="{{ asset('assets/admin/js/projectImg/seach-img.js') }}"></script>
 @endsection

@@ -48,6 +48,7 @@
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Ảnh tin tức</label>
                             <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+                            <div id="imagePreviewContainer"></div>
 
                             @if($news->image)
                                 <p class="mt-2 fw-semibold">Ảnh hiện tại:</p>
@@ -79,12 +80,6 @@
                                     {{ old('is_featured', $news->is_featured) ? 'checked' : '' }}>
                                 <label class="form-check-label fw-semibold">Tin nổi bật</label>
                             </div>
-
-                            {{-- <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" name="latest_news" value="1"
-                                    {{ old('latest_news', $news->latest_news) ? 'checked' : '' }}>
-                                <label class="form-check-label fw-semibold">Tin mới</label>
-                            </div> --}}
 
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="is_published" value="1"
@@ -124,16 +119,8 @@
     </div>
 </div>
 
+@endsection
 
-
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-<script>
-ClassicEditor.create(document.querySelector('#editor'), {
-    ckfinder: {
-        uploadUrl: "{{ route('admin.ckeditor.upload') }}?_token={{ csrf_token() }}"
-    }
-});
-</script>
-
-
+@section('scripts')
+<script src="{{ asset('assets/admin/js/news.js') }}"></script>
 @endsection

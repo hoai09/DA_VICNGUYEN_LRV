@@ -10,13 +10,11 @@
                     class="member-card"
                     data-index="{{ $index }}"
                     data-name="{{ $member->name }}"
-                    @foreach($member->projects as $project)
                     data-role="{{ $member->projects->pluck('pivot.role')->join(', ')  }}"
                     data-image="{{ asset('storage/' . $member->image) }}"
                     data-graduation="{{ $member->graduation_year ?? '—' }}"
                     data-join="{{ $member->join_year ?? '—' }}"
                     data-projects="{{ $member->projects->pluck('title')->join(', ')  }}"
-                    @endforeach
                     data-awards="{{ $member->awards ?? '—' }}"
                     data-bs-toggle="modal"
                     data-bs-target="#memberModal"
@@ -85,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // const roles = member.projects.map(p => p.pivot.role).join(', ');
         const projectTitles = member.projects.map(p => p.title).join(', ');
         const imageUrl = member.image
-            ? `storage./${member.image}`
+            ? `/storage./${member.image}`
             : `/assets/img/Thanhvien/default.png`;
 
         modalImage.src = imageUrl;

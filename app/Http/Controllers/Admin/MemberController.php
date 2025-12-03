@@ -35,8 +35,6 @@ class MemberController extends Controller
             'join_year' => 'nullable|integer',
             'image' => 'nullable|image|max:2048',
             'main_role' => 'required|string|max:255',
-            // 'project_id' => 'required|array',
-            // 'project_id.*' => 'required|integer',
             'awards' => 'nullable|string'
         ]);
 
@@ -54,8 +52,18 @@ class MemberController extends Controller
             'main_role' => $validated['main_role'],
         ]);
 
-        $member->projects()->sync($validated['project_id'] ?? []);
-
+        if($request->has('project_id')) {
+            $syncData = [];
+            foreach($request->project_id as $projectId) {
+                $syncData[$projectId] = [
+                    'role' => $request->roles[$projectId] ?? null
+                ];
+            }
+            $member->projects()->sync($syncData);
+        } else {
+            $member->projects()->sync([]);
+        }
+        
         return redirect()->route('admin.members.index')->with('success', 'Thêm thành viên thành công!');
     }
 
@@ -74,16 +82,20 @@ class MemberController extends Controller
             'graduation_year' => 'nullable|integer',
             'join_year' => 'nullable|integer',
             'main_role' => 'nullable|string|max:255',
-            // 'project_id' => 'required|array',
-            // 'project_id.*' => 'required|integer',
             'image' => 'nullable|image|max:2048',
             'awards' => 'nullable|string'
         ]);
 
-        $imagePath = $request->hasFile('image')
-            ? $request->file('image')->store('members', 'public')
-            : $member->image;
 
+        if ($request->hasFile('image')) {
+            if ($member->image && \Storage::disk('public')->exists($member->image)) {
+                \Storage::disk('public')->delete($member->image);
+            }
+            $imagePath = $request->file('image')->store('members', 'public');
+        } else {
+            $imagePath = $member->image;
+        }
+        
         $member->update([
             'name' => $validated['name'],
             'slug' => Member::generateUniqueSlug($validated['name'], $member->id),
@@ -94,7 +106,18 @@ class MemberController extends Controller
             'main_role' => $validated['main_role'],
         ]);
 
-        $member->projects()->sync($validated['project_id'] ?? []);
+        if($request->has('project_id')) {
+            $syncData = [];
+            foreach($request->project_id as $projectId) {
+                $syncData[$projectId] = [
+                    'role' => $request->roles[$projectId] ?? null
+                ];
+            }
+            $member->projects()->sync($syncData);
+        } else {
+            $member->projects()->sync([]);
+        }
+        
 
         return redirect()->route('admin.members.index')->with('success', 'Cập nhật thành công!');
     }

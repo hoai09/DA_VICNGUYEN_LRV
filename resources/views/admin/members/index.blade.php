@@ -53,8 +53,8 @@
                 
                     <td>
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset('storage/' . $member->image) }}"
-                                class="rounded-circle me-3" 
+                            <img src="{{ $member->image ? asset('storage/' . $member->image) : asset('assets/img/Thanhvien/default.png') }}"
+                                class="rounded-circle me-3"
                                 width="48" height="48"
                                 style="object-fit: cover;">
                             <div>
