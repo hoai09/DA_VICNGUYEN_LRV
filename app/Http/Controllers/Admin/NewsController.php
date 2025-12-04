@@ -153,7 +153,6 @@ class NewsController extends Controller
             'content'          => $validated['content'],
             'image'    => $imagePath,
             'is_featured'    => $request->boolean('is_featured'),
-            // 'latest_news'      => $request->boolean('latest_news'),
             'published_at'     => $publishedAt,
             'is_published'     => $request->has('is_published'),
             'meta_title'       => $request->meta_title,

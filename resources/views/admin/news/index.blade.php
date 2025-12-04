@@ -49,7 +49,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Tiêu đề</th>
-                        {{-- <th>Danh mục</th> --}}
+                        <th>Loại tin</th>
                         <th>Tác giả</th>
                         <th>Ảnh</th>
                         <th>Trạng thái</th>
@@ -64,6 +64,7 @@
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td><strong>{{ $item->title }}</strong></td>
+                        <td>{{ $item->categoriesNews->name ?? '-' }}</td>
                         <td>{{ $item->author->name ?? '-' }}</td>
                         <td>
                             @if($item->image)

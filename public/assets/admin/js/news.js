@@ -1,9 +1,6 @@
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>;
-
 ClassicEditor.create(document.querySelector("#editor"), {
     ckfinder: {
-        uploadUrl:
-            "{{ route('admin.ckeditor.upload') }}?_token={{ csrf_token() }}",
+        uploadUrl: CKEDITOR_UPLOAD_URL,
     },
 }).catch((error) => console.error(error));
 
@@ -13,11 +10,11 @@ document
         let name = document.getElementById("newCategoryName").value.trim();
         if (!name) return alert("Vui lòng nhập tên danh mục");
 
-        fetch("{{ route('admin.categories_news.store.ajax') }}", {
+        fetch(CATEGORY_STORE_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                "X-CSRF-TOKEN": CSRF,
             },
             body: JSON.stringify({ name }),
         })
@@ -35,14 +32,12 @@ document
 
                     let list = document.getElementById("categoryList");
                     list.innerHTML += `
-            <li class="list-group-item d-flex justify-content-between">
-                ${data.category.name}
-                <button class="btn btn-sm btn-danger deleteCatBtn" data-id="${data.category.id}">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </li>`;
-
-                    document.getElementById("newCategoryName").value = "";
+                    <li class="list-group-item d-flex justify-content-between">
+                        ${data.category.name}
+                        <button class="btn btn-sm btn-danger deleteCatBtn" data-id="${data.category.id}">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </li>`;
                 }
             });
     });
@@ -53,9 +48,9 @@ document.addEventListener("click", function (e) {
 
         if (!confirm("Bạn có chắc muốn xoá danh mục này?")) return;
 
-        fetch("{{ url('admin/categories_news/delete') }}/" + id, {
+        fetch(CATEGORY_DELETE_URL + id, {
             method: "DELETE",
-            headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" },
+            headers: { "X-CSRF-TOKEN": CSRF },
         })
             .then((res) => res.json())
             .then((data) => {
@@ -68,11 +63,11 @@ document.addEventListener("click", function (e) {
 const imageInput = document.querySelector('input[name="image"]');
 const previewContainer = document.getElementById("imagePreviewContainer");
 
-imageInput.addEventListener("change", function (e) {
-    previewContainer.innerHTML = ""; // Xoá preview cũ
-    const [file] = this.files;
+imageInput.addEventListener("change", function () {
+    previewContainer.innerHTML = "";
+    const file = this.files[0];
+
     if (file) {
-        // Check định dạng ảnh
         const validTypes = [
             "image/jpeg",
             "image/png",
@@ -85,9 +80,7 @@ imageInput.addEventListener("change", function (e) {
             return;
         }
 
-        // Check dung lượng tối đa 2MB
-        const maxSize = 2 * 1024 * 1024; // 2MB
-        if (file.size > maxSize) {
+        if (file.size > 2 * 1024 * 1024) {
             alert("Ảnh quá lớn! Vui lòng chọn ảnh dưới 2MB.");
             this.value = "";
             return;
@@ -96,15 +89,7 @@ imageInput.addEventListener("change", function (e) {
         const imgPreview = document.createElement("img");
         imgPreview.src = URL.createObjectURL(file);
         imgPreview.style.width = "200px";
-        imgPreview.style.marginTop = "10px";
         imgPreview.classList.add("img-thumbnail");
         previewContainer.appendChild(imgPreview);
     }
-});
-
-ClassicEditor.create(document.querySelector("#editor"), {
-    ckfinder: {
-        uploadUrl:
-            "{{ route('admin.ckeditor.upload') }}?_token={{ csrf_token() }}",
-    },
 });

@@ -151,6 +151,14 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    const CKEDITOR_UPLOAD_URL = "{{ route('admin.ckeditor.upload') }}?&_token={{ csrf_token() }}";
+    const CATEGORY_STORE_URL = "{{ route('admin.categories_news.store.ajax') }}";
+    const CATEGORY_DELETE_URL = "{{ url('admin/categories_news/delete') }}/";
+    const CSRF = "{{ csrf_token() }}";
+</script>
+
 <script src="{{ asset('assets/admin/js/news.js') }}"></script>
 
 @endsection

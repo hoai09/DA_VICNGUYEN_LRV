@@ -122,5 +122,6 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>;
 <script src="{{ asset('assets/admin/js/news.js') }}"></script>
 @endsection
