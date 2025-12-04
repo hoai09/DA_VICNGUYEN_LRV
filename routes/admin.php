@@ -36,7 +36,7 @@ Route::middleware(['auth', 'isAdmin'])
 
         Route::resource('members', AdminMemberController::class);
 
-        Route::resource('categories_project',AdminProjectController::class);
+        // Route::resource('categories_project',AdminProjectController::class);
 
         Route::resource('form',AdminContactAdviceController::class)->only(['index','show','destroy']);
 

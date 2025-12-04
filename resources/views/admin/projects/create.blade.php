@@ -165,5 +165,11 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    const CATEGORYPRJ_STORE_URL = "{{ route('admin.categories_project.store.ajax') }}";
+    const CATEGORYPRJ_DELETE_URL = "{{ url('admin/categories_project/delete') }}/";
+    const CSRF = "{{ csrf_token() }}";
+</script>
 <script src="{{ asset('assets/admin/js/projects.js') }}"></script>
 @endsection
