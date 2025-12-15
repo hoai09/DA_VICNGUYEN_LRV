@@ -1,37 +1,52 @@
-@extends('admin.layouts.home')  
+{{-- @extends('admin.layouts.home')  
 
 @section('header')  
 @endsection
 
-@section('content')
-<div class="news-page container-fluid">
-        <h2 class="title mt-4">Danh sách tin tức</h2>
+@section('content') --}}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>{{ config('apps.news.title') }}</h2>
+        <ol class="breadcrumb" style="margin-bottom:10px;">
+            <li>
+                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li class="active"><strong>{{ config('apps.news.title') }}</strong></li>
+        </ol>
+    </div>
+</div>
+
+<div class="ibox-title d-flex justify-content-between align-items-center ">
+        <h3 class="title mt-4">Danh sách tin tức</h3>
 
     <div class="d-flex justify-content-between align-items-center mt-4 ">
     <div class="filter-bar d-flex gap-2 mb-4">
         <a href="{{ route('admin.news.index') }}"
-        class="filter-chip {{ request('status') == null ? 'active' : '' }}">
+        class="filter-chip btn {{ request('status') == null ? 'active' : '' }}">
             <i class="fa-solid fa-list"></i>
             <span>Tất cả</span>
         </a>
 
         <a href="{{ route('admin.news.index', ['status' => 'published']) }}"
-        class="filter-chip {{ request('status') == 'published' ? 'active' : '' }}">
+        class="filter-chip btn {{ request('status') == 'published' ? 'active' : '' }}">
             <i class="fa-solid fa-circle-check text-success"></i>
             <span>Đã đăng</span>
         </a>
 
         <a href="{{ route('admin.news.index', ['status' => 'draft']) }}"
-        class="filter-chip {{ request('status') == 'draft' ? 'active' : '' }}">
+        class="filter-chip btn {{ request('status') == 'draft' ? 'active' : '' }}">
             <i class="fa-solid fa-circle-xmark text-secondary"></i>
             <span>Chưa đăng</span>
         </a>
         
     </div>
 
-    <a href="{{ route('admin.news.create') }}" class="btn btn-add mb-4">
-        <i class="fa-solid fa-plus"></i> Thêm tin tức
-    </a>
+    <div class="text-right">
+        <a href="{{ route('admin.news.create') }}"
+                            class="btn btn-primary btn-sm ">
+                            <i class="fa fa-plus "></i> Thêm tin tức
+        </a>
+    </div>
 </div>
     
     @if(session('success'))
@@ -42,8 +57,8 @@
     @endif
 
     
-    <div class="card shadow-sm border-0 rounded-4">
-        <div class="card-body p-0">
+    <div class="ibox-content p-0">
+        <div class="table-responsive">
             <table class="table table-hover news-table align-middle mb-0">
                 <thead class="form-label fw-semibold">
                     <tr>
@@ -68,7 +83,9 @@
                         <td>{{ $item->author->name ?? '-' }}</td>
                         <td>
                             @if($item->image)
-                                <img src="{{ asset('storage/' . $item->image) }}" class="news-thumb" alt="{{ $item->title }}">
+                                <img src="{{ asset('storage/' . $item->image) }}" class="news-thumb" alt="{{ $item->title }}"
+                                width="42" height="42"
+                                style="object-fit: cover">
                             @else
                                 <span class="text-muted">Không có</span>
                             @endif
@@ -92,12 +109,12 @@
                         <td>{{ $item->published_at?->format('d/m/Y H:i') ?? '-' }}</td>
                         <td class="text-center">
                             <div class="d-flex justify-content-center gap-2">
-                                <a href="{{ route('admin.news.show', $item) }}"
+                                {{-- <a href="{{ route('admin.news.show', $item) }}"
                                     class="btn btn-outline-info action-btn" title="Xem">
                                     <i class="fa-solid fa-eye"></i>
-                                </a>
+                                </a> --}}
                                 <a href="{{ route('admin.news.edit', $item) }}"
-                                    class="btn btn-outline-primary action-btn" title="Sửa">
+                                    class="btn btn-warning btn-sm" title="Sửa">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
 
@@ -105,7 +122,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" 
-                                        class="btn btn-danger btn-sm action-btn btn-delete">
+                                        class="btn btn-danger btn-sm">
                                         <i class="fa-solid fa-trash "></i>
                                     </button>
                                 </form>
@@ -126,12 +143,9 @@
 
 
     <div class="d-flex justify-content-end mt-4">
-        {{ $news->links('vendor.pagination.bootstrap-5') }}
+        {{ $news->links('vendor.pagination.bootstrap-4') }}
     </div>
 </div>
-
-
-
-@endsection
+{{-- @endsection --}}
 
 

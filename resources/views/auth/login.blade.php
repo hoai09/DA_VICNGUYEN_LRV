@@ -1,47 +1,86 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+ @extends('layouts.auth')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+ @section('title', 'Đăng nhập')
+ 
+ @section('content')
+ <div class="middle-box text-center loginscreen animated fadeInDown limiter">
+    <div class="container-login100">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <div class="wrap-login100">
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+        <h1 class="logo-name">VIC</h1>
+        {{-- <img src="{{ asset('assets/img/logo.svg') }}" alt=""> --}}
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        <h3>Welcome to VIC</h3>
+        <p>Login to continue</p>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
 
-        <div class="flex items-center justify-end mt-4">
+        <form class="m-t" method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <!-- EMAIL -->
+            <div class="form-group">
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    class="form-control @error('email') is-invalid @enderror"
+                    placeholder="Email"
+                    required
+                    autofocus
+                >
+
+                @error('email')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-group">
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control @error('password') is-invalid @enderror"
+                    placeholder="Password"
+                    required
+                >
+
+                @error('password')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- REMEMBER -->
+            <div class="form-group text-left">
+                <label>
+                    <input type="checkbox" name="remember"> Remember me
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary block full-width m-b">
+                Login
+            </button>
+
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <a href="{{ route('password.request') }}">
+                    <small>Forgot password?</small>
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        </form>
+
+        <p class="m-t">
+            <small>Inspinia Admin &copy; {{ date('Y') }}</small>
+        </p>
+
+    </div>
+</div>
+</div>
+
+@endsection

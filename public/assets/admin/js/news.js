@@ -1,9 +1,3 @@
-ClassicEditor.create(document.querySelector("#editor"), {
-    ckfinder: {
-        uploadUrl: CKEDITOR_UPLOAD_URL,
-    },
-}).catch((error) => console.error(error));
-
 document
     .getElementById("saveCategoryBtn")
     .addEventListener("click", function () {
@@ -42,6 +36,12 @@ document
             });
     });
 
+ClassicEditor.create(document.querySelector("#editor"), {
+    ckfinder: {
+        uploadUrl: CKEDITOR_UPLOAD_URL,
+    },
+}).catch((error) => console.error(error));
+
 document.addEventListener("click", function (e) {
     if (e.target.closest(".deleteCatBtn")) {
         let id = e.target.closest(".deleteCatBtn").dataset.id;
@@ -50,7 +50,10 @@ document.addEventListener("click", function (e) {
 
         fetch(CATEGORY_DELETE_URL + id, {
             method: "DELETE",
-            headers: { "X-CSRF-TOKEN": CSRF },
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": CSRF,
+            },
         })
             .then((res) => res.json())
             .then((data) => {

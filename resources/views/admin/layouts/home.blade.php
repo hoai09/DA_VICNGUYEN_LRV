@@ -1,4 +1,4 @@
-<!DOCTYPE html>   
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,13 +18,22 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/news.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/project_image.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/contact-info.css') }}">
+    @include('admin.dashboard.component.head')
     @stack('styles')
 </head>
 
 
 <body>
-
-    <div class="navigation">
+    <div id="wrapper">
+        @include('admin.dashboard.component.sidebar')
+            <div id="page-wrapper" class="gray-bg">
+                @include('admin.dashboard.component.nav')
+                @include('admin.dashboard.home.index')
+                @include('admin.dashboard.component.footer')
+            </div>
+    </div>
+    @include('admin.dashboard.component.scrip')
+    {{-- <div class="navigation">
         <ul>
             <li class="nav-logo">
                 <a href="#">
@@ -125,7 +134,7 @@
             @yield('content')
 
         </div>
-    </div>
+    </div> --}}
 
     @yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

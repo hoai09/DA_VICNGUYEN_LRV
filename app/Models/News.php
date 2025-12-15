@@ -27,7 +27,8 @@ class News extends Model
         'create_by',            //người đăng
         'meta_title',
         'meta_description',
-        'view_count'            //người xem
+        'view_count',            //người xem
+        'category_id',
     ];
 
     public function categoriesNews(){

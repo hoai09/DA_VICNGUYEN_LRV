@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')   
+{{-- @extends('admin.layouts.home')   
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/admin/css/form.css') }}">
@@ -8,7 +8,22 @@
 <h3 class="fw-bold ms-2 mt-5">Chi tiết thông tin dự án khách hàng</h3>
 @endsection
 
-@section('content')
+@section('content') --}}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>{{ config('apps.headtitle.title1') }}</h2>
+        <ol class="breadcrumb" style="margin-bottom:10px;">
+            <li>
+                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li>{{ config('apps.headtitle.title') }}</li>
+            <li class="active"><strong>{{ config('apps.headtitle.title1') }}</strong></li>
+        </ol>
+    </div>
+</div>
+
 <div class="container mt-4">
 
     <div class="card shadow-sm border-0 p-4 form-detail-card">
@@ -35,6 +50,6 @@
     </a>
 
 </div>
-@endsection
+{{-- @endsection --}}
 
 

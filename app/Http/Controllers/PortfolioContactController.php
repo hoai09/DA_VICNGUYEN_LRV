@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProjectContact;
+use App\Models\Portfolio_Contact;
 use Illuminate\Http\Request;
 
 class PortfolioContactController extends Controller   // FORM cái ni là của site design em xử lí form bữa trước ạ k phải của cái ui ni
@@ -24,7 +24,7 @@ class PortfolioContactController extends Controller   // FORM cái ni là của 
             'email.email' => 'Email không hợp lệ.',
         ]);
 
-        ProjectContact::create($request->only(['name', 'email', 'objects', 'content']));
+        Portfolio_Contact::create($request->only(['name', 'email', 'objects', 'content']));
 
         return redirect()->back()->with('success', 'Thông tin đã được gửi thành công!');
     }

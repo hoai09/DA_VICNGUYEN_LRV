@@ -1,0 +1,162 @@
+.ibox-title h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #f8fafc;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #475569;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.table td {
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.table img {
+    border-radius: 50%;
+    border: 2px solid #e5e7eb;
+}
+
+.label {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 999px;
+}
+
+.label-info {
+    background: #0dcaf0;
+    color: #0f172a;
+}
+
+.label-default {
+    background: #e5e7eb;
+    color: #334155;
+}
+
+.btn {
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.btn-xs {
+    padding: 4px 8px;
+}
+
+.btn-white:hover {
+    background: #f1f5f9;
+}
+
+td .btn {
+    margin: 0 2px;
+}
+
+.pagination {
+    margin: 12px 0 0;
+}
+
+.page-link {
+    border-radius: 8px !important;
+    margin: 0 2px;
+}
+
+.alert {
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    font-size: 13px;
+}
+
+.ibox-title .btn-primary {
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+}
+
+.ibox {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ibox:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.ibox-title {
+    background-color: #f7f9fc;
+    border-bottom: 1px solid #e0e0e0;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 18px 25px;
+}
+
+.ibox-content {
+    padding: 30px 25px;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 12px 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #071d3ec7;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+.btn-primary {
+    background-color: #071d3ec7;
+    border-color: #071d3ec7;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn-primary:hover {
+    background-color: #071d3ec7;
+    border-color: #071d3ec7;
+}
+
+.btn-white {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+/* Ảnh xem trước */
+.img-preview {
+    border: 2px solid #e0e0e0;
+    padding: 5px;
+}
+
+.is-invalid {
+    border-color: #e74a3b !important;
+}
+
+.invalid-feedback.d-block {
+    color: #e74a3b;
+    font-size: 0.9em;
+    margin-top: 5px;
+}

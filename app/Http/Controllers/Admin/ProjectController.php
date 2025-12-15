@@ -14,15 +14,17 @@ class ProjectController extends Controller
     
     public function index()
     {
+        $template = 'admin.projects.index';
         $projects = Project::with('user')->orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.projects.index', compact('projects'));
+        return view('admin.dashboard.layout', compact('template','projects'));
     }
 
     public function create()
     {
+        $template = 'admin.projects.create';
         $members = Member::all();
         $categories = CategoriesProject::all();
-        return view('admin.projects.create', compact('members','categories'));
+        return view('admin.dashboard.layout', compact('template','members','categories'));
     }
 
     /**
@@ -130,9 +132,10 @@ public function deleteAjax($id)
      */
     public function edit(Project $project)
     {
+        $template = 'admin.projects.edit';
         $members = Member::all();
         $categories = CategoriesProject::all();//
-        return view('admin.projects.edit', compact('project', 'members', 'categories'));
+        return view('admin.dashboard.layout', compact('template','project', 'members', 'categories'));
     }
 
     /**

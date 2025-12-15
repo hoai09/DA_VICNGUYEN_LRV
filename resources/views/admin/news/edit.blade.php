@@ -1,17 +1,33 @@
-@extends('admin.layouts.home')   
+{{-- @extends('admin.layouts.home')   
 
 @section('header')
 <h3 class="mb-4">Chỉnh sửa tin tức</h3>
 @endsection
 
-@section('content')
-<div class="container mt-4">
+@section('content') --}}
 
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>{{ config('apps.news.title2') }}</h2>
+        <ol class="breadcrumb" style="margin-bottom:10px;">
+            <li>
+                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li>{{ config('apps.news.title') }}</li>
+            <li class="active"><strong>{{ config('apps.news.title2') }}</strong></li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-sm border-0 rounded-4">
-                <div class="card-body p-4">
-
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Cập nhật tin tức</h5>
+                </div>
+                <div class="ibox-content">
                     <form method="POST" action="{{ route('admin.news.update', $news->slug) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -119,9 +135,10 @@
     </div>
 </div>
 
-@endsection
+{{-- @endsection --}}
 
 @section('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>;
+<script>const CKEDITOR_UPLOAD_URL = "{{ route('admin.ckeditor.upload') }}?&_token={{ csrf_token() }}";</script>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script src="{{ asset('assets/admin/js/news.js') }}"></script>
 @endsection

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CompanyInfoController as AdminCompanyInfoController;
 use App\Http\Controllers\Admin\ContactAdviceController as AdminContactAdviceController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProjectImageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UploadController;
@@ -53,7 +54,10 @@ Route::middleware(['auth', 'isAdmin'])
         Route::patch('/form/{form}/status', [AdminContactAdviceController::class, 'updateStatus'])
         ->name('form.status');
 
+        // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/user/index',[UserController::class,'index'])->name('user.index');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

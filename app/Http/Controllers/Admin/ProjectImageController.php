@@ -13,14 +13,16 @@ class ProjectImageController extends Controller
 {
     public function index()
     {
+        $template = 'admin.project_images.index';
         $images = ProjectImage::with('project')->latest()->paginate(12);
-        return view('admin.project_images.index', compact('images'));
+        return view('admin.dashboard.layout', compact('template','images'));
     }
 
     public function create()
     {
+        $template = 'admin.project_images.create';
         $projects = Project::all();
-        return view('admin.project_images.create', compact('projects'));
+        return view('admin.dashboard.layout', compact('template','projects'));
     }
 
     public function store(Request $request)

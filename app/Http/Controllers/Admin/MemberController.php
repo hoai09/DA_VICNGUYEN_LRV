@@ -12,8 +12,9 @@ class MemberController extends Controller
 {
     public function index()
     {
+        $template = 'admin.members.index';
         $members = Member::latest()->paginate(5);
-        return view('admin.members.index', compact('members'));
+        return view('admin.dashboard.layout', compact('template','members'));
     }
 
     public function show(Member $member)
@@ -24,8 +25,9 @@ class MemberController extends Controller
     /*==========================THÊM==================================*/
     public function create()
     {
+        $template = 'admin.members.create';
         $projects = Project::orderBy('title')->get();
-        return view('admin.members.create', compact('projects'));
+        return view('admin.dashboard.layout', compact('template','projects'));
     }
     public function store(Request $request)
     {
@@ -71,8 +73,9 @@ class MemberController extends Controller
 /*=========================SỬA===================================*/
     public function edit(Member $member)
     {
+        $template = 'admin.members.edit';
         $projects = Project::all();
-        return view('admin.members.edit', compact('member', 'projects'));
+        return view('admin.dashboard.layout', compact('template','member', 'projects'));
     }
 
     public function update(Request $request, Member $member)

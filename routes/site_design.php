@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortfolioContactController;
 
-Route::prefix('/about')->name('vicdesign.')->group(function () {
+Route::prefix('/')->name('vicdesign.')->group(function () {
     Route::view('/about', 'sitevicnguyendesign.about')->name('about');
     Route::view('/indexdgn', 'sitevicnguyendesign.indexdgn')->name('indexdgn');
     Route::view('/model', 'sitevicnguyendesign.model')->name('model');

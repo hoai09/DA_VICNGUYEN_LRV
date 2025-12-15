@@ -1,74 +1,130 @@
-@extends('admin.layouts.home')   
 
-@section('styles')
-<link rel="stylesheet" href="{{ asset('assets/admin/css/member.css') }}">
-<style>
-    .card-header { font-weight: 600; font-size: 1.1rem; }
-    .img-preview { max-width: 120px; border-radius: 6px; margin-top: 10px; }
-</style>
-@endsection
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>{{ config('apps.member.title2') }}</h2>
+        <ol class="breadcrumb" style="margin-bottom:10px;">
+            <li>
+                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li>{{ config('apps.member.title') }}</li>
+            <li class="active"><strong>{{ config('apps.member.title2') }}</strong></li>
+        </ol>
+    </div>
+</div>
 
-@section('content')
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm border-0">
-                <div class="card-header text-dack">
-                    Cập nhật nhân viên : {{ $member->name }}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-8">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Cập nhật thành viên: {{ $member->name }}</h5>
                 </div>
-                <div class="card-body">
-                    <form action="{{ route('admin.members.update', $member->slug) }}" method="POST" enctype="multipart/form-data">
+
+                <div class="ibox-content">
+
+                    <form action="{{ route('admin.members.update', $member->slug) }}"
+                            method="POST"
+                            enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
-                        <div class="mb-3">
-                            <label class="form-label">Tên</label>
-                            <input type="text" name="name" value="{{ old('name', $member->name) }}" class="form-control @error('name') is-invalid @enderror">
-                            @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        <div class="form-group">
+                            <label>Tên thành viên</label>
+                            <input type="text"
+                                    name="name"
+                                    value="{{ old('name', $member->name) }}"
+                                    class="form-control @error('name') is-invalid @enderror">
+
+                            @error('name')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Ảnh</label>
-                            <input type="file" name="image" class="form-control" id="imageInput">
+                        <div class="form-group">
+                            <label>Ảnh đại diện</label>
+                            <input type="file"
+                                    name="image"
+                                    class="form-control"
+                                    id="imageInput">
+
                             @if($member->image)
-                                <img id="previewImg" src="{{ asset('storage/'.$member->image) }}" class="img-preview">
+                                <img id="previewImg"
+                                        src="{{ asset('storage/' . $member->image) }}"
+                                        class="img-preview"
+                                        style="max-width:120px;
+                                                border-radius:8px;
+                                                margin-top:12px;
+                                                border:1px solid #e5e7eb;">
                             @else
-                                <img id="previewImg" src="#" class="img-preview d-none">
+                                <img id="previewImg"
+                                        class="img-preview d-none">
                             @endif
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Chức vụ</label>
-                            <input type="text" name="main_role" value="{{ old('main_role', $member->main_role) }}" class="form-control">
+                
+                        <div class="form-group">
+                            <label>Chức vụ</label>
+                            <input type="text"
+                                    name="main_role"
+                                    value="{{ old('main_role', $member->main_role) }}"
+                                    class="form-control">
                         </div>
 
+                        
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Tốt nghiệp</label>
-                                <input type="number" name="graduation_year" value="{{ old('graduation_year', $member->graduation_year) }}" class="form-control">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Năm tốt nghiệp</label>
+                                    <input type="number"
+                                            name="graduation_year"
+                                            value="{{ old('graduation_year', $member->graduation_year) }}"
+                                            class="form-control">
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Trở thành Vicer</label>
-                                <input type="number" name="join_year" value="{{ old('join_year', $member->join_year) }}" class="form-control">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Trở thành Vicer từ năm</label>
+                                    <input type="number"
+                                            name="join_year"
+                                            value="{{ old('join_year', $member->join_year) }}"
+                                            class="form-control">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Giải thưởng</label>
-                            <input type="text" name="awards" value="{{ old('awards', $member->awards) }}" class="form-control">
+                        
+                        <div class="form-group">
+                            <label>Giải thưởng</label>
+                            <input type="text"
+                                    name="awards"
+                                    value="{{ old('awards', $member->awards) }}"
+                                    class="form-control">
                         </div>
 
-                        <button type="submit" class="btn btn-outline-info mt-3">Cập nhật</button>
-                        <a href="{{ route('admin.members.index') }}" class="btn btn-outline-secondary mt-3">Quay lại danh sách</a>
+                        <div class="form-group text-right">
+                            <a href="{{ route('admin.members.index') }}"
+                                class="btn btn-white">
+                                Quay lại
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+                                <i class="fa fa-save"></i> Cập nhật
+                            </button>
+                        </div>
+
                     </form>
+
                 </div>
             </div>
 
-            
         </div>
     </div>
 </div>
-@endsection
 
 @section('scripts')
 <script src="{{ asset('assets/admin/js/member.js') }}"></script>

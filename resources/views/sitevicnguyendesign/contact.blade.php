@@ -38,7 +38,7 @@
                   <label>Email</label>
                   <input name="email" id="from_email" type="input" placeholder="" ></br>
                   <label for="other">Object</label>
-                  <input name="Objects" id="Objects" type="input" placeholder="" ></br>
+                  <input name="objects" id="Objects" type="input" placeholder="" ></br>
                   <label for="other">Your message</label>
                   <textarea name="content" id="content" rows="30" placeholder="" ></textarea>
                   <input type="submit" value="Send " name="subscribe" class="button submit" id="subscribe">

@@ -15,7 +15,7 @@
 			</div>
 			
 			<div class="content">
-				<div class="item">			
+				<div class="item">
 					<div class="description"></div>
 					<div class="detail">
 						<div class="detail-item awards">

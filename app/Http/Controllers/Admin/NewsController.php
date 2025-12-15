@@ -20,14 +20,16 @@ class NewsController extends Controller
         } elseif ($request->status === 'draft') {
             $query->where('is_published', false);
         }
+        $template = 'admin.news.index';
         $news = $query->orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.news.index', compact('news'));
+        return view('admin.dashboard.layout', compact('template','news'));
     }
 
     public function create()
     {
+        $template = 'admin.news.create';
         $categories = CategoriesNews::all();
-        return view('admin.news.create', compact('categories'));
+        return view('admin.dashboard.layout', compact('template','categories'));
     }
 
     public function store(Request $request)
@@ -116,8 +118,9 @@ class NewsController extends Controller
 
     public function edit(News $news)
     {
+        $template = 'admin.news.edit';
         $categories = CategoriesNews::all();
-        return view('admin.news.edit', compact('news','categories'));
+        return view('admin.dashboard.layout', compact('template','news','categories'));
     }
 
     public function update(Request $request, News $news)

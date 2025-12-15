@@ -11,14 +11,18 @@ class ContactAdviceController extends Controller   // FORM
 {
     public function index(Request $request)
     {
+        $template = 'admin.form.index';
         $information = ContactAdvice::latest()->paginate(10);
-        return view('admin.form.index', compact('information'));
+        return view('admin.dashboard.layout', compact('template','information'));
 
     }
 
     public function show(ContactAdvice $form)
     {
-        return view('admin.form.show', ['information' => $form]);
+        $template = 'admin.form.show';
+        return view('admin.dashboard.layout',
+            compact('template') + ['information' => $form]
+        );
     }
     
     public function destroy(ContactAdvice $form)

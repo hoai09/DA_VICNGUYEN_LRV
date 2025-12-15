@@ -1,17 +1,32 @@
-@extends('admin.layouts.home')   
+{{-- @extends('admin.layouts.home')   
 
 @section('header')
 <h3 class="mb-4">Thêm tin tức</h3>
 @endsection
 
-@section('content')
-<div class="container mt-4">
+@section('content') --}}
 
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>{{ config('apps.news.title1') }}</h2>
+        <ol class="breadcrumb" style="margin-bottom:10px;">
+            <li>
+                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li>{{ config('apps.news.title') }}</li>
+            <li class="active"><strong>{{ config('apps.news.title1') }}</strong></li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-sm border-0 rounded-4">
-                <div class="card-body p-4">
-
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h3>Thêm tin tức</h3>
+                </div>
+                <div class="ibox-content">
                     <form method="POST" action="{{ route('admin.news.store') }}" enctype="multipart/form-data">
                         @csrf
 
@@ -148,7 +163,7 @@
         </div>
     </div>
     </div>
-@endsection
+{{-- @endsection --}}
 
 @section('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
@@ -160,5 +175,4 @@
 </script>
 
 <script src="{{ asset('assets/admin/js/news.js') }}"></script>
-
 @endsection
