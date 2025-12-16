@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Project;
 use App\Models\CompanyInfo;
+use App\Models\ContactAdvice;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -29,6 +30,20 @@ class AppServiceProvider extends ServiceProvider
 
             $social = CompanyInfo::firstOrCreate(['type' => 'social']);
             $view->with('social', $social);
+        });
+
+        View::composer('admin.dashboard.*', function ($view) {
+
+            $contactUnreadCount = ContactAdvice::where('status', 0)->count();
+
+            $latestContactAdvices = ContactAdvice::latest()
+                ->limit(5)
+                ->get();
+
+            $view->with(compact(
+                'contactUnreadCount',
+                'latestContactAdvices'
+            ));
         });
     }
 }

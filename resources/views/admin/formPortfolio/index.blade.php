@@ -1,12 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
-        <h2>Danh sách tài khoản</h2>
+        <h2>Danh sách liên hệ</h2>
         <ol class="breadcrumb" style="margin-bottom:10px;">
             <li>
                 <a href="{{ route('admin.dashboard') }}">Dashboard</a>
             </li>
             <li class="active">
-                <strong>Tài khoản</strong>
+                <strong>Liên hệ</strong>
             </li>
         </ol>
     </div>
@@ -24,14 +24,7 @@
                 @endif
 
                 <div class="ibox-title">
-                    <h3>Danh sách tài khoản người dùng</h3>
-
-                    <div class="text-right">
-                        <a href="{{ route('admin.user.create') }}"
-                                            class="btn btn-primary btn-sm ">
-                                            <i class="fa fa-plus "></i> Thêm account
-                        </a>
-                    </div>
+                    <h3>Danh sách thông tin liên hệ</h3>
                 </div>
 
                 <div class="ibox-content p-0">
@@ -41,28 +34,30 @@
                                 <tr>
                                     <th>Họ và tên</th>
                                     <th>Email</th>
-                                    <th>Mật khẩu</th>
-                                    <th>Vai trò</th>
-                                    <th>Ngày tạo</th>
-                                    {{-- <th width="120px" class="text-center">Thao tác</th> --}}
+                                    <th>Đối tượng</th>
+                                    <th>Nội dung</th>
+                                    <th>Ngày gửi</th>
+                                    <th width="120px" class="text-center">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($account as $acc)
+                                @forelse($information as $info)
                                     <tr>
-                                        <td class="fw-semibold">{{ $acc->name }}</td>
-                                        <td>{{ $acc->email }}</td>
-                                        <td>{{ $acc->password }}</td>
-                                        <td >{{ $acc->role}}</td>
-                                        <td>{{ $acc->created_at->format('d/m/Y H:i') }}</td>
+                                        <td class="fw-semibold">{{ $info->name }}</td>
+                                        <td>{{ $info->email }}</td>
+                                        <td>{{ $info->objects }}</td>
+                                        <td class="text-truncate" style="max-width: 250px;">
+                                            {{ Str::limit($info->content, 80) }}
+                                        </td>
+                                        <td>{{ $info->created_at->format('d/m/Y H:i') }}</td>
 
-                                        {{-- <td class="d-flex gap-1 justify-content-center">
-                                            <a href="{{ route('admin.user.edit', $acc->id) }}"
+                                        <td class="d-flex gap-1 justify-content-center">
+                                            <a href="{{ route('admin.formPortfolio.show', $info->id) }}"
                                                 class="btn btn-info btn-sm">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
 
-                                            <form action="{{ route('admin.user.destroy', $info->id) }}" method="POST">
+                                            <form action="{{ route('admin.formPortfolio.destroy', $info->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button
@@ -71,7 +66,7 @@
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </form>
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -86,7 +81,7 @@
                 </div>
 
                 <div class="mt-3 px-3">
-                    {{ $account->links('vendor.pagination.bootstrap-4') }}
+                    {{ $information->links('vendor.pagination.bootstrap-4') }}
                 </div>
 
             </div>

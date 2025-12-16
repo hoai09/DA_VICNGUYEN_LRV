@@ -1,16 +1,3 @@
-{{-- @extends('admin.layouts.home')   
-
-@push('styles')
-<link rel="stylesheet" href="{{ asset('assets/admin/css/form.css') }}">
-@endpush
-
-@section('header')
-<h3 class="fw-bold ms-2 mt-5">Chi tiết thông tin dự án khách hàng</h3>
-@endsection
-
-@section('content') --}}
-
-
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>{{ config('apps.headtitle.title1') }}</h2>
@@ -24,32 +11,48 @@
     </div>
 </div>
 
-<div class="container mt-4">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h3>Chi tiết thông tin dự án khách hàng</h3>
+                </div>
 
-    <div class="card shadow-sm border-0 p-4 form-detail-card">
-        
-        <h4>{{ $information->full_name }}</h4>
+                <div class="ibox-content">
 
-        <p><strong>Email:</strong> {{ $information->email }}</p>
-        <p><strong>Điện thoại:</strong> {{ $information->phone }}</p>
-        <p><strong>Nghề nghiệp:</strong> {{ $information->job }}</p>
-        <p><strong>Tuổi:</strong> {{ $information->age }}</p>
+                    <h4>{{ $information->full_name }}</h4>
 
-        <p><strong>Loại dự án:</strong> {{ $information->category->name ?? ' ' }}</p>
-        <p><strong>Diện tích:</strong> {{ $information->area }}</p>
-        <p><strong>Quy mô:</strong> {{ $information->project_scale }}</p>
-        <p><strong>Địa điểm:</strong> {{ $information->address }}</p>
+                    <p><strong>Email:</strong> {{ $information->email }}</p>
+                    <p><strong>Điện thoại:</strong> {{ $information->phone }}</p>
+                    <p><strong>Nghề nghiệp:</strong> {{ $information->job }}</p>
+                    <p><strong>Tuổi:</strong> {{ $information->age }}</p>
 
-        <p><strong>Mô tả chức năng:</strong> {!! nl2br(e($information->description)) !!}</p>
-        <p><strong>Sở thích/Thói quen:</strong> {!! nl2br(e($information->hobbies)) !!}</p>
-        <p><strong>Lý do biết VIC:</strong> {!! nl2br(e($information->referral)) !!}</p>
+                    <p><strong>Loại dự án:</strong> {{ $information->category->name ?? '-' }}</p>
+                    <p><strong>Diện tích:</strong> {{ $information->area }}</p>
+                    <p><strong>Quy mô:</strong> {{ $information->project_scale }}</p>
+                    <p><strong>Địa điểm:</strong> {{ $information->address }}</p>
 
+                    <p><strong>Mô tả chức năng:</strong>
+                        {!! nl2br(e($information->description)) !!}
+                    </p>
+
+                    <p><strong>Sở thích/Thói quen:</strong>
+                        {!! nl2br(e($information->hobbies)) !!}
+                    </p>
+
+                    <p><strong>Lý do biết VIC:</strong>
+                        {!! nl2br(e($information->referral)) !!}
+                    </p>
+
+                    <div class="text-right">
+                        <a href="{{ route('admin.form.index') }}" class="btn btn-white mt-4">
+                            <i class="fa-solid fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-    <a href="{{ route('admin.form.index') }}" class="btn btn-outline-secondary mt-3">
-        <i class="fa-solid fa-arrow-left"></i> Quay lại
-    </a>
-
 </div>
-{{-- @endsection --}}
-
-

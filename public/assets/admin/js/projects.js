@@ -1,14 +1,17 @@
-document.getElementById("title").addEventListener("input", function () {
-    let text = this.value
-        .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/[^\w-]+/g, "");
-    document.getElementById("slug").value = text;
-});
+const titleInput = document.getElementById("title");
+if (titleInput) {
+    titleInput.addEventListener("input", function () {
+        let text = this.value
+            .toLowerCase()
+            .replace(/ /g, "-")
+            .replace(/[^\w-]+/g, "");
+        document.getElementById("slug").value = text;
+    });
+}
 
-document
-    .getElementById("saveCategoryBtn")
-    .addEventListener("click", function () {
+const saveBtn = document.getElementById("saveCategoryBtn");
+if (saveBtn) {
+    saveBtn.addEventListener("click", function () {
         let name = document.getElementById("newCategoryName").value;
 
         if (!name.trim()) return alert("Vui lòng nhập tên thể loại");
@@ -40,6 +43,7 @@ document
                 }
             });
     });
+}
 
 document.addEventListener("click", function (e) {
     if (e.target.closest(".deleteCatBtn")) {

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CompanyInfoController as AdminCompanyInfoController;
 use App\Http\Controllers\Admin\ContactAdviceController as AdminContactAdviceController;
+use App\Http\Controllers\Admin\PortfolioContactController as AdminPortfolioContactController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProjectImageController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -17,7 +18,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::middleware(['auth', 'isAdmin'])
+Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -41,6 +42,8 @@ Route::middleware(['auth', 'isAdmin'])
 
         Route::resource('form',AdminContactAdviceController::class)->only(['index','show','destroy']);
 
+        Route::resource('formPortfolio',AdminPortfolioContactController::class)->only(['index','show','destroy']);
+
 
         Route::get('/contact', [AdminCompanyInfoController::class, 'editContact'])->name('company_info.contact');
         Route::put('/contact', [AdminCompanyInfoController::class, 'updateContact']);
@@ -61,8 +64,16 @@ Route::middleware(['auth', 'isAdmin'])
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        
 
         Route::post('/ckeditor/upload', [UploadController::class, 'ckeditorUpload'])->name('ckeditor.upload');
 
+    });
+
+    Route::middleware(['auth', 'isAdmin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('user', UserController::class);
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });

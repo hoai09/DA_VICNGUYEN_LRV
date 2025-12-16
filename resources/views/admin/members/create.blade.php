@@ -77,7 +77,6 @@
                                     class="form-control">
                         </div>
 
-                        {{-- Giải thưởng --}}
                         <div class="form-group">
                             <label>Giải thưởng</label>
                             <input type="text"
@@ -86,7 +85,16 @@
                                     class="form-control">
                         </div>
 
-                        {{-- Button --}}
+                        <div class="form-group">
+                            <label>Site hiển thị</label>
+                            <select name="site" class="form-select" required>
+                                <option value="">---Chọn---</option>
+                                <option value="design">VicNguyen_Design</option>
+                                <option value="VicNguyen">VicNguyen</option>
+                            </select>
+                        </div>
+
+                        
                         <div class="form-group text-right">
                             <a href="{{ route('admin.members.index') }}"
                                 class="btn btn-white">
@@ -98,15 +106,13 @@
                                 <i class="fa fa-save"></i> Lưu Member
                             </button>
                         </div>
-
                     </form>
-
                 </div>
             </div>
 
         </div>
     </div>
 </div>
-@section('scripts')
+@push('scripts')
 <script src="{{ asset('assets/admin/js/member.js') }}"></script>
-@endsection
+@endpush

@@ -20,11 +20,16 @@ class ContactAdviceController extends Controller   // FORM
     public function show(ContactAdvice $form)
     {
         $template = 'admin.form.show';
-        return view('admin.dashboard.layout',
-            compact('template') + ['information' => $form]
-        );
+        if ($form->status == 0) {
+            $form->update(['status' => 1]);
+        }
+        $information = $form;
+
+        return view('admin.dashboard.layout', compact(
+            'template',
+            'information'
+        ));
     }
-    
     public function destroy(ContactAdvice $form)
     {
         $form->delete();

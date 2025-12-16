@@ -63,7 +63,8 @@
                                     <th>Dự án tham gia</th>
                                     <th>Giải thưởng</th>
                                     <th>Chức vụ</th>
-                                    <th width="140" class="text-center">Thao tác</th>
+                                    <th>Site</th>
+                                    <th class="text-center">Thao tác</th>
                                 </tr>
                             </thead>
 
@@ -111,6 +112,12 @@
                                     <td>
                                         <span class="label label-default">
                                             {{ $member->main_role }}
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-info text-dark">
+                                            {{ strtoupper($member->site) }}
                                         </span>
                                     </td>
 

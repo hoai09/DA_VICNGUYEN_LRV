@@ -143,7 +143,6 @@
     </div>
 </div>
 {{-- @endsection --}}
-
-@section('scripts')
+@push('scripts')
 <script src="{{ asset('assets/admin/js/projects.js') }}"></script>
-@endsection
+@endpush

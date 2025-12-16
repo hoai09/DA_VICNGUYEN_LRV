@@ -4,7 +4,7 @@
 <ul class="menunav">
 	<li class=""><a href="{{ route('vicdesign.portfolio') }}">Portfolio</a>
 	<li class=""><a href="{{ route('vicdesign.model') }}">Model</a>
-	<li class=""><a href="{{ route('vicdesign.team') }}">Team</a>
+	<li class=""><a href="{{ route('vicdesign.team.index') }}">Team</a>
 	<li class="active"><a href="{{ route('vicdesign.about') }}">About</a>
 	<li class=""><a href="{{ route('vicdesign.contact') }}">Contact</a>
 </ul>	
@@ -26,7 +26,7 @@
 <ul class="menunav">
 	<li class=""><a href="{{ route('vicdesign.portfolio') }}">Portfolio</a>
 	<li class=""><a href="{{ route('vicdesign.model') }}">Model</a>
-	<li class=""><a href="{{ route('vicdesign.team') }}">Team</a>
+	<li class=""><a href="{{ route('vicdesign.team.index') }}">Team</a>
 	<li class=""><a href="{{ route('vicdesign.about') }}">About</a>
 	<li class="active"><a href="{{ route('vicdesign.contact') }}">Contact</a>
 </ul>	

@@ -14,100 +14,96 @@
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    <i class="fa fa-envelope"></i>
+            
+                    @if($contactUnreadCount > 0)
+                        <span class="label label-warning">
+                            {{ $contactUnreadCount }}
+                        </span>
+                    @endif
                 </a>
+            
                 <ul class="dropdown-menu dropdown-messages">
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a7.jpg">
-                            </a>
-                            <div>
-                                <small class="pull-right">46h ago</small>
-                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+            
+                    @forelse($latestContactAdvices as $contact)
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <div>
+                                    <small class="pull-right">
+                                        {{ $contact->created_at->diffForHumans() }}
+                                    </small>
+            
+                                    <strong>{{ $contact->full_name }}</strong><br>
+            
+                                    <small class="text-muted">
+                                        {{ $contact->phone ?? $contact->email }}
+                                    </small>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a href="{{ route('admin.profile.edit') }}" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a4.jpg">
-                            </a>
-                            <div>
-                                <small class="pull-right text-navy">5h ago</small>
-                                <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a href="{{ route('admin.profile.edit') }}" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/profile.jpg">
-                            </a>
-                            <div>
-                                <small class="pull-right">23h ago</small>
-                                <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="divider"></li>
+                        </li>
+                        <li class="divider"></li>
+                    @empty
+                        <li class="text-center">
+                            <small>Chưa có yêu cầu tư vấn</small>
+                        </li>
+                    @endforelse
+            
                     <li>
                         <div class="text-center link-block">
-                            <a href="mailbox.html">
-                                <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                            <a href="{{ route('admin.form.index') }}">
+                                <i class="fa fa-envelope"></i>
+                                <strong>Xem tất cả tư vấn</strong>
                             </a>
                         </div>
                     </li>
+            
                 </ul>
             </li>
+            
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    <i class="fa fa-bell"></i>
+            
+                    @if($contactUnreadCount > 0)
+                        <span class="label label-primary">
+                            {{ $contactUnreadCount }}
+                        </span>
+                    @endif
                 </a>
+            
                 <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="mailbox.html">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="{{ route('admin.profile.edit') }}">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="grid_options.html">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
+            
+                    @forelse($latestContactAdvices as $contact)
+                        <li>
+                            <a href="{{ route('admin.form.show', $contact->id) }}">
+                                <div>
+                                    <i class="fa fa-info-circle fa-fw"></i>
+                                    Khách hàng mới:
+                                    <strong>{{ $contact->full_name }}</strong>
+            
+                                    <span class="pull-right text-muted small">
+                                        {{ $contact->created_at->diffForHumans() }}
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                    @empty
+                        <li class="text-center text-muted p-2">
+                            Không có thông báo mới
+                        </li>
+                    @endforelse
+            
                     <li>
                         <div class="text-center link-block">
-                            <a href="notifications.html">
-                                <strong>See All Alerts</strong>
+                            <a href="{{ route('admin.form.index') }}">
+                                <strong>Xem tất cả</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
                     </li>
                 </ul>
             </li>
-
             <li>
                 <a href="#"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

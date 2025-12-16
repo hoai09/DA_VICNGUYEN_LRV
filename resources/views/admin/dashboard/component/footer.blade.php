@@ -1,8 +1,29 @@
-<div class="footer">
-    <div class="pull-right">
-        10GB of <strong>250GB</strong> Free.
+<footer class="main-footer d-flex flex-column align-items-center justify-content-center pt-0 pb-4">
+
+    <p class="main-footer__copyright">
+        Copyright © VIC NGUYEN | ARCHITECTS 2018
+    </p>
+
+    @php
+        $items = [
+            'facebook' => 'fab fa-facebook-f',
+            'instagram' => 'fab fa-instagram',
+            'email_social' => 'fas fa-envelope',
+        ];
+    @endphp
+
+    <div class="main-footer__socials d-flex mt-3">
+        @foreach($items as $key => $icon)
+            @if(!empty($social->social_links[$key]))
+                <a
+                    href="{{ $key === 'email_social' ? 'mailto:' . $social->social_links[$key] : $social->social_links[$key] }}"
+                    class="main-footer__social-item"
+                    target="{{ $key !== 'email_social' ? '_blank' : '' }}"
+                >
+                    <i class="{{ $icon }} main-footer__social-icon"></i>
+                </a>
+            @endif
+        @endforeach
     </div>
-    <div>
-        <strong>Copyright</strong> Example Company &copy; 2014-2017
-    </div>
-</div>
+
+</footer>

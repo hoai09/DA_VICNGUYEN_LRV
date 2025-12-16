@@ -15,6 +15,7 @@ class Member extends Model
     protected $fillable = [
         'name',                 //tên
         'slug',
+        'site',                 //site
         'image',                //ảnh
         'graduation_year',      //năm tốt nghiệp
         'join_year',            //năm trở thành vicer

@@ -14,7 +14,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
 
             <div class="ibox">
                 <div class="ibox-title">
@@ -105,6 +105,20 @@
                                     class="form-control">
                         </div>
 
+                        <div class="form-group">
+                            <label class="form-label">Site hiển thị</label>
+                            <select name="site" class="form-select" required>
+                                <option value="">---Chọn---</option>
+                                <option value="design" {{ $member->site == 'design' ? 'selected' : '' }}>
+                                    VicNguyen_Design
+                                </option>
+                                <option value="VicNguyen" {{ $member->site == 'VicNguyen' ? 'selected' : '' }}>
+                                    VicNguyen
+                                </option>
+                            </select>
+                        </div>
+
+
                         <div class="form-group text-right">
                             <a href="{{ route('admin.members.index') }}"
                                 class="btn btn-white">
@@ -126,6 +140,6 @@
     </div>
 </div>
 
-@section('scripts')
+@push('scripts')
 <script src="{{ asset('assets/admin/js/member.js') }}"></script>
-@endsection
+@endpush

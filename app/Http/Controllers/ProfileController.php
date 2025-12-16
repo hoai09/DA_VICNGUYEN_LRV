@@ -16,9 +16,9 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $template = 'profile.edit';
+        $user = $request->user();
+        return view('admin.dashboard.layout', compact('template', 'user'));
     }
 
     /**

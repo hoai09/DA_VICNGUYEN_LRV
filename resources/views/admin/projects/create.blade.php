@@ -88,7 +88,7 @@
                                         <option value="">-- Chọn trạng thái --</option>
                                         <option value="Đang triển khai">Đang triển khai</option>
                                         <option value="Hoàn thành">Hoàn thành</option>
-                                        <option value="Hoàn thành">Tạm dừng</option>
+                                        <option value="Tạm dừng">Tạm dừng</option>
                                     </select>
                                 </div>
                             </div>
@@ -112,8 +112,9 @@
                                 @foreach($members as $member)
                                 <div class="member-item d-flex align-items-center p-2 rounded mb-2 shadow-sm bg-white border">
         
-                                    <input class="form-check-input me-3" type="checkbox" 
-                                        name="members[]" value="{{ $member->id }}">
+                                    <input class="form-check-input me-3 member-checkbox" type="checkbox"
+                                    name="members[]" value="{{ $member->id }}">
+
         
                                     <div class="flex-grow-1">
                                         <strong>{{ $member->name }}</strong>
@@ -121,21 +122,21 @@
                                     </div>
         
                                     <input type="text"
-                                        name="roles[{{ $member->id }}]"
-                                        placeholder="Vai trò"
-                                        class="form-control ms-3"
-                                        style="max-width: 200px;">
+                                    name="roles[{{ $member->id }}]"
+                                    placeholder="Vai trò"
+                                    class="form-control ms-3 role-input"
+                                    style="display:none; max-width: 200px;">
                                 </div>
                                 @endforeach
                             </div>
                         </div>
         
-                        <div class="d-flex justify-content-between mt-4">
-                            <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-secondary px-4">
+                        <div class="d-flex justify-content-between mt-4 ">
+                            <a href="{{ route('admin.projects.index') }}" class="btn px-4">
                                 <i class="bi bi-arrow-left"></i> Quay lại
                             </a>
         
-                            <button class="btn btn-outline-info px-4">
+                            <button class="btn btn-info px-4">
                                 <i class="fa-solid fa-floppy-disk me-2"></i> Lưu dự án
                             </button>
                         </div>
@@ -188,8 +189,7 @@
 
 {{-- 
 @endsection --}}
-
-@section('scripts')
+@push('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
     const CATEGORYPRJ_STORE_URL = "{{ route('admin.categories_project.store.ajax') }}";
@@ -197,4 +197,4 @@
     const CSRF = "{{ csrf_token() }}";
 </script>
 <script src="{{ asset('assets/admin/js/projects.js') }}"></script>
-@endsection
+@endpush

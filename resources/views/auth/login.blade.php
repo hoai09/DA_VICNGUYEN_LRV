@@ -76,7 +76,7 @@
         </form>
 
         <p class="m-t">
-            <small>Inspinia Admin &copy; {{ date('Y') }}</small>
+            <small>Vic_nguyen &copy; {{ date('Y') }}</small>
         </p>
 
     </div>

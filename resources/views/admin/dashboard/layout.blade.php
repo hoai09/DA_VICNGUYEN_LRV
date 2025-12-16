@@ -16,6 +16,6 @@
             </div>
     </div>
     @include('admin.dashboard.component.script')
-    @yield('scripts')
+    @stack('scripts')
 </body>
 </html>

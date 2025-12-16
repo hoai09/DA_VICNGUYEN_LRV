@@ -12,8 +12,9 @@ class CompanyInfoController extends Controller    //address + studio + footer
 
     public function editContact()
     {
+        $template = 'admin.company_info.contact';
         $contact = CompanyInfo::firstOrCreate(['type'=>'contact']);
-        return view('admin.company_info.contact', compact('contact'));
+        return view('admin.dashboard.layout', compact('template','contact'));
     }
 
     public function updateContact(Request $request)
@@ -47,8 +48,9 @@ class CompanyInfoController extends Controller    //address + studio + footer
 
     public function editSocial()
     {
+        $template = 'admin.company_info.social';
         $social = CompanyInfo::firstOrCreate(['type'=>'social']);
-        return view('admin.company_info.social', compact('social'));
+        return view('admin.dashboard.layout', compact('template','social'));
     }
 
     public function updateSocial(Request $request)
@@ -74,8 +76,9 @@ class CompanyInfoController extends Controller    //address + studio + footer
 /* =====================STUDIO==============================*/
     public function editStudio()
     {
+        $template = 'admin.company_info.studio';
         $studio = CompanyInfo::firstOrCreate(['type'=>'studio']);
-        return view('admin.company_info.studio', compact('studio'));
+        return view('admin.dashboard.layout', compact('template','studio'));
     }
 
     public function updateStudio(Request $request)

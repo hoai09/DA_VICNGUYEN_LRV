@@ -33,6 +33,7 @@ class MemberController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
+            'site' => 'required|string|in:design,VicNguyen',
             'graduation_year' => 'nullable|integer',
             'join_year' => 'nullable|integer',
             'image' => 'nullable|image|max:2048',
@@ -47,6 +48,7 @@ class MemberController extends Controller
         $member = Member::create([
             'name' => $validated['name'],
             'slug' => Member::generateUniqueSlug($validated['name']),
+            'site' => $validated['site'],
             'graduation_year' => $validated['graduation_year'],
             'join_year' => $validated['join_year'],
             'awards' => $validated['awards'] ?? null,
@@ -82,6 +84,7 @@ class MemberController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
+            'site' => 'required|string|in:design,VicNguyen',
             'graduation_year' => 'nullable|integer',
             'join_year' => 'nullable|integer',
             'main_role' => 'nullable|string|max:255',
@@ -102,6 +105,7 @@ class MemberController extends Controller
         $member->update([
             'name' => $validated['name'],
             'slug' => Member::generateUniqueSlug($validated['name'], $member->id),
+            'site' => $validated['site'],
             'graduation_year' => $validated['graduation_year'],
             'join_year' => $validated['join_year'],
             'awards' => $validated['awards'] ?? null,

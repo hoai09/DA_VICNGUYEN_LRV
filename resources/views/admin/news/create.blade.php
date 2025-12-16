@@ -110,11 +110,11 @@
                         </div>
 
                     
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-outline-info mt-3">
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn btn-primary ">
                                 <i class="fa-solid fa-floppy-disk me-1"></i> Lưu
                             </button>
-                            <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary mt-3">
+                            <a href="{{ route('admin.news.index') }}" class="btn btn-white ">
                                 <i class="fa-solid fa-arrow-left me-1"></i> Quay lại
                             </a>
                         </div>
@@ -165,7 +165,7 @@
     </div>
 {{-- @endsection --}}
 
-@section('scripts')
+@push('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
     const CKEDITOR_UPLOAD_URL = "{{ route('admin.ckeditor.upload') }}?&_token={{ csrf_token() }}";
@@ -175,4 +175,4 @@
 </script>
 
 <script src="{{ asset('assets/admin/js/news.js') }}"></script>
-@endsection
+@endpush

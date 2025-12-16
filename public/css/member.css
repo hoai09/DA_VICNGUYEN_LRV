@@ -119,7 +119,13 @@ td .btn {
     padding: 12px 15px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    padding: 8px 15px;
+}
 .form-control:focus {
     border-color: #071d3ec7;
     box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
