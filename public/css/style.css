@@ -8694,3 +8694,17 @@ body.md-skin {
 .mt-4 {
     margin-top: 30px;
 }
+
+.mt-2 {
+    margin-top: 20px;
+}
+.ms-2 {
+    margin-left: 20px;
+}
+.flex-row {
+    display: flex;
+}
+
+.ge {
+    display: flex;
+}

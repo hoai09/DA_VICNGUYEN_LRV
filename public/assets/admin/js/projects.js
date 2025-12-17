@@ -14,7 +14,10 @@ if (saveBtn) {
     saveBtn.addEventListener("click", function () {
         let name = document.getElementById("newCategoryName").value;
 
-        if (!name.trim()) return alert("Vui lòng nhập tên thể loại");
+        if (!name.trim()) {
+            alert("Vui lòng nhập tên thể loại");
+            return;
+        }
 
         fetch(CATEGORYPRJ_STORE_URL, {
             method: "POST",
@@ -37,9 +40,10 @@ if (saveBtn) {
                     select.add(option);
 
                     document.getElementById("newCategoryName").value = "";
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("addCategoryModal")
-                    ).hide();
+
+                    $("#addCategoryModal").modal("hide");
+                } else {
+                    alert(data.message || "Có lỗi xảy ra");
                 }
             });
     });
@@ -70,5 +74,11 @@ document.querySelectorAll(".member-checkbox").forEach((cb) => {
         const roleInput =
             this.closest(".member-item").querySelector(".role-input");
         roleInput.style.display = this.checked ? "block" : "none";
+    });
+});
+
+$(document).ready(function () {
+    $("#addCategoryModal").on("hidden.bs.modal", function () {
+        document.activeElement && document.activeElement.blur();
     });
 });

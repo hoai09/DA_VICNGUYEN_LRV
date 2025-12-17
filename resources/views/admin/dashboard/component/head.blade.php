@@ -16,5 +16,8 @@
     <link rel="stylesheet" href="{{asset('css/animate.css') }}" >
     <link rel="stylesheet" href="{{asset('css/style.css') }}" >
     <link rel="stylesheet" href="{{asset('css/member.css') }}" >
+    @if(isset($template) && $template === 'admin.projects.create')
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/project.css') }}">
+@endif
     
     {{-- <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script> --}}
