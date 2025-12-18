@@ -108,7 +108,7 @@
                         <td>{{ $item->view_count }}</td>
                         <td>{{ $item->published_at?->format('d/m/Y H:i') ?? '-' }}</td>
                         <td class="text-center">
-                            <div class="d-flex justify-content-center gap-2">
+                            <div class="flex-row">
                                 {{-- <a href="{{ route('admin.news.show', $item) }}"
                                     class="btn btn-outline-info action-btn" title="Xem">
                                     <i class="fa-solid fa-eye"></i>

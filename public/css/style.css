@@ -8703,8 +8703,15 @@ body.md-skin {
 }
 .flex-row {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ge {
+    position: absolute;
+    right: 20px;
+}
+.flex {
     display: flex;
+    align-items: center;
 }

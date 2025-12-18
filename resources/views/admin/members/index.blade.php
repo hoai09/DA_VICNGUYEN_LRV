@@ -121,7 +121,7 @@
                                         </span>
                                     </td>
 
-                                    <td class="text-center ">
+                                    <td class="text-center flex-row ">
                                         {{-- <a href="{{ route('admin.members.show', $member->slug) }}"
                                             class="btn btn-white btn-xs">
                                             <i class="fa fa-eye"></i>

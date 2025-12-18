@@ -79,7 +79,7 @@
                                     </td>
         
                                     <td>
-                                        <div class="d-flex justify-content-center gap-2 text-center">
+                                        <div class="flex-row justify-content-center text-center">
         
                             
                                             {{-- <a href="{{ route('admin.projects.show', $project->slug) }}" 

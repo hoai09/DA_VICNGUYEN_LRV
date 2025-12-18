@@ -33,8 +33,8 @@
                     
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Danh mục</label>
-                            <div class="input-group flex-row">
-                                <div>
+                            <div class="input-group ">
+                                <div class="flex-row">
                                     <select id="categorySelect" name="category_id"
                                             class="form-select @error('category_id') is-invalid @enderror" required>
                                         <option value="">-- Chọn danh mục --</option>
@@ -44,7 +44,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                
 
                                 <div class="ms-2">
                                     <button type="button" class="btn btn-primary"
@@ -52,6 +52,7 @@
                                             <i class="fa fa-plus"></i>
                                             </button>
                                 </div>
+                            </div>
                             </div>
                             @error('category_id') 
                             <div class="invalid-feedback">{{ $message }}</div> 
@@ -145,19 +146,20 @@
             <div class="modal-body px-4 pb-4">
                 <div class="form-group mb-4">
                     <label class="small font-weight-bold text-uppercase text-muted mb-2">Tên danh mục</label>
-                    <div class="input-group flex-row">
-                        <div>
+                    <div class="input-group ">
+                        <div class="flex-row">
                             <input type="text" 
                                     id="newCategoryName" 
                                     class="form-control form-control-lg bg-light border-0" 
                                     placeholder="vd:technology" 
                                     style="font-size: 1.5rem;">
-                        </div>
+                        
                         <div class="input-group-append ms-2">
                             <button class="btn btn-primary px-4" id="saveCategoryBtn">
                                 <i class="fa fa-save mr-1"></i> Lưu
                             </button>
                         </div>
+                    </div>
                     </div>
                 </div>
             
@@ -171,12 +173,12 @@
                 <div class="custom-scroll" style="max-height: 300px; overflow-y: auto;">
                     <ul id="categoryList" class="list-group list-group-flush">
                         @foreach($categories as $cat)
-                            <li class="list-group-item flex-row px-0 py-3 border-bottom">
+                            <li class="list-group-item flex px-0 py-3 border-bottom">
                                 
                                     <div class=" align-items-center">
                                         <span class="text-dark font-weight-medium">{{ $cat->name }}</span>
                                     </div>
-                                    <div>
+                                    <div class="ge">
                                         <button class="btn btn-sm btn-danger border-0 rounded-circle deleteCatBtn" data-id="{{ $cat->id }}" title="Xóa">
                                             <i class="fa fa-trash"></i>
                                         </button>

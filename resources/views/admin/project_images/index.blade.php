@@ -98,7 +98,7 @@
                                             <td>{{ $img->project->end_year ?? '-' }}</td>
                 
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center gap-2">
+                                                <div class="flex-row">
                 
                                                     <a href="{{ asset('storage/'.$img->image_path) }}" 
                                                         target="_blank"

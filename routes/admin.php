@@ -43,7 +43,8 @@ Route::middleware('auth')
         Route::resource('form',AdminContactAdviceController::class)->only(['index','show','destroy']);
 
         Route::resource('formPortfolio',AdminPortfolioContactController::class)->only(['index','show','destroy']);
-
+        Route::resource('formPortfolio',AdminPortfolioContactController::class);
+        Route::post('formPortfolio/{formPortfolio}/done',[AdminPortfolioContactController::class, 'done'])->name('formPortfolio.done');
 
         Route::get('/contact', [AdminCompanyInfoController::class, 'editContact'])->name('company_info.contact');
         Route::put('/contact', [AdminCompanyInfoController::class, 'updateContact']);

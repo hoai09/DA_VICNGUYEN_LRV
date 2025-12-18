@@ -39,22 +39,22 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label class="form-label fw-semibold">Thể loại</label>
-                                    <div class="input-group flex-row">
-                                        <div>
+                                    <div class="input-group ">
+                                        <div class="flex-row">
                                             <select name="category_id" id="categorySelect" class="form-select">
                                                 <option value="">-- Chọn loại dự án --</option>
                                                 @foreach($categories as $cat)
                                                     <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
+                                        
                                         <div class="ms-2">
                                             <button type="button" class="btn btn-primary"
                                             data-toggle="modal" data-target="#addCategoryModal">
                                             <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
-
+                                    </div>
                                     </div>
                                     
                             </div>
@@ -163,9 +163,9 @@
             <div class="modal-body px-4 pb-4">
                 <div class="form-group mb-4">
                     <label class="small font-weight-bold text-uppercase text-muted mb-2">Tên loại dự án</label>
-                    <div class="input-group">
+                    <div class="input-group flex-row">
                         <input type="text" id="newCategoryName" class="form-control form-control-lg bg-light border-0" placeholder="Ví dụ: Thiết kế nội thất..." style="font-size: 1rem;">
-                        <div class="input-group-append mt-2">
+                        <div class="input-group-append">
                             <button class="btn btn-primary px-4" id="saveCategoryBtn">
                                 <i class="fa fa-save mr-1"></i> Lưu
                             </button>
@@ -183,7 +183,7 @@
                 <div class="custom-scroll" style="max-height: 300px; overflow-y: auto;">
                     <ul id="categoryList" class="list-group list-group-flush">
                         @foreach($categories as $cat)
-                            <li class="list-group-item flex-row justify-content-between align-items-center px-0 py-3 border-bottom">
+                            <li class="list-group-item flex justify-content-between align-items-center px-0 py-3 border-bottom">
                                 <div class="d-flex align-items-center">
                                     <span class="text-dark font-weight-medium">{{ $cat->name }}</span>
                                 </div>

@@ -1,6 +1,6 @@
-<footer class="main-footer d-flex flex-column align-items-center justify-content-center pt-0 pb-4">
+<footer class="main-footer flex-column align-items-center justify-content-center pt-0 pb-4">
 
-    <p class="main-footer__copyright">
+    <p class="main-footer__copyright flex-row">
         Copyright © VIC NGUYEN | ARCHITECTS 2018
     </p>
 
@@ -12,7 +12,7 @@
         ];
     @endphp
 
-    <div class="main-footer__socials d-flex mt-3">
+    <div class="main-footer__socials flex-row mt-3">
         @foreach($items as $key => $icon)
             @if(!empty($social->social_links[$key]))
                 <a

@@ -8,6 +8,6 @@ class Portfolio_Contact extends Model
 {
     protected $table = 'project_contacts';
     protected $fillable = [
-        'name','email','objects','content'
+        'name','email','objects','content','status'
     ];
 }

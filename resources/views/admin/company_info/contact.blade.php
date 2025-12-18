@@ -94,7 +94,7 @@
                             @enderror
         
                             @if($contact->map_image)
-                                <div class="mt-3">
+                                <div class="mt-4">
                                     <img src="{{ asset('storage/' . $contact->map_image) }}" 
                                         class="img-fluid border rounded shadow-sm"
                                         style="max-height: 200px;">

@@ -75,7 +75,7 @@
                                         
                                     </td>
             
-                                    <td class="d-flex gap-1 justify-content-center text-center">
+                                    <td class="flex-row gap-1 justify-content-center text-center">
             
                                         <a href="{{ route('admin.form.show', $info->id) }}"
                                         class="btn btn-info btn-sm action-btn">
