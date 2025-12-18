@@ -65,8 +65,8 @@
                     </div>
     
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-info mt-3">Tải lên</button>
-                        <a href="{{ route('admin.project_images.index') }}" class="btn btn-outline-secondary mt-3">Quay lại</a>
+                        <button type="submit" class="btn btn-primary mt-3">Tải lên</button>
+                        <a href="{{ route('admin.project_images.index') }}" class="btn btn-white mt-3">Quay lại</a>
                     </div>
                 </form>
             </div>

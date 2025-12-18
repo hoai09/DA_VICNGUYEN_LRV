@@ -139,6 +139,6 @@
 {{-- @endsection --}}
 
 
-@section('scripts')
+@push('scripts')
 <script src="{{ asset('assets/admin/js/projectImg/seach-img.js') }}"></script>
-@endsection
+@endpush

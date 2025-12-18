@@ -11,7 +11,6 @@
             <div id="page-wrapper" class="gray-bg">
                 @include('admin.dashboard.component.nav')
                 @include($template)
-                @yield('content')
                 @include('admin.dashboard.component.footer')
             </div>
     </div>

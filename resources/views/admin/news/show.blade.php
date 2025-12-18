@@ -1,10 +1,4 @@
-@extends('admin.layouts.home')   
 
-@section('header')
-<h3>Chi tiết tin tức</h3>
-@endsection
-
-@section('content')
 <div class="container mt-4 member-detail">
 
     <div class="row justify-content-center">
@@ -48,7 +42,7 @@
 
                     <div class="row mb-3">
                         <div class="col-md-4 fw-semibold text-secondary">Nội dung chi tiết</div>
-                        <div class="col-md-8">
+                        <div class="col-md-8" style="text-align: justify;">
                             {!! $news->content !!}
                         </div>
                     </div>
@@ -65,4 +59,4 @@
         </div>
     </div>
 </div>
-@endsection
+

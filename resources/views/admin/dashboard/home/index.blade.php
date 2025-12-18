@@ -13,7 +13,7 @@
         @foreach($stats_config as $item)
         <div class="col-lg-3 col-md-6">
             <div class="ibox modern-stat-card {{ $item['class'] }}">
-                <div class="ibox-content">
+                <div class="ibox-content ">
                     <div class="stat-icon"><i class="fa {{ $item['icon'] }}"></i></div>
                     <div class="stat-info">
                         <h2 class="no-margins font-bold">{{ number_format($item['value']) }}</h2>
@@ -62,9 +62,9 @@
                                         <div class="stat-percent font-bold text-info" id="stat-percent">0% <i class="fa fa-level-up"></i></div> Tăng trưởng
                                     </li>
                                 </ul>
-                                <div class="alert alert-info small m-t-sm">
-                                    Dữ liệu thống kê dựa trên thời gian thực.
-                                </div>
+                                {{-- <div class="alert alert-info small m-t-sm">
+                                    
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,16 @@
                                             <span class="text-navy small"><i class="fa fa-clock-o"></i> {{ $item->created_at->format('d/m/Y H:i') }}</span>
                                         </td>
                                         <td class="text-right p-m">
-                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Xem</a>
+                                            <a href="
+                                                    @if($item->type === 'Contact')
+                                                        {{ route('admin.form.show', $item->id) }}
+                                                    @else
+                                                        {{ route('admin.formPortfolio.show', $item->id) }}
+                                                    @endif
+                                                "class="btn btn-white btn-sm">
+                                                <i class="fa fa-folder"></i> Xem
+                                            </a>
+
                                         </td>
                                     </tr>
                                 @empty

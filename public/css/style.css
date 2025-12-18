@@ -8715,3 +8715,60 @@ body.md-skin {
     display: flex;
     align-items: center;
 }
+
+.flexg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gapsocial {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.fa-facebook-f {
+    color: #00ff;
+}
+
+.fa-instagram {
+    color: pink;
+}
+.fa-envelope {
+    color: #a73333;
+}
+
+.fa-bell {
+    color: #d5d52f;
+}
+
+li:last-child > a:has(i.fa-sign-out) {
+    color: #dd2020f0;
+}
+
+.grad-primary,
+.grad-info,
+.grad-success,
+.grad-danger {
+    color: black;
+}
+
+.ibox .ibox-content:first-of-type {
+    border-radius: 10px;
+}
+.grad-primary .ibox-content {
+    background-color: rgb(10 70 240 / 90%);
+}
+.grad-info .ibox-content {
+    background-color: #8ae5d3;
+}
+.grad-success .ibox-content {
+    background-color: #dad325cc;
+}
+.grad-danger .ibox-content {
+    background-color: #ec2727ed;
+}
+
+.fw-semibold {
+    font-weight: 600;
+}

@@ -39,21 +39,28 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
-                <div class="ibox-title d-flex justify-content-between align-items-center">
+                <div class="ibox-title justify-content-between align-items-center">
                     <h3>Danh sách thành viên</h3>
-
-                    <div class="text-right">
-                        <a href="{{ route('admin.members.create') }}"
-                            class="btn btn-primary btn-sm ">
-                            <i class="fa fa-plus "></i> Thêm thành viên
-                        </a>
+                    <div class="flexg">
+                        <div class="input-group search-box shadow-sm">
+                            <input type="text"
+                                    id="searchInput"
+                                    class="form-control border-start-0"
+                                    placeholder="Tìm kiếm thành viên..." >
+                        </div>
+                        <div class="text right">
+                            <a href="{{ route('admin.members.create') }}"
+                                class="btn btn-primary btn-sm ">
+                                <i class="fa fa-plus "></i> Thêm thành viên
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="ibox-content p-0">
 
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped align-middle mb-0">
+                        <table  class="table table-hover table-striped align-middle mb-0">
                             <thead>
                                 <tr>
                                     <th width="60"><input type="checkbox" value="" id="checkAll" class="input-checkbox"></th>
@@ -68,7 +75,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="tableBody">
                             @forelse ($members as $member)
                                 <tr>
                                     {{-- <td class="text-muted">{{ $member->id }}</td> --}}
@@ -167,6 +174,9 @@
     </div>
 </div>
 
+@push('scripts')
+<script src="{{ asset('assets/admin/js/seach-member.js') }}"></script>
+@endpush
 
 
 

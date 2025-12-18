@@ -1,14 +1,4 @@
-{{-- @extends('admin.layouts.home')     
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('assets/admin/css/form.css') }}">
-@endpush
-
-@section('header')
-<h3 class="fw-bold mt-5 ms-2">Danh sách thông tin dự án khách hàng</h3>
-@endsection
-
-@section('content') --}}
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
@@ -23,7 +13,7 @@
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-<div>
+    <div>
     
         <div class="col-lg-12">
             <div class="ibox">
@@ -101,13 +91,13 @@
                     </div>
                 </div>
             
-                <div class="mt-3">
+                <div class="mt-3 px-3">
                     {{ $information->links('vendor.pagination.bootstrap-4') }}
                 </div>
-            </div class="ibox">
-        </div class="col-lg-12">
+            </div >
+        </div>
+    </div>
 </div>
-</div>
-{{-- @endsection --}}
+
 
 

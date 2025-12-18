@@ -17,7 +17,7 @@
             @if(!empty($social->social_links[$key]))
                 <a
                     href="{{ $key === 'email_social' ? 'mailto:' . $social->social_links[$key] : $social->social_links[$key] }}"
-                    class="main-footer__social-item"
+                    class="main-footer__social-item gapsocial"
                     target="{{ $key !== 'email_social' ? '_blank' : '' }}"
                 >
                     <i class="{{ $icon }} main-footer__social-icon"></i>

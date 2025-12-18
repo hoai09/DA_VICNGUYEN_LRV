@@ -98,7 +98,7 @@ td .btn {
 }
 
 .ibox:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 40%);
 }
 
 .ibox-title {
@@ -165,4 +165,9 @@ td .btn {
     color: #e74a3b;
     font-size: 0.9em;
     margin-top: 5px;
+}
+figure img {
+    object-fit: cover;
+    height: auto;
+    width: 100%;
 }

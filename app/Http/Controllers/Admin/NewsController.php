@@ -113,7 +113,8 @@ class NewsController extends Controller
 
     public function show(News $news)
     {
-        return view('admin.news.show', compact('news'));
+        $template = 'admin.news.show';
+        return view('admin.dashboard.layout', compact('template','news'));
     }
 
     public function edit(News $news)

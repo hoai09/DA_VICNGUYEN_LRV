@@ -90,14 +90,14 @@
                                             <form action="{{ route('admin.formPortfolio.done', $info->id) }}"
                                                 method="POST"
                                                 style="display:inline">
-                                              @csrf
-                                              <button class="btn btn-success btn-sm"
-                                                  title="Đánh dấu đã xử lý"
-                                                  {{ $info->status == 2 ? 'disabled' : '' }}>
-                                                  <i class="fa fa-check"></i>
-                                              </button>
-                                          </form>
-                                          
+                                                @csrf
+                                                <button class="btn btn-success btn-sm"
+                                                    title="Đánh dấu đã xử lý"
+                                                    {{ $info->status == 2 ? 'disabled' : '' }}>
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </form>
+                                            
 
                                             <form action="{{ route('admin.formPortfolio.destroy', $info->id) }}" method="POST">
                                                 @csrf

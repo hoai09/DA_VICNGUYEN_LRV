@@ -109,10 +109,10 @@
                         <td>{{ $item->published_at?->format('d/m/Y H:i') ?? '-' }}</td>
                         <td class="text-center">
                             <div class="flex-row">
-                                {{-- <a href="{{ route('admin.news.show', $item) }}"
-                                    class="btn btn-outline-info action-btn" title="Xem">
+                                <a href="{{ route('admin.news.show', $item) }}"
+                                    class="btn btn-info btn-sm" title="Xem">
                                     <i class="fa-solid fa-eye"></i>
-                                </a> --}}
+                                </a>
                                 <a href="{{ route('admin.news.edit', $item) }}"
                                     class="btn btn-warning btn-sm" title="Sửa">
                                     <i class="fa-solid fa-pen"></i>
