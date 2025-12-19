@@ -38,13 +38,13 @@
                                     <p class="text-muted">Chưa có ảnh</p>
                                 @endif
                             </div>
-                            <input type="file" name="studio_image" class="form-control @error('studio_image') is-invalid @enderror">
+                            <input type="file" name="studio_image" class="form-control @error('studio_image') is-invalid @enderror mt-2">
                             @error('studio_image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                 
-                        <div class="mb-4">
+                        <div class="mb-4 mt-2">
                             <label class="form-label fw-bold">Giới thiệu Studio</label>
                             <textarea name="studio_content" class="form-control @error('studio_content') is-invalid @enderror"
                                     rows="6" placeholder="Nhập nội dung giới thiệu...">{{ old('studio_content', $studio->studio_content) }}</textarea>
@@ -53,7 +53,7 @@
                             @enderror
                         </div>
                 
-                        <div class="mb-4">
+                        <div class="mb-4 mt-2">
                             <label class="form-label fw-bold">Danh sách Awards</label>
                             <small class="text-muted d-block mb-2"></small>
                 

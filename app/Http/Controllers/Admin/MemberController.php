@@ -19,7 +19,8 @@ class MemberController extends Controller
 
     public function show(Member $member)
     {
-        return view('admin.members.show', compact('member'));
+        $template = 'admin.members.show';
+        return view('admin.dashboard.layout', compact('template','member'));
     }
     
     /*==========================THÊM==================================*/

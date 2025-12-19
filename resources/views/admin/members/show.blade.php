@@ -1,10 +1,16 @@
-@extends('admin.layouts.home')   
-@section('styles')
-<link rel="stylesheet" href="{{ asset('assets/admin/css/member.css') }}">
-@endsection
-@section('header')
-@endsection
-@section('content')
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>{{ config('apps.headtitle.title1') }}</h2>
+        <ol class="breadcrumb" style="margin-bottom:10px;">
+            <li>
+                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li class="active"><strong>{{ config('apps.headtitle.title1') }}</strong></li>
+        </ol>
+    </div>
+</div>
+
+
 <div class="container mt-4 member-detail">
 
     <div class="row justify-content-center">
@@ -53,13 +59,13 @@
                         <div class="col-md-8">{{ $member->awards }}</div>
                     </div>
 
-                    <div class="d-flex justify-content-end mt-4 gap-2">
-                        <a href="{{ route('admin.members.index') }}" class="btn btn-outline-secondary mt-3">Quay lại</a>
+                    <div class="d-flex justify-content-end mt-4 text-right">
+                        <a href="{{ route('admin.members.index') }}" class="btn btn-primary mt-3">Quay lại</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+
 

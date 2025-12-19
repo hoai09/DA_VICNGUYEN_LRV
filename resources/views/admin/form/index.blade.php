@@ -13,7 +13,7 @@
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div>
+    <div class="row">
     
         <div class="col-lg-12">
             <div class="ibox">
@@ -22,7 +22,8 @@
                 @endif
             
                 <div class="ibox-title d-flex justify-content-between align-items-center">
-                    <h3>Danh sách thành viên</h3>
+                    <h3>Danh sách khách hàng liên hệ</h3>
+                </div>
                     <div class="ibox-content p-0">
                         <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0 form-table">
@@ -89,7 +90,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                
             
                 <div class="mt-3 px-3">
                     {{ $information->links('vendor.pagination.bootstrap-4') }}

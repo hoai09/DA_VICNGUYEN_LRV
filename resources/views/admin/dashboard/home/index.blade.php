@@ -12,7 +12,20 @@
 
         @foreach($stats_config as $item)
         <div class="col-lg-3 col-md-6">
-            <div class="ibox modern-stat-card {{ $item['class'] }}">
+            <div class="ibox modern-stat-card {{ $item['class'] }}"
+        onclick="
+        @if($item['label'] === 'Dự án')
+            window.location='{{ route('admin.projects.index') }}'
+        @elseif($item['label'] === 'Thành viên')
+            window.location='{{ route('admin.members.index') }}'
+        @elseif($item['label'] === 'Bài viết')
+            window.location='{{ route('admin.news.index') }}'
+        @else
+            window.location='{{ route('admin.form.index') }}'
+        @endif
+        "
+        style="cursor:pointer">
+
                 <div class="ibox-content ">
                     <div class="stat-icon"><i class="fa {{ $item['icon'] }}"></i></div>
                     <div class="stat-info">
@@ -96,7 +109,14 @@
                             </thead>
                             <tbody>
                                 @forelse ($formStats['latest'] as $item)
-                                    <tr>
+                                    <tr style="cursor:pointer"
+                                    onclick="
+                                        @if($item->type === 'Contact')
+                                            window.location='{{ route('admin.form.show', $item->id) }}'
+                                        @else
+                                            window.location='{{ route('admin.formPortfolio.show', $item->id) }}'
+                                        @endif
+                                    ">
                                         <td class="p-m">
                                             <span class="label label-{{ $item->type === 'Contact' ? 'info' : 'success' }} label-outline">
                                                 {{ $item->type }}
@@ -141,14 +161,21 @@
                     <div class="feed-activity-list custom-scroll" style="height: 300px; overflow-y: auto;">
                         @foreach ($latest['members'] as $member)
                         <div class="feed-element">
-                            <a href="#" class="pull-left">
-                                <img class="img-circle" src="{{ $member->image ? asset('storage/'.$member->image) : asset('admin/img/avatar_default.png') }}">
-                            </a>
-                            <div class="media-body">
-                                <small class="pull-right text-navy">{{ $member->created_at->diffForHumans() }}</small>
-                                <strong>{{ $member->name }}</strong><br>
-                                <small class="text-muted">Năm tham gia: {{ $member->join_year ?? 'N/A' }}</small>
-                            </div>
+                            <a href="{{ route('admin.members.show', $member->slug) }}"
+                                class="feed-element d-block text-dark"
+                                style="cursor:pointer">
+                                
+                                    <div class="pull-left">
+                                        <img class="img-circle"
+                                            src="{{ $member->image ? asset('storage/'.$member->image) : asset('admin/img/avatar_default.png') }}">
+                                    </div>
+                                    
+                                    <div class="media-body">
+                                        <small class="pull-right text-navy">{{ $member->created_at->diffForHumans() }}</small>
+                                        <strong>{{ $member->name }}</strong><br>
+                                        <small class="text-muted">Năm tham gia: {{ $member->join_year ?? 'N/A' }}</small>
+                                    </div>
+                                </a>
                         </div>
                         @endforeach
                     </div>
@@ -183,7 +210,9 @@
                         <tbody>
                             @foreach ($newsStats['latest'] as $news)
                             <tr>
-                                <td><small>{{ Str::limit($news->title, 45) }}</small></td>
+                                <td><a href="{{ route('admin.news.show', $news->slug) }}" class="text-navy">
+                                    <small>{{ Str::limit($news->title, 45) }}</small>
+                                </a></td>
                                 <td><i class="fa fa-calendar"></i> {{ $news->created_at->format('d/m') }}</td>
                             </tr>
                             @endforeach

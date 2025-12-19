@@ -49,8 +49,8 @@
 
                     
                     <div class="d-flex justify-content-end mt-4 gap-2">
-                        <a href="{{ route('admin.news.index') }}" class="btn btn-secondary mt-3">Quay lại</a>
-                        <a href="{{ route('admin.news.edit', $news->slug) }}" class="btn btn-outline-info mt-3">Chỉnh sửa</a>
+                        <a href="{{ route('admin.news.index') }}" class="btn btn-white mt-3">Quay lại</a>
+                        <a href="{{ route('admin.news.edit', $news->slug) }}" class="btn btn-primary mt-3">Chỉnh sửa</a>
                     </div>
 
                 </div>
