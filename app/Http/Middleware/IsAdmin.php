@@ -15,13 +15,14 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check()) {
-            return redirect()->route('login');
-        }
+        // if (!auth()->check()) {
+        //     return redirect()->route('login');
+        // }
 
-        if (auth()->user()->role !== 'admin') {
-            abort(403, 'Bạn không có quyền truy cập.');
+        if (!auth()->user()->isAdmin()) {
+            abort(403);
         }
+    
         return $next($request);
     }
 }

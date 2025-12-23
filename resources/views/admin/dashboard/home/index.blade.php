@@ -158,6 +158,22 @@
                     <h5><i class="fa fa-user-plus text-info"></i> Thành viên mới</h5>
                 </div>
                 <div class="ibox-content">
+
+                    <div class="row text-center m-b-lg">
+                        <div class="col-xs-4">
+                            <h2 class="no-margins">{{ $membersStats['total'] }}</h2>
+                            <small class="text-muted">Tổng số</small>
+                        </div>
+                        <div class="col-xs-4 border-left border-right">
+                            <h2 class="no-margins text-navy">{{ $membersStats['today'] }}</h2>
+                            <small class="text-muted">Hôm nay</small>
+                        </div>
+                        <div class="col-xs-4">
+                            <h2 class="no-margins text-success">{{ $membersStats['month'] }}</h2>
+                            <small class="text-muted">Tháng này</small>
+                        </div>
+                    </div>
+
                     <div class="feed-activity-list custom-scroll" style="height: 300px; overflow-y: auto;">
                         @foreach ($latest['members'] as $member)
                         <div class="feed-element">

@@ -65,7 +65,7 @@
                         <th>ID</th>
                         <th>Tiêu đề</th>
                         <th>Loại tin</th>
-                        <th>Tác giả</th>
+                        <th>Người đăng</th>
                         <th>Ảnh</th>
                         <th>Trạng thái</th>
                         <th>Chú ý</th>

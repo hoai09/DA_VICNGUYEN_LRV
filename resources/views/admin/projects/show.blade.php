@@ -40,7 +40,6 @@
                 </div>
             </div>
 
-        
             <div class="mb-3">
                 <h5 class="fw-semibold text-muted">Mô tả:</h5>
                 <p class="border p-3 rounded-3 bg-light">{!! nl2br(e($project->description)) !!}</p>

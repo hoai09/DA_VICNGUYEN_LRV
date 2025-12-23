@@ -19,7 +19,9 @@
                                     </h5>
                                     <p>
                                         {{ $member->main_role }}
-                                        <span>&nbsp;</span>
+                                        @if(strlen($member->main_role ?? '') < 21)
+                                            <span>&nbsp;</span>
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="clear"></div>

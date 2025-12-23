@@ -27,7 +27,6 @@ class ContactAdviceController extends Controller    //FORM FE
         ]);
 
         ContactAdvice::create($request->all());
-
         return redirect()->back()->with('success', 'Thông tin đã được gửi thành công!');
     }
 }

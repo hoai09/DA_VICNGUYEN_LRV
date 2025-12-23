@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CompanyInfo;
 use Illuminate\Http\Request;
 
-class CompanyInfoController extends Controller         //CONTROLLER FE address + studio + footer
+class CompanyInfoController extends Controller
 {
     public function index()
     {

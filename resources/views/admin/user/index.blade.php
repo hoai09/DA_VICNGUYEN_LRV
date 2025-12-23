@@ -41,7 +41,6 @@
                                 <tr>
                                     <th>Họ và tên</th>
                                     <th>Email</th>
-                                    <th>Mật khẩu</th>
                                     <th>Vai trò</th>
                                     <th>Ngày tạo</th>
                                     {{-- <th width="120px" class="text-center">Thao tác</th> --}}
@@ -52,26 +51,32 @@
                                     <tr>
                                         <td class="fw-semibold">{{ $acc->name }}</td>
                                         <td>{{ $acc->email }}</td>
-                                        <td>{{ $acc->password }}</td>
                                         <td >{{ $acc->role}}</td>
                                         <td>{{ $acc->created_at->format('d/m/Y H:i') }}</td>
 
-                                        {{-- <td class="d-flex gap-1 justify-content-center">
-                                            <a href="{{ route('admin.user.edit', $acc->id) }}"
+                                        <td class="d-flex gap-1 justify-content-center">
+                                            {{-- <a href="{{ route('admin.user.edit', $acc->id) }}"
                                                 class="btn btn-info btn-sm">
                                                 <i class="fa-solid fa-eye"></i>
-                                            </a>
+                                            </a> --}}
 
-                                            <form action="{{ route('admin.user.destroy', $info->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button
-                                                    onclick="return confirm('Bạn có chắc muốn xoá không?')"
-                                                    class="btn btn-danger btn-sm">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td> --}}
+                                            @if(auth()->id() !== $acc->id)
+                                                <form action="{{ route('admin.user.destroy', $acc->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        onclick="return confirm('Bạn có chắc muốn xoá tài khoản này không?')"
+                                                        class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                                @else
+                                                <span class="text-muted fst-italic"><button class="btn btn-gray btn-sm">
+                                                    <i class="fa fa-trash"></i> </button>
+                                                </span>
+                                            @endif
+
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>

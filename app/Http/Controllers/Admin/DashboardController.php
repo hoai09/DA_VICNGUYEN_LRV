@@ -43,6 +43,19 @@ class DashboardController extends Controller
                 ->get(),
         ];
 
+        $membersStats = [
+            'total'   => Member::count(),
+            'today'   => Member::whereDate('created_at', today())->count(),
+            'month'   => Member::whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->count(),
+            // 'pending' => News::where('is_published', 0)->count(),
+        
+            'latest'  => Member::latest()
+                ->limit(5)
+                ->get(),
+        ];
+
         $formStats = [
             'total' =>
                 ContactAdvice::count()
@@ -111,7 +124,8 @@ class DashboardController extends Controller
                 'period',
                 'projectChart',
                 'newsStats',
-                'formStats'
+                'formStats',
+                'membersStats'
             )
         );
     }

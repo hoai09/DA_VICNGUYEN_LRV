@@ -106,11 +106,11 @@
             </li>
             <li>
                 <a href="#"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault(); document.getElementById('logoutnav-form').submit();">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <form id="logoutnav-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </li>

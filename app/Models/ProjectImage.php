@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
 
-class ProjectImage extends Model // bảng chứa ảnh của trang project
+
+class ProjectImage extends Model 
 {
     use HasFactory;
     protected $table = 'project_images';
     protected $fillable=[
     'project_id',
-    'image_path',       // đường dẫn ảnh
-    
+    'image_path',
     ];
 
 

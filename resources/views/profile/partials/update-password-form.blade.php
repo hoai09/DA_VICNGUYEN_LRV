@@ -4,12 +4,23 @@
             @method('PUT')
 
             <div class="form-group">
+                <label class="control-label">Email:</label>
+                <input type="email"
+                        name="email"
+                        class="form-control"
+                        value="{{ auth()->user()->email }}"
+                        readonly
+                        autocomplete="name">
+            </div>
+            
+            <div class="form-group">
                 <label class="control-label">Mật khẩu hiện tại:</label>
                 <div class="col-sm-12">
                     <input type="password"
                             name="current_password"
                             class="form-control @error('current_password','updatePassword') has-error @enderror"
-                            autocomplete="current-password">
+                            autocomplete="current-password"
+                            placeholder="A123@">
 
                     @error('current_password','updatePassword')
                         <span class="help-block m-b-none text-danger">{{ $message }}</span>
@@ -23,7 +34,8 @@
                     <input type="password"
                             name="password"
                             class="form-control @error('password','updatePassword') has-error @enderror"
-                            autocomplete="new-password">
+                            autocomplete="new-password"
+                            placeholder="A123@">
 
                     @error('password','updatePassword')
                         <span class="help-block m-b-none text-danger">{{ $message }}</span>
@@ -37,7 +49,8 @@
                     <input type="password"
                             name="password_confirmation"
                             class="form-control"
-                            autocomplete="new-password">
+                            autocomplete="new-password"
+                            placeholder="A123@">
                 </div>
             </div>
 

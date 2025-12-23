@@ -1,4 +1,16 @@
 
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>{{ config('apps.headtitle.title1') }}</h2>
+        <ol class="breadcrumb" style="margin-bottom:10px;">
+            <li>
+                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li class="active"><strong>{{ config('apps.headtitle.title1') }}</strong></li>
+        </ol>
+    </div>
+</div>
+
 <div class="container mt-4 member-detail">
 
     <div class="row justify-content-center">
