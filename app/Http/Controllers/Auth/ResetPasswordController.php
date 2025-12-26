@@ -42,7 +42,7 @@ class ResetPasswordController extends Controller
     
     // Hiển thị form đặt lại mật khẩu.
     
-    public function showResetPasswordForm(Request $request): View
+    public function showResetPassword(Request $request): View
     {
         return view('auth.reset-password', [
             'token' => $request->route('token') ?? $request->input('token'),
@@ -53,7 +53,7 @@ class ResetPasswordController extends Controller
     
     //lưu mật khẩu mới.
     
-    public function reset(Request $request): RedirectResponse
+    public function resetPassword(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'token'    => ['required'],

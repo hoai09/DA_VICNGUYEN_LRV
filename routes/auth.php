@@ -9,7 +9,7 @@ Route::middleware('guest')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 
     Route::get('forgot-password', [ResetPasswordController::class, 'showForgotPassword'])->name('password.request');
-    Route::post('forgot-password', [ResetPasswordController::class, 'forgotPassword'])->name('password.email');
+    Route::post('forgot-password', [ResetPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
     Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetPassword'])->name('password.reset');
     Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
