@@ -8670,7 +8670,7 @@ body.md-skin {
 }
 
 .container-login100 {
-    width: 100%;
+    width: 140%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -8700,6 +8700,9 @@ body.md-skin {
 }
 .ms-2 {
     margin-left: 20px;
+}
+.mb-2{
+    margin-bottom: 20px;
 }
 .flex-row {
     display: flex;

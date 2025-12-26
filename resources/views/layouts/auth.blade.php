@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+    <base target='_self'/><link rel="shortcut icon" type="text/css" href="{{ asset('assets/frontend/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{asset('css/animate.css') }}" >

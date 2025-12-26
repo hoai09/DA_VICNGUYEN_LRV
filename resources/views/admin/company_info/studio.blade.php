@@ -17,12 +17,11 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox">
-                <div class="ibox-title">
-                    <h3 class="fw-bold mb-4">Quản lý Studio</h3>
+                
                     @if(session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                </div>
+                
                 <div class="ibox-content">
                     <form action="{{ route('admin.company_info.studio') }}" method="POST" enctype="multipart/form-data">
                         @csrf

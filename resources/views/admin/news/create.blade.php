@@ -23,9 +23,9 @@
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="ibox">
-                <div class="ibox-title">
+                {{-- <div class="ibox-title">
                     <h3>Thêm tin tức</h3>
-                </div>
+                </div> --}}
                 <div class="ibox-content">
                     <form method="POST" action="{{ route('admin.news.store') }}" enctype="multipart/form-data">
                         @csrf

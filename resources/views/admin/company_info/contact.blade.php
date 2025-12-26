@@ -19,9 +19,6 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
-                <h3 class="ibox-title">
-                    <i class="bi bi-geo-alt-fill me-2"></i> Quản lý Thông tin Liên hệ
-                </h3>
             
                 @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show">

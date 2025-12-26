@@ -27,7 +27,6 @@
         <div class="ibox">
         
             <div class="ibox-title d-flex justify-content-between align-items-center">
-                <h3 class="fw-semibold m-0">Danh sách dự án</h3>
 
                 <a href="{{ route('admin.projects.create') }}" class="btn btn-primary btn-sm">
                     <i class="fa fa-plus"></i> Thêm dự án

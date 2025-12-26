@@ -15,9 +15,6 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
-                <div class="ibox-title">
-                    <h3>Chi tiết thông tin dự án khách hàng</h3>
-                </div>
 
                 <div class="ibox-content">
 

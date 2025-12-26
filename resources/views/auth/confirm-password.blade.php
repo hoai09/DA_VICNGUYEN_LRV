@@ -1,28 +1,55 @@
-<x-guest-layout>
-    
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Vui lòng xác nhận mật khẩu trước khi tiếp tục.') }}
+@extends('layouts.auth')
+
+@section('title', __('Xác nhận mật khẩu'))
+
+@section('content')
+<div class="middle-box text-center loginscreen animated fadeInDown limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 mx-auto" style="max-width: 420px; min-width: 350px;">
+
+            <h1 class="logo-name">VIC</h1>
+            {{-- <img src="{{ asset('assets/img/logo.svg') }}" alt=""> --}}
+
+            <p>{{ __('Xác nhận mật khẩu trước khi tiếp tục') }}</p>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form class="m-t" method="POST" action="{{ route('password.confirm') }}">
+                @csrf
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        placeholder="{{ __('Mật khẩu') }}"
+                        required
+                        autofocus
+                        autocomplete="current-password"
+                    >
+                    @error('password')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <button type="submit" class="btn btn-primary block full-width m-b">
+                    {{ __('Xác nhận') }}
+                </button>
+            </form>
+
+            <p class="m-t">
+                <small>Vic_nguyen &copy; {{ date('Y') }}</small>
+            </p>
         </div>
-    
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</div>
+@endsection

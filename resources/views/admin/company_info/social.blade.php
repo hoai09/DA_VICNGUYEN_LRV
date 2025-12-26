@@ -17,13 +17,12 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
-                <div class="ibox-title">
-                    <h2 class="mb-4 text-black">Cập nhật Social Links</h2>
+    
                 
                     @if(session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                </div>
+                
                 <div class="ibox-content">
                     <form action="{{ route('admin.company_info.social') }}" method="POST">
                         @csrf

@@ -24,9 +24,9 @@
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="ibox">
-                <div class="ibox-title">
+                {{-- <div class="ibox-title">
                     <h5>Cập nhật tin tức</h5>
-                </div>
+                </div> --}}
                 <div class="ibox-content">
                     <form method="POST" action="{{ route('admin.news.update', $news->slug) }}" enctype="multipart/form-data">
                         @csrf

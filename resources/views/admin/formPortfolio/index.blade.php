@@ -23,9 +23,6 @@
                     </div>
                 @endif
 
-                <div class="ibox-title">
-                    <h3>Danh sách thông tin liên hệ</h3>
-                </div>
 
                 <div class="ibox-content border-bottom">
                     <form method="GET" class="form-inline">

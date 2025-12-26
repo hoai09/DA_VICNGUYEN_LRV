@@ -1,18 +1,17 @@
 
- @extends('layouts.auth')
+@extends('layouts.auth')
 
- @section('title', 'Đăng nhập')
- 
- @section('content')
- <div class="middle-box text-center loginscreen animated fadeInDown limiter">
+@section('title', 'Đăng nhập')
+
+@section('content')
+<div class="middle-box text-center loginscreen animated fadeInDown limiter">
     <div class="container-login100">
 
-    <div class="wrap-login100">
+    <div class="wrap-login100 mx-auto" style="max-width: 420px; min-width: 350px;">
 
         <h1 class="logo-name">VIC</h1>
         {{-- <img src="{{ asset('assets/img/logo.svg') }}" alt=""> --}}
 
-        <h3>Welcome to VIC</h3>
         <p>Login to continue</p>
 
         @if (session('status'))
@@ -69,7 +68,7 @@
 
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}">
-                    <small>Forgot password?</small>
+                    <small>Quên mật khẩu?</small>
                 </a>
             @endif
 

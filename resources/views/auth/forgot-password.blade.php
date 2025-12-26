@@ -1,25 +1,57 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Nhập email vào bên dưới.') }}
+@extends('layouts.auth')
+
+@section('title', 'Quên mật khẩu')
+
+@section('content')
+<div class="middle-box text-center loginscreen animated fadeInDown limiter">
+    <div class="container-login100">
+
+        <div class="wrap-login100 mx-auto" style="max-width: 420px; min-width: 350px;">
+
+            <h1 class="logo-name">VIC</h1>
+            {{-- <img src="{{ asset('assets/img/logo.svg') }}" alt=""> --}}
+            <p>Nhập email của bạn để nhận liên kết đặt lại mật khẩu</p>
+
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <form class="m-t" method="POST" action="{{ route('password.email') }}">
+                @csrf
+
+                <!-- EMAIL -->
+                <div class="form-group">
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        class="form-control @error('email') is-invalid @enderror"
+                        placeholder="Email"
+                        required
+                        autofocus
+                    >
+
+                    @error('email')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <button type="submit" class="btn btn-primary block full-width m-b">
+                    Gửi liên kết đặt lại mật khẩu
+                </button>
+
+                <a href="{{ route('login') }}">
+                    <small>Quay lại đăng nhập</small>
+                </a>
+            </form>
+
+            <p class="m-t">
+                <small>Vic_nguyen &copy; {{ date('Y') }}</small>
+            </p>
+
+        </div>
     </div>
-
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email nhận link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</div>
+@endsection

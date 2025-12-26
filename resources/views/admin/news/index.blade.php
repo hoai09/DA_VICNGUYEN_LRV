@@ -1,9 +1,4 @@
-{{-- @extends('admin.layouts.home')  
 
-@section('header')  
-@endsection
-
-@section('content') --}}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>{{ config('apps.news.title') }}</h2>
@@ -17,7 +12,6 @@
 </div>
 
 <div class="ibox-title d-flex justify-content-between align-items-center ">
-        <h3 class="title mt-4">Danh sách tin tức</h3>
 
     <div class="d-flex justify-content-between align-items-center mt-4 ">
     <div class="filter-bar d-flex gap-2 mb-4">

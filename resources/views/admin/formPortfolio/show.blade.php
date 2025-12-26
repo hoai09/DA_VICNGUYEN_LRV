@@ -19,9 +19,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
-                <div class="ibox-title">
-                    <h3>Thông tin liên hệ</h3>
-                </div>
+        
 
                 <div class="ibox-content">
                     <div class="mb-3">
